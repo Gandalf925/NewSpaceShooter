@@ -73,6 +73,8 @@ public class NormalEnemy : MonoBehaviour
             Vector3 targetPosition = player.transform.position;
 
             GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+            bullet.transform.right = (targetPosition - bulletSpawnPoint.position).normalized;
+            bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.right * bulletSpeed;
 
             // 現在のPlayerの位置に向かって発射するようにする
             bullet.GetComponent<Rigidbody2D>().velocity = (targetPosition - bulletSpawnPoint.position).normalized * bulletSpeed;

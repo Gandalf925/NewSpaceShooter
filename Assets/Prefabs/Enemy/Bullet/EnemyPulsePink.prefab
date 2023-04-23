@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8354351000625563103}
   - component: {fileID: 1933423741073503048}
   m_Layer: 0
-  m_Name: EnemyPulseRed
+  m_Name: EnemyPulsePink
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8354351000625563102}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.8004465, y: 0.5690115, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -78,8 +78,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 5334a60396bca40f19ac9d531fab2621, type: 3}
-  m_Color: {r: 0.9811321, g: 0.3224312, b: 0.1147739, a: 1}
-  m_FlipX: 1
+  m_Color: {r: 0.9716981, g: 0.18700601, b: 0.7290898, a: 1}
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.63, y: 0.32}

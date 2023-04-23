@@ -12,12 +12,18 @@ public class RadialEnemy : MonoBehaviour
     public Transform bulletSpawnPoint;
     public GameObject player;
 
+    public float moveSpeed = 1f;
+    public float minY = -2.5f;
+    public float maxY = 2.5f;
+
     private bool isShowingDamage = false;
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
 
     private int currentHP;
     private GameManager gameManager;
+
+    private int moveDirection;
 
     void Start()
     {
@@ -28,6 +34,25 @@ public class RadialEnemy : MonoBehaviour
 
         // 弾の発射
         StartCoroutine(FireRoutine());
+
+        // 初期移動方向をランダムに決定
+        moveDirection = Random.Range(0, 2) * 2 - 1;
+    }
+
+    void Update()
+    {
+        // 上下にゆっくり移動する
+        transform.Translate(Vector2.up * moveSpeed * moveDirection * Time.deltaTime);
+
+        // 移動範囲を超えたら反転して移動方向を変える
+        if (transform.position.y < minY)
+        {
+            moveDirection = 1;
+        }
+        else if (transform.position.y > maxY)
+        {
+            moveDirection = -1;
+        }
     }
 
     private IEnumerator FireRoutine()

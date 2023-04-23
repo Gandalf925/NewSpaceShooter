@@ -158,6 +158,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletType: 2
-  speed: 6
-  fireRate: 1.2
-  attackPower: 5
+  speed: 5
+  fireRate: 1
+  attackPower: 4

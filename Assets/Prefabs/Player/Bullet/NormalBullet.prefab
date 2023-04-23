@@ -159,5 +159,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletType: 0
   speed: 10
-  fireRate: 0.8
-  attackPower: 3
+  fireRate: 0.5
+  attackPower: 2
