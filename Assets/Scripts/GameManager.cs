@@ -5,15 +5,15 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public int lives = 3;
-    public int score = 0;
+    public float score = 0;
 
     public void UpdateLives()
     {
         lives -= 1;
     }
 
-    public void UpdateScore(int damage)
+    public void UpdateScore(float point)
     {
-        score += damage;
+        score += point;
     }
 }

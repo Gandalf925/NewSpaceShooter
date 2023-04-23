@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using DG.Tweening;
 
 public class RadialEnemy : MonoBehaviour
 {
@@ -20,10 +21,12 @@ public class RadialEnemy : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
 
-    private int currentHP;
+    private float currentHP;
     private GameManager gameManager;
 
     private int moveDirection;
+
+    public Material dissolve;
 
     void Start()
     {
@@ -57,6 +60,15 @@ public class RadialEnemy : MonoBehaviour
 
     private IEnumerator FireRoutine()
     {
+
+        // 2DxFXのマテリアルを設定する
+        spriteRenderer.material = dissolve;
+        yield return new WaitForSeconds(1f);
+
+        // 2DxFXのマテリアルを初期化する
+        spriteRenderer.material.SetColor("_EmissionColor", Color.black);
+
+        yield return new WaitForSecondsRealtime(1f);
         while (true)
         {
             for (int i = 0; i < 7; i++)
@@ -73,7 +85,7 @@ public class RadialEnemy : MonoBehaviour
     {
         if (other.CompareTag("PlayerBullet"))
         {
-            int damage = other.GetComponent<PlayerBulletController>().attackPower;
+            float damage = other.GetComponent<PlayerBulletController>().attackPower;
             currentHP -= damage;
             gameManager.UpdateScore(damage);
 
@@ -83,6 +95,7 @@ public class RadialEnemy : MonoBehaviour
             if (currentHP <= 0)
             {
                 GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+                explosion.transform.DOScale(new Vector3(50f, 50f, 0), 0.5f);
                 Destroy(explosion, 1f);
                 Destroy(gameObject);
             }

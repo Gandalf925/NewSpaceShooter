@@ -149,12 +149,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 1
   moveSpeed: 3
-  bulletSpeed: 4
-  bulletFireRate: 1.5
+  bulletSpeed: 5
+  bulletFireRate: 2
   bulletPrefab: {fileID: 8354351000625563102, guid: c846ef118cbe1284783dce81da90a1e9, type: 3}
   player: {fileID: 0}
   explosionPrefab: {fileID: 336278662954817479, guid: b350deb427977454493eb242f505d753, type: 3}
   bulletSpawnPoint: {fileID: 5098067422842518569}
+  smallPowerupPrefab: {fileID: 666197690854531664, guid: 767f4ab1bbe02e84ba699c6091ae398e, type: 3}
+  largePowerupPrefab: {fileID: 6990624485992650979, guid: d24ad0cf399d9cb489dc30fb442fdb7e, type: 3}
 --- !u!1 &5098067422842518568
 GameObject:
   m_ObjectHideFlags: 0

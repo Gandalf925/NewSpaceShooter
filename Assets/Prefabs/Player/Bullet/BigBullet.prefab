@@ -160,4 +160,4 @@ MonoBehaviour:
   bulletType: 2
   speed: 5
   fireRate: 1
-  attackPower: 4
+  attackPower: 2

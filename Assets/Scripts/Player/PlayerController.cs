@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private float invincibleTime = 3f;
     private float invincibleTimer = 0f;
     private bool isInvincible = false;
+    private bool isFiring = false;
     private SpriteRenderer spriteRenderer;
 
     GameManager gameManager;
@@ -34,10 +35,20 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // キャラクターの移動
-        float x = Input.GetKey(KeyCode.RightArrow) ? 1f : (Input.GetKey(KeyCode.LeftArrow) ? -1f : 0f);
-        float y = Input.GetKey(KeyCode.UpArrow) ? 1f : (Input.GetKey(KeyCode.DownArrow) ? -1f : 0f);
+        float x = (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) ? 1f :
+                  (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) ? -1f : 0f;
+        float y = (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) ? 1f :
+                  (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) ? -1f : 0f;
+
+        // Shiftキーが押されている場合は速度を半分にする
+        float currentSpeed = speed;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            currentSpeed *= 0.5f;
+        }
+
         Vector2 movement = new Vector2(x, y);
-        rb.velocity = movement * speed;
+        rb.velocity = movement * currentSpeed;
 
         // 攻撃（弾の発射）
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -53,7 +64,16 @@ public class PlayerController : MonoBehaviour
             selectedBulletIndex = 2;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time > nextFireTime)
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isFiring = true;
+        }
+        else if (Input.GetKeyUp(KeyCode.Space))
+        {
+            isFiring = false;
+        }
+
+        if (isFiring && Time.time > nextFireTime)
         {
             // 選択された弾のプレハブを取得
             GameObject bulletPrefab = bulletPrefabs[selectedBulletIndex];
@@ -99,13 +119,14 @@ public class PlayerController : MonoBehaviour
         if (isInvincible)
         {
             invincibleTimer += Time.deltaTime;
-            float alpha = Mathf.PingPong(Time.time * 10f, 1f);
+            float alpha = Mathf.PingPong(Time.time * 5f, 1f);
             spriteRenderer.color = new Color(1f, 1f, 1f, alpha);
 
             if (invincibleTimer >= invincibleTime)
             {
                 spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
                 isInvincible = false;
+                EnableCollider();
                 invincibleTimer = 0f;
             }
         }
@@ -120,6 +141,7 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("EnemyBullet") || other.CompareTag("Enemy"))
         {
             gameManager.UpdateLives();
+            DisableCollider();
             isInvincible = true;
 
             if (gameManager.lives <= 0)
@@ -130,23 +152,15 @@ public class PlayerController : MonoBehaviour
 
                 // プレイヤーを破棄する
                 Destroy(gameObject);
-
-                // エフェクトの終了後にゲームを停止
-                StartCoroutine(StopGameAfterEffect(explosionEffect.GetComponent<ParticleSystem>().main.duration));
             }
         }
     }
 
-    IEnumerator StopGameAfterEffect(float delay)
-    {
-        // エフェクトの再生時間だけ待機
-        yield return new WaitForSeconds(delay);
-
-        // ゲームの停止
-        Time.timeScale = 0;
-    }
-
     private void EnableCollider()
+    {
+        col.enabled = true;
+    }
+    private void DisableCollider()
     {
         col.enabled = true;
     }
