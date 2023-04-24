@@ -88,6 +88,11 @@ public class EnemySpawnerStage1 : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(3f);
 
+        SpawnRadialEnemy(radialPositionTop);
+        SpawnRadialEnemy(radialPositionBottom);
+
+        yield return new WaitForSecondsRealtime(4f);
+
 
     }
 

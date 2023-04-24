@@ -26,7 +26,6 @@ public class RadialEnemy : MonoBehaviour
 
     private int moveDirection;
 
-    public Material dissolve;
 
     void Start()
     {
@@ -60,15 +59,6 @@ public class RadialEnemy : MonoBehaviour
 
     private IEnumerator FireRoutine()
     {
-
-        // 2DxFXのマテリアルを設定する
-        spriteRenderer.material = dissolve;
-        yield return new WaitForSeconds(1f);
-
-        // 2DxFXのマテリアルを初期化する
-        spriteRenderer.material.SetColor("_EmissionColor", Color.black);
-
-        yield return new WaitForSecondsRealtime(1f);
         while (true)
         {
             for (int i = 0; i < 7; i++)
