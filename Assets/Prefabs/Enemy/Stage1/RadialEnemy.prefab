@@ -108,6 +108,9 @@ MonoBehaviour:
   explosionPrefab: {fileID: 336278662954817479, guid: b350deb427977454493eb242f505d753, type: 3}
   bulletSpawnPoint: {fileID: 4155113967077455139}
   player: {fileID: 0}
+  moveSpeed: 1
+  minY: -2.5
+  maxY: 2.5
 --- !u!50 &4155113966504708326
 Rigidbody2D:
   serializedVersion: 4
@@ -142,7 +145,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.023783043, y: 0.003963832}
+  m_Offset: {x: -0.009687178, y: -0.000063568354}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -153,7 +156,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4124339, y: 0.19657862}
+  m_Size: {x: 0.4406256, y: 0.23282516}
   m_EdgeRadius: 0
 --- !u!1 &4155113967077455148
 GameObject:
