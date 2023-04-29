@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpItem : MonoBehaviour
+public class PowerupItem : MonoBehaviour
 {
     public enum PowerupType
     {
         Small,  // 小アイテム
         Large,  // 大アイテム
+        Life, // 回復アイテム
     }
 
     public PowerupType powerupType;  // アイテムの種類
@@ -23,6 +24,7 @@ public class PowerUpItem : MonoBehaviour
     private bool isMovingToTarget = false;
     private bool isMovingToLeft = false;
     GameManager gameManager;
+    GameObject player;
 
     private void Start()
     {
@@ -34,6 +36,7 @@ public class PowerUpItem : MonoBehaviour
         Vector3 direction = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f);
         targetPosition = startPosition + direction * rightMoveDistance;
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        player = GameObject.FindWithTag("Player");
     }
 
     private void Update()
@@ -86,11 +89,17 @@ public class PowerUpItem : MonoBehaviour
             // アイテムの種類によってスコアを変更する
             if (powerupType == PowerupType.Small)
             {
-                gameManager.UpdateScore(1);
+                gameManager.UpdateScore(5);
+                gameManager.AddPowerupPoint(5);
             }
             else if (powerupType == PowerupType.Large)
             {
-                gameManager.UpdateScore(5);
+                gameManager.UpdateScore(20);
+                gameManager.AddPowerupPoint(20);
+            }
+            else if (powerupType == PowerupType.Life)
+            {
+                gameManager.lives += 1;
             }
 
             Destroy(gameObject);

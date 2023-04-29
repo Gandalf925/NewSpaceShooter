@@ -16,6 +16,8 @@ public class RadialEnemy : MonoBehaviour
     public GameObject smallPowerupPrefab;
     public GameObject largePowerupPrefab;
 
+    public GameObject lifePowerupPrefab;
+
     public float moveSpeed = 1f;
     public float minY = -2.5f;
     public float maxY = 2.5f;
@@ -78,7 +80,7 @@ public class RadialEnemy : MonoBehaviour
     {
         if (other.CompareTag("PlayerBullet"))
         {
-            float damage = other.GetComponent<PlayerBulletController>().attackPower;
+            int damage = other.GetComponent<PlayerBulletController>().attackPower;
             currentHP -= damage;
             gameManager.UpdateScore(damage);
 
@@ -91,7 +93,7 @@ public class RadialEnemy : MonoBehaviour
                 explosion.transform.DOScale(new Vector3(50f, 50f, 0), 0.5f);
                 explosion.GetComponent<SpriteRenderer>().DOColor(new Color(255, 0, 0, 0), 0.5f);
 
-                GeneratePowerUpItem();
+                GeneratePowerUpItemAndLife();
                 Destroy(explosion, 0.5f);
                 Destroy(gameObject);
             }
@@ -126,11 +128,12 @@ public class RadialEnemy : MonoBehaviour
         isShowingDamage = false;
     }
 
-    private void GeneratePowerUpItem()
+
+    private void GeneratePowerUpItemAndLife()
     {
         // 小アイテムと大アイテムの確率を設定
-        float smallProbability = 0.8f;  // 80％の確率で小アイテムを生成する
-
+        float smallProbability = 0.7f;  // 70％の確率で小アイテムを生成する
+        float largeProbability = 0.9f;  // 70％の確率で大アイテムを生成する
         // ランダムな値を生成して、小アイテムか大アイテムを決定する
         float randomValue = Random.value;
         if (randomValue < smallProbability)
@@ -138,10 +141,14 @@ public class RadialEnemy : MonoBehaviour
             // 小アイテムを生成する
             GameObject smallPowerup = Instantiate(smallPowerupPrefab, transform.position, Quaternion.identity);
         }
-        else
+        else if (smallProbability < randomValue && randomValue < largeProbability)
         {
             // 大アイテムを生成する
             GameObject powerup = Instantiate(largePowerupPrefab, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            GameObject powerup = Instantiate(lifePowerupPrefab, transform.position, Quaternion.identity);
         }
     }
 }

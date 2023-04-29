@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     public GameObject[] bulletPrefabs;  // 弾のプレハブの配列
     public Transform bulletSpawnPoint;  // 弾の発射位置
 
+    public int powerupCount;
+
     public GameObject explosionEffect;  // 爆発エフェクトのプレハブ
 
     private Rigidbody2D rb;
@@ -19,6 +21,8 @@ public class PlayerController : MonoBehaviour
     private bool isInvincible = false;
     private bool isFiring = false;
     private SpriteRenderer spriteRenderer;
+
+    private int previousPowerupPoint;
 
     GameManager gameManager;
 
@@ -84,7 +88,26 @@ public class PlayerController : MonoBehaviour
             // BulletControllerの発射間隔、攻撃力を取得
             PlayerBulletController bulletController = bulletInstance.GetComponent<PlayerBulletController>();
             float fireRate = bulletController.fireRate;
-            float attackPower = bulletController.attackPower;
+            int attackPower = bulletController.attackPower;
+
+            //パワーアップ時の処理
+            if (powerupCount >= 1)
+            {
+
+                float angleLeft = -15f;
+                float angleRight = 15f;
+
+                GameObject bulletInstanceLeft = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+                bulletInstanceLeft.transform.rotation = Quaternion.Euler(0f, 0f, angleLeft);
+                bulletInstanceLeft.GetComponent<PlayerBulletController>().fireRate = fireRate;
+                bulletInstanceLeft.GetComponent<PlayerBulletController>().attackPower = attackPower;
+
+                GameObject bulletInstanceRight = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+                bulletInstanceRight.transform.rotation = Quaternion.Euler(0f, 0f, angleRight);
+                bulletInstanceRight.GetComponent<PlayerBulletController>().fireRate = fireRate;
+                bulletInstanceRight.GetComponent<PlayerBulletController>().attackPower = attackPower;
+
+            }
 
             // 次に弾を発射できる時刻を更新
             nextFireTime = Time.time + fireRate;
@@ -130,6 +153,12 @@ public class PlayerController : MonoBehaviour
                 invincibleTimer = 0f;
             }
         }
+        // 50ポイント毎にパワーアップする（最大値:5）
+        if (gameManager.powerupPoint >= 50 && powerupCount < 5)
+        {
+            Powerup();
+            gameManager.ResetPowerupPoint();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -141,6 +170,9 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("EnemyBullet") || other.CompareTag("Enemy"))
         {
             gameManager.UpdateLives();
+
+            PowerDown();
+
             DisableCollider();
             isInvincible = true;
 
@@ -156,12 +188,32 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    private void Powerup()
+    {
+        powerupCount += 1;
+        speed += 1;
+    }
+
+    private void PowerDown()
+    {
+        if (powerupCount >= 1)
+        {
+            powerupCount -= 1;
+            speed -= 1;
+            if (powerupCount < 0)
+            {
+                powerupCount = 0;
+            }
+        }
+    }
+
     private void EnableCollider()
     {
         col.enabled = true;
     }
     private void DisableCollider()
     {
-        col.enabled = true;
+        col.enabled = false;
     }
 }

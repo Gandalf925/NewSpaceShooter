@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4155113966504708327}
   m_Layer: 0
   m_Name: RadialEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7afe63fbbb42dff41b86a08f6468cd49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 5
+  maxHP: 20
   bulletSpeed: 4
   bulletFireRate: 1
   attackDuration: 5
@@ -110,6 +110,7 @@ MonoBehaviour:
   player: {fileID: 0}
   smallPowerupPrefab: {fileID: 666197690854531664, guid: 767f4ab1bbe02e84ba699c6091ae398e, type: 3}
   largePowerupPrefab: {fileID: 6990624485992650979, guid: d24ad0cf399d9cb489dc30fb442fdb7e, type: 3}
+  lifePowerupPrefab: {fileID: 6061619657933071244, guid: 200e8baadad3bed40bdca5cdb81711ee, type: 3}
   moveSpeed: 1
   minY: -2.5
   maxY: 2.5

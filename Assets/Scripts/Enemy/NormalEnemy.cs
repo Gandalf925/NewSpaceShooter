@@ -48,7 +48,7 @@ public class NormalEnemy : MonoBehaviour
     {
         if (other.CompareTag("PlayerBullet"))
         {
-            float damage = other.GetComponent<PlayerBulletController>().attackPower;
+            int damage = other.GetComponent<PlayerBulletController>().attackPower;
             currentHP -= damage;
             gameManager.UpdateScore(damage);
 

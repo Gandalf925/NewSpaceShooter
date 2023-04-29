@@ -1,10 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemySpawnerStage1 : MonoBehaviour
 {
     public GameObject nomalEnemyPrefab;
     public GameObject radialEnemyPrefab;
+    public GameObject bossPrefab;
+
     [Header("NormalEnemyPosition")]
     public Transform spawnPositionTop;
     public Transform[] spawnPositionsMiddle;
@@ -15,9 +18,15 @@ public class EnemySpawnerStage1 : MonoBehaviour
     public Transform radialPositionMiddle;
     public Transform radialPositionBottom;
 
+    [Header("Boss")]
+    public float bossSpawnDelay = 5f;
+    private bool allEnemiesSpawned = false;
+    public GameObject warningPanel;
+
     void Start()
     {
         StartCoroutine(SpawnRoutine());
+        StartCoroutine(SpawnBossRoutine());
     }
 
     IEnumerator SpawnRoutine()
@@ -93,7 +102,32 @@ public class EnemySpawnerStage1 : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(4f);
 
+        allEnemiesSpawned = true;
 
+    }
+
+    IEnumerator SpawnBossRoutine()
+    {
+        // すべての敵が生成されるまで待つ
+        while (!allEnemiesSpawned)
+        {
+            yield return null;
+        }
+
+        while (!AreAllEnemiesDefeated())
+        {
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(3f);
+
+        StartCoroutine(BossAppearanceDirection());
+
+        yield return new WaitForSeconds(bossSpawnDelay);
+        Debug.Log("Boss apeared");
+
+        // Spawn the boss
+        GameObject boss = Instantiate(bossPrefab, new Vector3(0, 0, 0), Quaternion.identity);
     }
 
 
@@ -105,5 +139,18 @@ public class EnemySpawnerStage1 : MonoBehaviour
     private void SpawnRadialEnemy(Transform spawnPoint)
     {
         GameObject enemy = Instantiate(radialEnemyPrefab, spawnPoint.position, Quaternion.identity);
+    }
+
+    private bool AreAllEnemiesDefeated()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        return enemies.Length == 0;
+    }
+
+    private IEnumerator BossAppearanceDirection()
+    {
+        warningPanel.SetActive(true);
+        yield return new WaitForSecondsRealtime(4f);
+        warningPanel.SetActive(false);
     }
 }

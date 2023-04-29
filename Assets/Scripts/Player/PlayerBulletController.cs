@@ -13,7 +13,7 @@ public class PlayerBulletController : MonoBehaviour
     public BulletType bulletType;
     public float speed;
     public float fireRate;
-    public float attackPower;
+    public int attackPower;
     private Rigidbody2D rb;
 
     void Start()

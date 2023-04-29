@@ -160,4 +160,4 @@ MonoBehaviour:
   bulletType: 1
   speed: 12
   fireRate: 0.05
-  attackPower: 0.2
+  attackPower: 1
