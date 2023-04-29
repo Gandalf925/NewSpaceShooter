@@ -108,6 +108,8 @@ MonoBehaviour:
   explosionPrefab: {fileID: 336278662954817479, guid: b350deb427977454493eb242f505d753, type: 3}
   bulletSpawnPoint: {fileID: 4155113967077455139}
   player: {fileID: 0}
+  smallPowerupPrefab: {fileID: 666197690854531664, guid: 767f4ab1bbe02e84ba699c6091ae398e, type: 3}
+  largePowerupPrefab: {fileID: 6990624485992650979, guid: d24ad0cf399d9cb489dc30fb442fdb7e, type: 3}
   moveSpeed: 1
   minY: -2.5
   maxY: 2.5

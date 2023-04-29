@@ -13,6 +13,9 @@ public class RadialEnemy : MonoBehaviour
     public Transform bulletSpawnPoint;
     public GameObject player;
 
+    public GameObject smallPowerupPrefab;
+    public GameObject largePowerupPrefab;
+
     public float moveSpeed = 1f;
     public float minY = -2.5f;
     public float maxY = 2.5f;
@@ -86,7 +89,10 @@ public class RadialEnemy : MonoBehaviour
             {
                 GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
                 explosion.transform.DOScale(new Vector3(50f, 50f, 0), 0.5f);
-                Destroy(explosion, 1f);
+                explosion.GetComponent<SpriteRenderer>().DOColor(new Color(255, 0, 0, 0), 0.5f);
+
+                GeneratePowerUpItem();
+                Destroy(explosion, 0.5f);
                 Destroy(gameObject);
             }
 
@@ -118,5 +124,24 @@ public class RadialEnemy : MonoBehaviour
         spriteRenderer.color = originalColor; // 通常
 
         isShowingDamage = false;
+    }
+
+    private void GeneratePowerUpItem()
+    {
+        // 小アイテムと大アイテムの確率を設定
+        float smallProbability = 0.8f;  // 80％の確率で小アイテムを生成する
+
+        // ランダムな値を生成して、小アイテムか大アイテムを決定する
+        float randomValue = Random.value;
+        if (randomValue < smallProbability)
+        {
+            // 小アイテムを生成する
+            GameObject smallPowerup = Instantiate(smallPowerupPrefab, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            // 大アイテムを生成する
+            GameObject powerup = Instantiate(largePowerupPrefab, transform.position, Quaternion.identity);
+        }
     }
 }

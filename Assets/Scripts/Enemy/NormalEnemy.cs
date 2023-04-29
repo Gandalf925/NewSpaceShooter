@@ -59,7 +59,7 @@ public class NormalEnemy : MonoBehaviour
             {
                 GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
                 explosion.transform.DOScale(new Vector3(50f, 50f, 0), 0.5f);
-
+                explosion.GetComponent<SpriteRenderer>().DOColor(new Color(255, 0, 0, 0), 0.5f);
                 GeneratePowerUpItem();
 
                 Destroy(explosion, 0.5f);
