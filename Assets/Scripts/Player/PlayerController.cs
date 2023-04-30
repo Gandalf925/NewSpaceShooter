@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private float invincibleTimer = 0f;
     private bool isInvincible = false;
     private bool isFiring = false;
-    private SpriteRenderer spriteRenderer;
+    private Image playerImage;
 
     private int previousPowerupPoint;
 
@@ -32,7 +33,7 @@ public class PlayerController : MonoBehaviour
         col = GetComponent<CircleCollider2D>();
 
         // SpriteRenderer コンポーネントを取得する
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        playerImage = GetComponent<Image>();
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
     }
 
@@ -143,11 +144,11 @@ public class PlayerController : MonoBehaviour
         {
             invincibleTimer += Time.deltaTime;
             float alpha = Mathf.PingPong(Time.time * 5f, 1f);
-            spriteRenderer.color = new Color(1f, 1f, 1f, alpha);
+            playerImage.color = new Color(1f, 1f, 1f, alpha);
 
             if (invincibleTimer >= invincibleTime)
             {
-                spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
+                playerImage.color = new Color(1f, 1f, 1f, 1f);
                 isInvincible = false;
                 EnableCollider();
                 invincibleTimer = 0f;

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using DG.Tweening;
+using MoreMountains.Feedbacks;
 
 public class RadialEnemy : MonoBehaviour
 {
@@ -8,7 +9,9 @@ public class RadialEnemy : MonoBehaviour
     public float bulletSpeed = 10f;
     public float bulletFireRate = 1f;
     public float attackDuration = 5f;
+
     public GameObject bulletPrefab;
+    private BoxCollider2D col;
     public GameObject explosionPrefab;
     public Transform bulletSpawnPoint;
     public GameObject player;
@@ -34,6 +37,7 @@ public class RadialEnemy : MonoBehaviour
 
     void Start()
     {
+
         currentHP = maxHP;
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
@@ -41,6 +45,7 @@ public class RadialEnemy : MonoBehaviour
 
         // 弾の発射
         StartCoroutine(FireRoutine());
+
 
         // 初期移動方向をランダムに決定
         moveDirection = Random.Range(0, 2) * 2 - 1;
@@ -150,5 +155,14 @@ public class RadialEnemy : MonoBehaviour
         {
             GameObject powerup = Instantiate(lifePowerupPrefab, transform.position, Quaternion.identity);
         }
+    }
+
+    private void EnableCollider()
+    {
+        col.enabled = true;
+    }
+    private void DisableCollider()
+    {
+        col.enabled = false;
     }
 }
