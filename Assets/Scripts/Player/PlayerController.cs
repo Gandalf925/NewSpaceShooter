@@ -154,6 +154,7 @@ public class PlayerController : MonoBehaviour
                 invincibleTimer = 0f;
             }
         }
+
         // 50ポイント毎にパワーアップする（最大値:5）
         if (gameManager.powerupPoint >= 50 && powerupCount < 5)
         {

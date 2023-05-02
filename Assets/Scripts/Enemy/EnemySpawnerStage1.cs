@@ -19,14 +19,14 @@ public class EnemySpawnerStage1 : MonoBehaviour
     public Transform radialPositionBottom;
 
     [Header("Boss")]
-    public Transform bossAppearPosition;
+    public Transform bossSpawnPosition;
     public GameObject backgroundPanel;
     public GameObject player;
-    public float bossSpawnDelay = 10f;
     private bool allEnemiesSpawned = false;
     public GameObject warningPanel;
     BackgroundController backgroundController;
     BackgroundPanelShrink backgroundShrinker;
+    public GameObject bossDecoy;
 
     private Vector3 playerInitialScale;
     public float scaleDuration = 0.8f;
@@ -82,15 +82,6 @@ public class EnemySpawnerStage1 : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(3f);
 
-        //middleのポジションから8体出現
-        for (int i = 8; i <= 0; i--)
-        {
-            SpawnNormalEnemy(spawnPositionsMiddle[i]);
-            yield return new WaitForSecondsRealtime(0.4f);
-        }
-
-        yield return new WaitForSecondsRealtime(3f);
-
         SpawnNormalEnemy(spawnPositionsMiddle[2]);
         yield return new WaitForSecondsRealtime(0.4f);
         SpawnNormalEnemy(spawnPositionsMiddle[2]);
@@ -138,13 +129,11 @@ public class EnemySpawnerStage1 : MonoBehaviour
         StartCoroutine(BossAppearanceDirection());
 
 
+        yield return new WaitForSecondsRealtime(8f);
 
-
-        yield return new WaitForSeconds(bossSpawnDelay);
-        Debug.Log("Boss apeared");
-
+        bossDecoy.SetActive(false);
         // Spawn the boss
-        SpawnBoss(bossAppearPosition);
+        SpawnBoss(bossSpawnPosition);
     }
 
 
@@ -159,7 +148,7 @@ public class EnemySpawnerStage1 : MonoBehaviour
     }
     private void SpawnBoss(Transform spawnPoint)
     {
-        GameObject boss = Instantiate(bossPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        GameObject boss = Instantiate(bossPrefab, spawnPoint.position, Quaternion.identity);
     }
 
     private bool AreAllEnemiesDefeated()
@@ -176,6 +165,8 @@ public class EnemySpawnerStage1 : MonoBehaviour
         warningPanel.SetActive(false);
         yield return new WaitForSecondsRealtime(1f);
         backgroundShrinker.Shrink();
+        yield return new WaitForSecondsRealtime(3f);
+
     }
 
     private IEnumerator StopBackgroundMove()

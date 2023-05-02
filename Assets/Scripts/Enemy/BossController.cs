@@ -26,7 +26,6 @@ public class BossController : MonoBehaviour
 
     void Start()
     {
-        // StartCoroutine(Appear());
         currentHP = maxHP;
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
@@ -40,8 +39,14 @@ public class BossController : MonoBehaviour
 
     void Update()
     {
+        if (currentHP > 0)
+        {
+            // 左右に移動
+            transform.position += new Vector3(Mathf.Cos(Time.time) * moveSpeed * Time.deltaTime, 0f, 0f);
 
-
+            // 上下に移動
+            transform.position += new Vector3(0f, Mathf.Sin(Time.time) * moveSpeed * Time.deltaTime, 0f);
+        }
     }
 
 
@@ -94,22 +99,23 @@ public class BossController : MonoBehaviour
             }
         }
     }
+
     IEnumerator FireBarrageRoutine()
     {
         // 弾幕の発射角度をランダムに決定する
         float angle = Random.Range(0f, 360f);
-        // 弾幕の速度をランダムに決定する
-        float speed = Random.Range(2f, 2.5f);
 
         while (player != null && currentHP > 0)
         {
             // 弾幕を生成する
             for (int i = 0; i < bulletCount; i++)
             {
+                // 弾幕の速度をランダムに決定する
+                float speed = Random.Range(2f, 2.5f);
                 float angleStep = 360f / bulletCount;
                 float bulletAngle = angle + i * angleStep;
 
-                Vector2 velocity = new Vector2(Mathf.Cos(bulletAngle * Mathf.Deg2Rad), Mathf.Sin(bulletAngle * Mathf.Deg2Rad)) * bulletSpeed;
+                Vector2 velocity = new Vector2(Mathf.Cos(bulletAngle * Mathf.Deg2Rad), Mathf.Sin(bulletAngle * Mathf.Deg2Rad)) * speed;
 
                 for (int j = 0; j < bulletSpawners.Length; j++)
                 {
@@ -130,15 +136,15 @@ public class BossController : MonoBehaviour
         isShowingDamage = true;
 
         float duration = 0.4f;
-        float halfDuration = duration / 2f;
+        float halfDuration = duration / 3f;
 
         spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(halfDuration);
 
-        spriteRenderer.color = Color.white;
+        spriteRenderer.color = Color.black;
         yield return new WaitForSeconds(halfDuration);
 
-        spriteRenderer.color = Color.Lerp(Color.white, originalColor, 0.5f);
+        spriteRenderer.color = Color.Lerp(Color.black, originalColor, 0.3f);
         yield return new WaitForSeconds(halfDuration);
 
         spriteRenderer.color = originalColor;

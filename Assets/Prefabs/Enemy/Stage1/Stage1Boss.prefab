@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2857570658142181970}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2857570658315086385}
@@ -103,13 +103,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bc90cf6ef739cd40b089d1b2d2c8f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 1000
-  moveSpeed: 2
-  beamSpeed: 5
-  bulletSpeed: 8
+  maxHP: 500
+  moveSpeed: 1
+  beamSpeed: 20
+  bulletSpeed: 3
   beamFireRate: 8
-  bulletFireRate: 0.05
-  bulletCount: 30
+  bulletFireRate: 0.5
+  bulletCount: 14
   beamPrefab: {fileID: 8354351000625563102, guid: 1033531c5ec9ca74ca434cb8dbce1817, type: 3}
   bulletPrefab: {fileID: 8354351000625563102, guid: c846ef118cbe1284783dce81da90a1e9, type: 3}
   player: {fileID: 0}
