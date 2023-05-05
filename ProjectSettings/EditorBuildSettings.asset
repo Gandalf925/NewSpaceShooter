@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/OPMovie.unity
     guid: 7863a7b30ad33ef49bd59313561561ee
+  - enabled: 1
+    path: Assets/Scenes/Title.unity
+    guid: d10616e0454f0bb4398af851f3754a47
   m_configObjects: {}

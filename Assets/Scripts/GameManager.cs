@@ -9,8 +9,6 @@ public class GameManager : MonoBehaviour
     public int lives = 3;
     public int powerupPoint { get; private set; } = 0;
 
-
-
     int startingScore = 0; // スタートするポイント
     public int score = 0; // 表示する最大のポイント
     public float duration = 1f; // アニメーションにかける時間
@@ -32,23 +30,23 @@ public class GameManager : MonoBehaviour
 
     public void UpdateScore(int point)
     {
-        score += point;
+        score += (point * 100);
 
-        // DOTweenを使って値を徐々に変化させる
-        DOTween.To(() => currentScore, x => currentScore = x, currentScore + 1, duration)
-            .OnUpdate(() =>
-            {
-                // テキストを更新
-                scoreText.text = currentScore.ToString();
-            })
-            .OnComplete(() =>
-            {
-                // endPointに到達したら、アニメーションを停止する
-                if (currentScore == score)
-                {
-                    DOTween.Kill(this);
-                }
-            });
+        // // DOTweenを使って値を徐々に変化させる
+        // DOTween.To(() => currentScore, x => currentScore = x, currentScore + 1, duration)
+        //     .OnUpdate(() =>
+        //     {
+        //         // テキストを更新
+        //         scoreText.text = currentScore.ToString();
+        //     })
+        //     .OnComplete(() =>
+        //     {
+        //         // endPointに到達したら、アニメーションを停止する
+        //         if (currentScore == score)
+        //         {
+        //             DOTween.Kill(this);
+        //         }
+        //     });
 
         scoreText.text = score.ToString();
     }

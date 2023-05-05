@@ -77,7 +77,7 @@ public class RadialEnemy : MonoBehaviour
                 GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.Euler(0f, 0f, angle));
                 bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.right * bulletSpeed;
             }
-            yield return new WaitForSeconds(1f / bulletFireRate);
+            yield return new WaitForSeconds(bulletFireRate);
         }
     }
 

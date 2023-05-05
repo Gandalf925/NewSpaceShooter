@@ -94,7 +94,6 @@ public class PlayerController : MonoBehaviour
             //パワーアップ時の処理
             if (powerupCount >= 1)
             {
-
                 float angleLeft = -15f;
                 float angleRight = 15f;
 
@@ -107,7 +106,6 @@ public class PlayerController : MonoBehaviour
                 bulletInstanceRight.transform.rotation = Quaternion.Euler(0f, 0f, angleRight);
                 bulletInstanceRight.GetComponent<PlayerBulletController>().fireRate = fireRate;
                 bulletInstanceRight.GetComponent<PlayerBulletController>().attackPower = attackPower;
-
             }
 
             // 次に弾を発射できる時刻を更新

@@ -88,7 +88,7 @@ public class NormalEnemy : MonoBehaviour
 
                 // 現在のPlayerの位置に向かって発射するようにする
                 bullet.GetComponent<Rigidbody2D>().velocity = (targetPosition - bulletSpawnPoint.position).normalized * bulletSpeed;
-                yield return new WaitForSeconds(1f / bulletFireRate);
+                yield return new WaitForSeconds(bulletFireRate);
             }
             else
             {

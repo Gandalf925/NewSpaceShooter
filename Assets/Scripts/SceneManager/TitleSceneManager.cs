@@ -1,0 +1,69 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using DG.Tweening;
+
+public class TitleSceneManager : MonoBehaviour
+{
+    public string sceneName = "Stage1";
+    public Image titleTextImage;
+    public Image pressSpaceKeyImage;
+
+    public GameObject blackoutPanel;
+
+    public Transform titleTextStopPosition;
+    public Transform pressSpaceImageStopPosition;
+
+    bool isStart = false;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        StartCoroutine(MoveTitleText());
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!isStart)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                isStart = true;
+                StartCoroutine(LoadNextScene());
+            }
+        }
+    }
+
+    IEnumerator MoveTitleText()
+    {
+        yield return new WaitForSecondsRealtime(2f);
+
+        blackoutPanel.GetComponent<Image>().DOFade(0f, 1f);
+
+        yield return new WaitForSecondsRealtime(1f);
+
+        titleTextImage.transform.DOMoveY(titleTextStopPosition.position.y, 3f);
+
+        yield return new WaitForSecondsRealtime(3f);
+
+        pressSpaceKeyImage.transform.DOMoveY(pressSpaceImageStopPosition.position.y, 1f);
+    }
+    IEnumerator LoadNextScene()
+    {
+        pressSpaceKeyImage.DOFade(0f, 0.2f);
+        yield return new WaitForSecondsRealtime(0.2f);
+        pressSpaceKeyImage.DOFade(1f, 0.2f);
+        yield return new WaitForSecondsRealtime(0.2f);
+        pressSpaceKeyImage.DOFade(0f, 0.2f);
+        yield return new WaitForSecondsRealtime(0.2f);
+        pressSpaceKeyImage.DOFade(1f, 0.2f);
+        yield return new WaitForSecondsRealtime(0.2f);
+
+        blackoutPanel.GetComponent<Image>().DOFade(1f, 1f);
+        yield return new WaitForSecondsRealtime(1f);
+        SceneManager.LoadScene(sceneName);
+    }
+}

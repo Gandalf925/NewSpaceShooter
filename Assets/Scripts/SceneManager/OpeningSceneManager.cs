@@ -9,7 +9,7 @@ using TMPro;
 
 public class OpeningSceneManager : MonoBehaviour
 {
-    public string gameSceneName = "Stage1";
+    public string sceneName = "Title";
     public VideoPlayer videoPlayer;
     public GameObject loadingPanel;
     public GameObject blackoutPanel;
@@ -76,7 +76,7 @@ public class OpeningSceneManager : MonoBehaviour
 
     private void LoadGameScene()
     {
-        SceneManager.LoadScene(gameSceneName);
+        SceneManager.LoadScene(sceneName);
     }
 
     void BlinkText()

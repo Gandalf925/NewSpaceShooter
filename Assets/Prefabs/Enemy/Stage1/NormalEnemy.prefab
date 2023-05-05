@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2969067001419220925}
   - component: {fileID: 8231607743038009001}
   m_Layer: 0
-  m_Name: NormalEnemyRe
+  m_Name: NormalEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,10 +154,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fa748c0d25b3da4dbe6c7eb6b880d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 3
+  maxHP: 1
   moveSpeed: 3
   bulletSpeed: 5
-  bulletFireRate: 2
+  bulletFireRate: 1.5
   bulletPrefab: {fileID: 8354351000625563102, guid: c846ef118cbe1284783dce81da90a1e9, type: 3}
   player: {fileID: 0}
   explosionPrefab: {fileID: 336278662954817479, guid: b350deb427977454493eb242f505d753, type: 3}

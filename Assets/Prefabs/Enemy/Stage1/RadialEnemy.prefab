@@ -100,9 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7afe63fbbb42dff41b86a08f6468cd49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 20
+  maxHP: 30
   bulletSpeed: 4
-  bulletFireRate: 1
+  bulletFireRate: 3
   attackDuration: 5
   bulletPrefab: {fileID: 8354351000625563102, guid: 3d2e8bbc588487145b0e5b4a2b779b91, type: 3}
   explosionPrefab: {fileID: 336278662954817479, guid: b350deb427977454493eb242f505d753, type: 3}
