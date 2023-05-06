@@ -69,6 +69,8 @@ public class RadialEnemy : MonoBehaviour
 
     private IEnumerator FireRoutine()
     {
+        transform.DOMoveX(transform.position.x - 3f, 3f);
+
         while (true)
         {
             for (int i = 0; i < 7; i++)
