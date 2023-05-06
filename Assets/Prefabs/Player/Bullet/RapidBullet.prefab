@@ -161,3 +161,4 @@ MonoBehaviour:
   speed: 12
   fireRate: 0.05
   attackPower: 1
+  explosionPrefab: {fileID: 336278662954817479, guid: 07d5370df963b864f9f0deb0b68579aa, type: 3}

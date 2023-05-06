@@ -1,12 +1,15 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class EnemySpawnerStage1 : MonoBehaviour
 {
     public GameObject nomalEnemyPrefab;
     public GameObject radialEnemyPrefab;
     public GameObject bossPrefab;
+    Stage1BossController boss;
 
     [Header("NormalEnemyPosition")]
     public Transform spawnPositionTop;
@@ -21,16 +24,19 @@ public class EnemySpawnerStage1 : MonoBehaviour
     [Header("Boss")]
     public Transform bossSpawnPosition;
     public GameObject backgroundPanel;
-    public GameObject player;
+    public PlayerController player;
     private bool allEnemiesSpawned = false;
     public GameObject warningPanel;
     BackgroundController backgroundController;
     BackgroundPanelShrink backgroundShrinker;
     public GameObject bossDecoy;
 
+    bool bossAppear = false;
+
     private Vector3 playerInitialScale;
-    public float scaleDuration = 0.8f;
-    public float scaleAmount = 0.8f;
+    [SerializeField] Image blackoutPanel;
+    [SerializeField] GameObject backgroundStarsPanel;
+    private string nextSceneName;
 
     void Start()
     {
@@ -38,8 +44,18 @@ public class EnemySpawnerStage1 : MonoBehaviour
         StartCoroutine(SpawnBossRoutine());
         backgroundController = FindObjectOfType<BackgroundController>();
         backgroundShrinker = backgroundPanel.GetComponent<BackgroundPanelShrink>();
-        player = GameObject.FindWithTag("Player");
+        player = FindObjectOfType<PlayerController>();
+    }
 
+    void Update()
+    {
+        if (bossAppear)
+        {
+            if (boss.isDefeated)
+            {
+                StartCoroutine(LoadNextScene());
+            }
+        }
     }
 
     IEnumerator SpawnRoutine()
@@ -58,53 +74,53 @@ public class EnemySpawnerStage1 : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.5f);
 
 
-        yield return new WaitForSecondsRealtime(5f);
+        // yield return new WaitForSecondsRealtime(5f);
 
-        // Bottmeから4体出現
-        SpawnNormalEnemy(spwanPositionBottom);
-        yield return new WaitForSecondsRealtime(0.5f);
-        SpawnNormalEnemy(spwanPositionBottom);
-        yield return new WaitForSecondsRealtime(0.5f);
-        SpawnNormalEnemy(spwanPositionBottom);
-        yield return new WaitForSecondsRealtime(0.5f);
-        SpawnNormalEnemy(spwanPositionBottom);
-        yield return new WaitForSecondsRealtime(0.5f);
+        // // Bottmeから4体出現
+        // SpawnNormalEnemy(spwanPositionBottom);
+        // yield return new WaitForSecondsRealtime(0.5f);
+        // SpawnNormalEnemy(spwanPositionBottom);
+        // yield return new WaitForSecondsRealtime(0.5f);
+        // SpawnNormalEnemy(spwanPositionBottom);
+        // yield return new WaitForSecondsRealtime(0.5f);
+        // SpawnNormalEnemy(spwanPositionBottom);
+        // yield return new WaitForSecondsRealtime(0.5f);
 
 
-        yield return new WaitForSecondsRealtime(3f);
+        // yield return new WaitForSecondsRealtime(3f);
 
-        //middleのポジションから8体出現
-        for (int i = 0; i < 8; i++)
-        {
-            SpawnNormalEnemy(spawnPositionsMiddle[i]);
-            yield return new WaitForSecondsRealtime(0.4f);
-        }
+        // //middleのポジションから8体出現
+        // for (int i = 0; i < 8; i++)
+        // {
+        //     SpawnNormalEnemy(spawnPositionsMiddle[i]);
+        //     yield return new WaitForSecondsRealtime(0.4f);
+        // }
 
-        yield return new WaitForSecondsRealtime(3f);
+        // yield return new WaitForSecondsRealtime(3f);
 
-        SpawnNormalEnemy(spawnPositionsMiddle[2]);
-        yield return new WaitForSecondsRealtime(0.4f);
-        SpawnNormalEnemy(spawnPositionsMiddle[2]);
-        yield return new WaitForSecondsRealtime(0.4f);
-        SpawnNormalEnemy(spawnPositionsMiddle[2]);
-        yield return new WaitForSecondsRealtime(0.4f);
-        SpawnNormalEnemy(spawnPositionsMiddle[5]);
-        yield return new WaitForSecondsRealtime(0.4f);
-        SpawnNormalEnemy(spawnPositionsMiddle[5]);
-        yield return new WaitForSecondsRealtime(0.4f);
-        SpawnNormalEnemy(spawnPositionsMiddle[5]);
-        yield return new WaitForSecondsRealtime(0.4f);
+        // SpawnNormalEnemy(spawnPositionsMiddle[2]);
+        // yield return new WaitForSecondsRealtime(0.4f);
+        // SpawnNormalEnemy(spawnPositionsMiddle[2]);
+        // yield return new WaitForSecondsRealtime(0.4f);
+        // SpawnNormalEnemy(spawnPositionsMiddle[2]);
+        // yield return new WaitForSecondsRealtime(0.4f);
+        // SpawnNormalEnemy(spawnPositionsMiddle[5]);
+        // yield return new WaitForSecondsRealtime(0.4f);
+        // SpawnNormalEnemy(spawnPositionsMiddle[5]);
+        // yield return new WaitForSecondsRealtime(0.4f);
+        // SpawnNormalEnemy(spawnPositionsMiddle[5]);
+        // yield return new WaitForSecondsRealtime(0.4f);
 
-        yield return new WaitForSecondsRealtime(3f);
+        // yield return new WaitForSecondsRealtime(3f);
 
-        SpawnRadialEnemy(radialPositionMiddle);
+        // SpawnRadialEnemy(radialPositionMiddle);
 
-        yield return new WaitForSecondsRealtime(3f);
+        // yield return new WaitForSecondsRealtime(3f);
 
-        SpawnRadialEnemy(radialPositionTop);
-        SpawnRadialEnemy(radialPositionBottom);
+        // SpawnRadialEnemy(radialPositionTop);
+        // SpawnRadialEnemy(radialPositionBottom);
 
-        yield return new WaitForSecondsRealtime(4f);
+        // yield return new WaitForSecondsRealtime(4f);
 
         allEnemiesSpawned = true;
 
@@ -148,7 +164,8 @@ public class EnemySpawnerStage1 : MonoBehaviour
     }
     private void SpawnBoss(Transform spawnPoint)
     {
-        GameObject boss = Instantiate(bossPrefab, spawnPoint.position, Quaternion.identity);
+        boss = Instantiate(bossPrefab, spawnPoint.position, Quaternion.identity).GetComponent<Stage1BossController>();
+        bossAppear = true;
     }
 
     private bool AreAllEnemiesDefeated()
@@ -166,7 +183,6 @@ public class EnemySpawnerStage1 : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
         backgroundShrinker.Shrink();
         yield return new WaitForSecondsRealtime(3f);
-
     }
 
     private IEnumerator StopBackgroundMove()
@@ -177,5 +193,23 @@ public class EnemySpawnerStage1 : MonoBehaviour
             backgroundController.scrollSpeedBack -= 1;
             yield return new WaitForSecondsRealtime(0.5f);
         }
+    }
+
+    IEnumerator LoadNextScene()
+    {
+        EnemyBulletController[] enemyBullets = FindObjectsOfType<EnemyBulletController>();
+        for (int i = 0; i < enemyBullets.Length; i++)
+        {
+            enemyBullets[i].Destroy();
+        }
+
+        BossBeamController bossBeam = FindObjectOfType<BossBeamController>();
+        bossBeam.Destroy();
+
+        yield return new WaitForSecondsRealtime(1f);
+        blackoutPanel.DOFade(1f, 2f);
+        backgroundStarsPanel.SetActive(false);
+        yield return new WaitForSecondsRealtime(2f);
+        SceneManager.LoadScene(nextSceneName);
     }
 }

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 814054867089113862}
   m_Layer: 0
   m_Name: Stage1Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bc90cf6ef739cd40b089d1b2d2c8f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 500
+  maxHP: 1
   moveSpeed: 1
   beamSpeed: 20
   bulletSpeed: 3
@@ -118,6 +118,7 @@ MonoBehaviour:
   bulletSpawners:
   - {fileID: 2857570659614847126}
   - {fileID: 2857570658315086385}
+  isDefeated: 0
 --- !u!50 &-3575177712712126215
 Rigidbody2D:
   serializedVersion: 4

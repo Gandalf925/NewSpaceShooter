@@ -15,6 +15,7 @@ public class PlayerBulletController : MonoBehaviour
     public float fireRate;
     public int attackPower;
     private Rigidbody2D rb;
+    [SerializeField] GameObject explosionPrefab;
 
     void Start()
     {
@@ -50,6 +51,16 @@ public class PlayerBulletController : MonoBehaviour
         if (screenPosition.x < -100 || screenPosition.x > Screen.width + 100
             || screenPosition.y < -100 || screenPosition.y > Screen.height + 100)
         {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy") || collision.CompareTag("Boss"))
+        {
+            GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            Destroy(explosion, 0.5f);
             Destroy(gameObject);
         }
     }

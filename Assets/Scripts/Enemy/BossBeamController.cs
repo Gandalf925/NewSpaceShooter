@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BossBeamController : MonoBehaviour
 {
+    [SerializeField] GameObject explosionPrefab;
     private void Update()
     {
         // 画面外に出た弾を自動的に削除する
@@ -13,5 +14,10 @@ public class BossBeamController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 }

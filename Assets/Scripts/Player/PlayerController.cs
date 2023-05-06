@@ -208,11 +208,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void EnableCollider()
+    public void EnableCollider()
     {
         col.enabled = true;
     }
-    private void DisableCollider()
+    public void DisableCollider()
     {
         col.enabled = false;
     }
