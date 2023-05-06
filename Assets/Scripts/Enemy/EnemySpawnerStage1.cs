@@ -31,28 +31,37 @@ public class EnemySpawnerStage1 : MonoBehaviour
     BackgroundPanelShrink backgroundShrinker;
     public GameObject bossDecoy;
 
+    [SerializeField] GameObject startTextFrame;
+    [SerializeField] Transform frameStartPos;
+    [SerializeField] Transform frameStopPos;
+    [SerializeField] Transform frameEndPos;
+
     bool bossAppear = false;
+    bool atOnce = false;
 
     private Vector3 playerInitialScale;
     [SerializeField] Image blackoutPanel;
     [SerializeField] GameObject backgroundStarsPanel;
-    private string nextSceneName;
+    private string nextSceneName = "Stage1ED";
 
     void Start()
     {
         StartCoroutine(SpawnRoutine());
         StartCoroutine(SpawnBossRoutine());
+        startTextFrame.transform.position = frameStartPos.position;
         backgroundController = FindObjectOfType<BackgroundController>();
         backgroundShrinker = backgroundPanel.GetComponent<BackgroundPanelShrink>();
         player = FindObjectOfType<PlayerController>();
+        blackoutPanel.color = new Color(0f, 0f, 0f, 255f);
     }
 
     void Update()
     {
         if (bossAppear)
         {
-            if (boss.isDefeated)
+            if (boss.isDefeated && !atOnce)
             {
+                atOnce = true;
                 StartCoroutine(LoadNextScene());
             }
         }
@@ -60,18 +69,27 @@ public class EnemySpawnerStage1 : MonoBehaviour
 
     IEnumerator SpawnRoutine()
     {
+        blackoutPanel.DOFade(0f, 3f);
         // Game Start
-        yield return new WaitForSecondsRealtime(3f);
+        yield return new WaitForSecondsRealtime(5f);
 
-        // Topから4体出現
-        SpawnNormalEnemy(spawnPositionTop);
-        yield return new WaitForSecondsRealtime(0.5f);
-        SpawnNormalEnemy(spawnPositionTop);
-        yield return new WaitForSecondsRealtime(0.5f);
-        SpawnNormalEnemy(spawnPositionTop);
-        yield return new WaitForSecondsRealtime(0.5f);
-        SpawnNormalEnemy(spawnPositionTop);
-        yield return new WaitForSecondsRealtime(0.5f);
+        startTextFrame.transform.DOMove(frameStopPos.position, 0.5f);
+
+        yield return new WaitForSecondsRealtime(2f);
+
+        startTextFrame.transform.DOMove(frameEndPos.position, 0.5f);
+
+        yield return new WaitForSecondsRealtime(1f);
+
+        // // Topから4体出現
+        // SpawnNormalEnemy(spawnPositionTop);
+        // yield return new WaitForSecondsRealtime(0.5f);
+        // SpawnNormalEnemy(spawnPositionTop);
+        // yield return new WaitForSecondsRealtime(0.5f);
+        // SpawnNormalEnemy(spawnPositionTop);
+        // yield return new WaitForSecondsRealtime(0.5f);
+        // SpawnNormalEnemy(spawnPositionTop);
+        // yield return new WaitForSecondsRealtime(0.5f);
 
 
         // yield return new WaitForSecondsRealtime(5f);
