@@ -1,11 +1,19 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     public int speed = 5;  // キャラクターの移動速度
-    public float touchSensitivity = 0.1f;
+
+    public Image joystickImage;
+    public Image outerFrameImage;
+    private Vector2 centerPos;
+    private float outerFrameRadius;
+
+    public float touchSensitivity = 0.2f;
+    public float maxDistanceFromCenter = 50.0f;
 
     public GameObject[] bulletPrefabs;  // 弾のプレハブの配列
     public Transform bulletSpawnPoint;  // 弾の発射位置
@@ -27,6 +35,9 @@ public class PlayerController : MonoBehaviour
     private int previousPowerupPoint;
 
     GameManager gameManager;
+    JoystickController joystickController;
+    private RectTransform joystickRectTransform;
+    private Vector2 joystickCenterPos;
 
     private void Start()
     {
@@ -36,31 +47,30 @@ public class PlayerController : MonoBehaviour
         // SpriteRenderer コンポーネントを取得する
         playerImage = GetComponent<Image>();
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+
+        // ジョイスティックのコントローラーを取得する
+        joystickController = FindObjectOfType<JoystickController>();
+
+        // outerFrameImageの半径を計算する
+        outerFrameRadius = outerFrameImage.rectTransform.rect.width / 2f;
+
+        // centerPosを計算する
+        centerPos = outerFrameImage.rectTransform.position;
+
+        // JoystickImageのRectTransformを取得し、中心位置を計算する
+        joystickRectTransform = joystickImage.GetComponent<RectTransform>();
+        joystickCenterPos = joystickRectTransform.position;
+
     }
 
     private void Update()
     {
-        // キャラクターの移動
-        if (Input.GetMouseButton(0))
-        {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 diff = mousePos - transform.position;
-            diff.z = 0;
+        // プレイヤーの移動
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
+        Vector2 movement = new Vector2(joystickController.GetHorizontalValue(), joystickController.GetVerticalValue());
+        rb.velocity = movement * speed;
 
-            // 差分ベクトルが一定値以上であれば移動する
-            if (diff.magnitude > touchSensitivity)
-            {
-                rb.velocity = diff.normalized * speed;
-            }
-            else
-            {
-                rb.velocity = Vector2.zero;
-            }
-        }
-        else
-        {
-            rb.velocity = Vector2.zero;
-        }
 
         // 攻撃（弾の発射）
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -124,7 +134,6 @@ public class PlayerController : MonoBehaviour
             // 弾が発射された後、衝突判定を再度有効化する
             Invoke("EnableCollider", 0.1f);
         }
-
         // 画面外に出られないようにする
         Vector3 clampedPosition = transform.position;
         clampedPosition.x = Mathf.Clamp(transform.position.x, -8f, 8f);
