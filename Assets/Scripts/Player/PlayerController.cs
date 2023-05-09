@@ -4,7 +4,9 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 5f;  // キャラクターの移動速度
+    public int speed = 5;  // キャラクターの移動速度
+    public float touchSensitivity = 0.1f;
+
     public GameObject[] bulletPrefabs;  // 弾のプレハブの配列
     public Transform bulletSpawnPoint;  // 弾の発射位置
 
@@ -39,20 +41,26 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // キャラクターの移動
-        float x = (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) ? 1f :
-                  (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) ? -1f : 0f;
-        float y = (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) ? 1f :
-                  (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) ? -1f : 0f;
-
-        // Shiftキーが押されている場合は速度を半分にする
-        float currentSpeed = speed;
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetMouseButton(0))
         {
-            currentSpeed *= 0.5f;
-        }
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 diff = mousePos - transform.position;
+            diff.z = 0;
 
-        Vector2 movement = new Vector2(x, y);
-        rb.velocity = movement * currentSpeed;
+            // 差分ベクトルが一定値以上であれば移動する
+            if (diff.magnitude > touchSensitivity)
+            {
+                rb.velocity = diff.normalized * speed;
+            }
+            else
+            {
+                rb.velocity = Vector2.zero;
+            }
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
+        }
 
         // 攻撃（弾の発射）
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -68,11 +76,11 @@ public class PlayerController : MonoBehaviour
             selectedBulletIndex = 2;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButton(0))
         {
             isFiring = true;
         }
-        else if (Input.GetKeyUp(KeyCode.Space))
+        else
         {
             isFiring = false;
         }
@@ -151,6 +159,7 @@ public class PlayerController : MonoBehaviour
                 invincibleTimer = 0f;
             }
         }
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)

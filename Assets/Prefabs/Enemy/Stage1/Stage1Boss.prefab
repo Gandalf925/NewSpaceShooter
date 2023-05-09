@@ -103,13 +103,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bc90cf6ef739cd40b089d1b2d2c8f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 500
+  maxHP: 800
   moveSpeed: 1
   beamSpeed: 20
   bulletSpeed: 3
   beamFireRate: 8
-  bulletFireRate: 0.5
-  bulletCount: 14
+  bulletFireRate: 0.3
+  bulletCount: 20
   beamPrefab: {fileID: 8354351000625563102, guid: 1033531c5ec9ca74ca434cb8dbce1817, type: 3}
   bulletPrefab: {fileID: 8354351000625563102, guid: c846ef118cbe1284783dce81da90a1e9, type: 3}
   player: {fileID: 0}

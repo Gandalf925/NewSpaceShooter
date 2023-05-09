@@ -159,6 +159,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletType: 0
   speed: 10
-  fireRate: 0.1
+  fireRate: 0.2
   attackPower: 3
   explosionPrefab: {fileID: 336278662954817479, guid: 07d5370df963b864f9f0deb0b68579aa, type: 3}

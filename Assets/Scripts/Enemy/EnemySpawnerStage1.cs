@@ -25,6 +25,7 @@ public class EnemySpawnerStage1 : MonoBehaviour
     public Transform bossSpawnPosition;
     public GameObject backgroundPanel;
     public PlayerController player;
+    public int playerCurrentSpeed;
     private bool allEnemiesSpawned = false;
     public GameObject warningPanel;
     BackgroundController backgroundController;
@@ -201,6 +202,10 @@ public class EnemySpawnerStage1 : MonoBehaviour
         warningPanel.SetActive(false);
         yield return new WaitForSecondsRealtime(1f);
         backgroundShrinker.Shrink();
+
+        playerCurrentSpeed = player.speed;
+        player.speed = player.speed / 2;
+
         yield return new WaitForSecondsRealtime(3f);
     }
 
@@ -217,15 +222,26 @@ public class EnemySpawnerStage1 : MonoBehaviour
     IEnumerator LoadNextScene()
     {
         EnemyBulletController[] enemyBullets = FindObjectsOfType<EnemyBulletController>();
-        for (int i = 0; i < enemyBullets.Length; i++)
+
+        if (enemyBullets != null)
         {
-            enemyBullets[i].Destroy();
+            for (int i = 0; i < enemyBullets.Length; i++)
+            {
+                enemyBullets[i].Destroy();
+            }
         }
 
         BossBeamController bossBeam = FindObjectOfType<BossBeamController>();
-        bossBeam.Destroy();
+
+        if (bossBeam != null)
+        {
+            bossBeam.Destroy();
+        }
 
         yield return new WaitForSecondsRealtime(1f);
+
+        player.speed = playerCurrentSpeed;
+
         uIManager.blackoutPanel.DOFade(1f, 2f);
         backgroundStarsPanel.SetActive(false);
         yield return new WaitForSecondsRealtime(2f);

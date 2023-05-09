@@ -29,7 +29,7 @@ public class TitleSceneManager : MonoBehaviour
     {
         if (!isStart)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetMouseButton(0))
             {
                 isStart = true;
                 StartCoroutine(LoadNextScene());
