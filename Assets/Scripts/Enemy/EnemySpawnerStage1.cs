@@ -40,19 +40,20 @@ public class EnemySpawnerStage1 : MonoBehaviour
     bool atOnce = false;
 
     private Vector3 playerInitialScale;
-    [SerializeField] Image blackoutPanel;
     [SerializeField] GameObject backgroundStarsPanel;
     private string nextSceneName = "Stage1ED";
+    UIManager uIManager;
 
     void Start()
     {
-        StartCoroutine(SpawnRoutine());
-        StartCoroutine(SpawnBossRoutine());
-        startTextFrame.transform.position = frameStartPos.position;
+        player = FindObjectOfType<PlayerController>();
+        uIManager = FindObjectOfType<UIManager>();
         backgroundController = FindObjectOfType<BackgroundController>();
         backgroundShrinker = backgroundPanel.GetComponent<BackgroundPanelShrink>();
-        player = FindObjectOfType<PlayerController>();
-        blackoutPanel.color = new Color(0f, 0f, 0f, 255f);
+        startTextFrame.transform.position = frameStartPos.position;
+        uIManager.blackoutPanel.color = new Color(0f, 0f, 0f, 255f);
+        StartCoroutine(SpawnRoutine());
+        StartCoroutine(SpawnBossRoutine());
     }
 
     void Update()
@@ -69,9 +70,9 @@ public class EnemySpawnerStage1 : MonoBehaviour
 
     IEnumerator SpawnRoutine()
     {
-        blackoutPanel.DOFade(0f, 3f);
+        uIManager.FadeIn();
         // Game Start
-        yield return new WaitForSecondsRealtime(5f);
+        yield return new WaitForSecondsRealtime(4f);
 
         startTextFrame.transform.DOMove(frameStopPos.position, 0.5f);
 
@@ -207,8 +208,8 @@ public class EnemySpawnerStage1 : MonoBehaviour
     {
         for (int i = 0; i <= 4; i++)
         {
-            backgroundController.scrollSpeedFront -= 2;
-            backgroundController.scrollSpeedBack -= 1;
+            backgroundController.scrollSpeedFront -= 1f;
+            backgroundController.scrollSpeedBack -= 0.5f;
             yield return new WaitForSecondsRealtime(0.5f);
         }
     }
@@ -225,7 +226,7 @@ public class EnemySpawnerStage1 : MonoBehaviour
         bossBeam.Destroy();
 
         yield return new WaitForSecondsRealtime(1f);
-        blackoutPanel.DOFade(1f, 2f);
+        uIManager.blackoutPanel.DOFade(1f, 2f);
         backgroundStarsPanel.SetActive(false);
         yield return new WaitForSecondsRealtime(2f);
         SceneManager.LoadScene(nextSceneName);

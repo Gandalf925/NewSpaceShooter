@@ -99,7 +99,7 @@ public class PowerupItem : MonoBehaviour
             }
             else if (powerupType == PowerupType.Life)
             {
-                gameManager.lives += 1;
+                gameManager.UpdateLives(1);
             }
 
             Destroy(gameObject);

@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2796256431232039623}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 5334a60396bca40f19ac9d531fab2621, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -159,6 +159,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletType: 0
   speed: 10
-  fireRate: 0.2
+  fireRate: 0.1
   attackPower: 3
   explosionPrefab: {fileID: 336278662954817479, guid: 07d5370df963b864f9f0deb0b68579aa, type: 3}

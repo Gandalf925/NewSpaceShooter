@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     public GameObject[] bulletPrefabs;  // 弾のプレハブの配列
     public Transform bulletSpawnPoint;  // 弾の発射位置
 
-    public int powerupCount;
 
     public GameObject explosionEffect;  // 爆発エフェクトのプレハブ
 
@@ -92,7 +91,7 @@ public class PlayerController : MonoBehaviour
             int attackPower = bulletController.attackPower;
 
             //パワーアップ時の処理
-            if (powerupCount >= 1)
+            if (gameManager.powerupCount >= 1)
             {
                 float angleLeft = -15f;
                 float angleRight = 15f;
@@ -152,13 +151,6 @@ public class PlayerController : MonoBehaviour
                 invincibleTimer = 0f;
             }
         }
-
-        // 50ポイント毎にパワーアップする（最大値:5）
-        if (gameManager.powerupPoint >= 50 && powerupCount < 5)
-        {
-            Powerup();
-            gameManager.ResetPowerupPoint();
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -169,8 +161,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.CompareTag("EnemyBullet") || other.CompareTag("Enemy"))
         {
-            gameManager.UpdateLives();
-
+            gameManager.UpdateLives(-1);
             PowerDown();
 
             DisableCollider();
@@ -189,21 +180,21 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void Powerup()
+    public void Powerup()
     {
-        powerupCount += 1;
+        gameManager.powerupCount += 1;
         speed += 1;
     }
 
     private void PowerDown()
     {
-        if (powerupCount >= 1)
+        if (gameManager.powerupCount >= 1)
         {
-            powerupCount -= 1;
+            gameManager.powerupCount -= 1;
             speed -= 1;
-            if (powerupCount < 0)
+            if (gameManager.powerupCount < 0)
             {
-                powerupCount = 0;
+                gameManager.powerupCount = 0;
             }
         }
     }

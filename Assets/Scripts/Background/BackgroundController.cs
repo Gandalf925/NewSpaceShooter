@@ -6,8 +6,8 @@ public class BackgroundController : MonoBehaviour
     public Transform backgroundFront;
     public Transform backgroundBack;
 
-    public float scrollSpeedFront = 0.1f;
-    public float scrollSpeedBack = 0.05f;
+    public float scrollSpeedFront = 1f;
+    public float scrollSpeedBack = 0.5f;
 
     private List<Transform> starsFront = new List<Transform>();
     private List<Transform> starsBack = new List<Transform>();
