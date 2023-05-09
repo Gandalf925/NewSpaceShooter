@@ -47,6 +47,12 @@ public class PlayerController : MonoBehaviour
             Vector3 diff = mousePos - transform.position;
             diff.z = 0;
 
+            // 調整量を加算する
+            float offsetX = 1.0f;
+            float offsetY = 1.0f;
+            diff += new Vector3(offsetX, offsetY, 0);
+
+
             // 差分ベクトルが一定値以上であれば移動する
             if (diff.magnitude > touchSensitivity)
             {

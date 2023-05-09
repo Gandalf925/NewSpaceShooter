@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2857570658142181965}
   - component: {fileID: -3575177712712126215}
   - component: {fileID: 8464172653068470945}
-  - component: {fileID: 814054867089113862}
   m_Layer: 0
   m_Name: Stage1Boss
   m_TagString: Boss
@@ -165,32 +164,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 5.736744, y: 3.4745793}
-  m_EdgeRadius: 0
---- !u!61 &814054867089113862
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2857570658142181970}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -4.0221214, y: -0.98646194}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 19.2, y: 10.8}
-    newSize: {x: 19.2, y: 10.8}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.7281113, y: 1.0695435}
   m_EdgeRadius: 0
 --- !u!1 &2857570658315086384
 GameObject:
