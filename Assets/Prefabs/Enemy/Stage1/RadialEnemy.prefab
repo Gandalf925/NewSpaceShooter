@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 30
-  bulletSpeed: 4
+  bulletSpeed: 8
   bulletFireRate: 3
   attackDuration: 5
   bulletPrefab: {fileID: 8354351000625563102, guid: 3d2e8bbc588487145b0e5b4a2b779b91, type: 3}

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject[] bulletPrefabs;  // 弾のプレハブの配列
     public Transform bulletSpawnPoint;  // 弾の発射位置
-
+    public Image touchCircle;
 
     public GameObject explosionEffect;  // 爆発エフェクトのプレハブ
 
@@ -33,14 +34,17 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<CircleCollider2D>();
 
-        // SpriteRenderer コンポーネントを取得する
         playerImage = GetComponent<Image>();
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+
+        touchCircle.gameObject.SetActive(true);
+
+        StartCoroutine(BlinkTouchCircle());
     }
 
     private void Update()
     {
-        // キャラクターの移動
+        // キャラクターの移動(マウスとスマホ)
         if (Input.GetMouseButton(0))
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -48,8 +52,8 @@ public class PlayerController : MonoBehaviour
             diff.z = 0;
 
             // 調整量を加算する
-            float offsetX = 1.0f;
-            float offsetY = 1.0f;
+            float offsetX = 4f;
+            float offsetY = 0.3f;
             diff += new Vector3(offsetX, offsetY, 0);
 
 
@@ -68,6 +72,26 @@ public class PlayerController : MonoBehaviour
             rb.velocity = Vector2.zero;
         }
 
+        // キャラクターの移動（PC）
+        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+        {
+            float x = (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) ? 1f :
+                      (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) ? -1f : 0f;
+            float y = (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) ? 1f :
+                      (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) ? -1f : 0f;
+
+            // Shiftキーが押されている場合は速度を半分にする
+            float currentSpeed = speed;
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                currentSpeed *= 0.5f;
+            }
+
+            Vector2 movement = new Vector2(x, y);
+            rb.velocity = movement * currentSpeed;
+        }
+
+
         // 攻撃（弾の発射）
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -82,11 +106,20 @@ public class PlayerController : MonoBehaviour
             selectedBulletIndex = 2;
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             isFiring = true;
         }
-        else
+        else if (Input.GetKeyUp(KeyCode.Space))
+        {
+            isFiring = false;
+        }
+
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+        {
+            isFiring = true;
+        }
+        else if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space))
         {
             isFiring = false;
         }
@@ -212,6 +245,27 @@ public class PlayerController : MonoBehaviour
                 gameManager.powerupCount = 0;
             }
         }
+    }
+
+    IEnumerator BlinkTouchCircle()
+    {
+        yield return new WaitForSecondsRealtime(3f);
+
+        touchCircle.DOFade(0f, 0.3f);
+        yield return new WaitForSecondsRealtime(0.3f);
+        touchCircle.DOFade(1f, 0.3f);
+        yield return new WaitForSecondsRealtime(0.3f);
+        touchCircle.DOFade(0f, 0.3f);
+        yield return new WaitForSecondsRealtime(0.3f);
+        touchCircle.DOFade(1f, 0.3f);
+        yield return new WaitForSecondsRealtime(0.3f);
+        touchCircle.DOFade(0f, 0.3f);
+        yield return new WaitForSecondsRealtime(0.3f);
+        touchCircle.DOFade(1f, 0.3f);
+        yield return new WaitForSecondsRealtime(0.3f);
+
+        touchCircle.gameObject.SetActive(false);
+
     }
 
     public void EnableCollider()

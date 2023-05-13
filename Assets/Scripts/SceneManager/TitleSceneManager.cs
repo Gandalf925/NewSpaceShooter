@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,7 +6,7 @@ using DG.Tweening;
 
 public class TitleSceneManager : MonoBehaviour
 {
-    public string sceneName = "Stage1";
+    private string sceneName = "Stage1OPFirst";
     public Image titleTextImage;
     public Image pressSpaceKeyImage;
 
@@ -29,7 +28,7 @@ public class TitleSceneManager : MonoBehaviour
     {
         if (!isStart)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space))
             {
                 isStart = true;
                 StartCoroutine(LoadNextScene());

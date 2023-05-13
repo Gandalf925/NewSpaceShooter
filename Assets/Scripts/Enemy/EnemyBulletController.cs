@@ -4,6 +4,10 @@ public class EnemyBulletController : MonoBehaviour
 {
     [SerializeField] GameObject explosionPrefab;
 
+    private void Start()
+    {
+    }
+
     private void Update()
     {
         // 画面外に出た弾を自動的に削除する
@@ -29,4 +33,6 @@ public class EnemyBulletController : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+
 }

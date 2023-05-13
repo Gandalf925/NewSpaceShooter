@@ -104,8 +104,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 800
   moveSpeed: 1
-  beamSpeed: 20
-  bulletSpeed: 3
+  beamSpeed: 5
+  bulletSpeed: 8
   beamFireRate: 8
   bulletFireRate: 0.3
   bulletCount: 20
