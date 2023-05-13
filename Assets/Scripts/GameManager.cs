@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public int powerupCount;
     EnemySpawnerStage1 enemySpawnerStage1;
     UIManager uIManager;
+    bool isPaused;
 
     void Start()
     {
@@ -92,5 +93,29 @@ public class GameManager : MonoBehaviour
     public void ResetPowerupPoint()
     {
         powerupPoint = 0;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))  // 例としてEscapeキーを押すと一時停止するようにしています
+        {
+            TogglePause();
+        }
+    }
+
+    public void TogglePause()
+    {
+        isPaused = !isPaused;
+
+        if (isPaused)
+        {
+            Time.timeScale = 0f;  // ゲームの時間を停止させる
+            // 他の一時停止に関連する処理を実行する（BGM停止、ポーズメニューの表示など）
+        }
+        else
+        {
+            Time.timeScale = 1f;  // ゲームの時間を再開させる
+            // 他の一時停止解除に関連する処理を実行する（BGM再生、ポーズメニューの非表示など）
+        }
     }
 }
