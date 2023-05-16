@@ -25,6 +25,7 @@ public class Stage1BossController : MonoBehaviour
     private Color originalColor;
     GameManager gameManager;
 
+
     void Start()
     {
         currentHP = maxHP;

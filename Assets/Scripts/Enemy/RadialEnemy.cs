@@ -34,6 +34,9 @@ public class RadialEnemy : MonoBehaviour
 
     private int moveDirection;
 
+    [Header("Audio")]
+    SoundManager soundManager;
+
 
     void Start()
     {
@@ -42,6 +45,8 @@ public class RadialEnemy : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+
 
         // 弾の発射
         StartCoroutine(FireRoutine());
@@ -101,6 +106,9 @@ public class RadialEnemy : MonoBehaviour
                 explosion.GetComponent<SpriteRenderer>().DOColor(new Color(255, 0, 0, 0), 0.5f);
 
                 GeneratePowerUpItemAndLife();
+
+                soundManager.PlayExplosionSE();
+
                 Destroy(explosion, 0.5f);
                 Destroy(gameObject);
             }

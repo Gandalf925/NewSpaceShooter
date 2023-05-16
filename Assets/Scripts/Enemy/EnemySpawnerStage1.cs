@@ -37,10 +37,13 @@ public class EnemySpawnerStage1 : MonoBehaviour
     [SerializeField] Transform frameStopPos;
     [SerializeField] Transform frameEndPos;
 
+    [Header("Audio")]
+    public AudioClip stage1NormalBgm;
+    public AudioClip stage1BossBgm;
+
     bool bossAppear = false;
     bool atOnce = false;
 
-    private Vector3 playerInitialScale;
     [SerializeField] GameObject backgroundStarsPanel;
     private string nextSceneName = "Stage1ED";
     UIManager uIManager;
@@ -51,6 +54,8 @@ public class EnemySpawnerStage1 : MonoBehaviour
         uIManager = FindObjectOfType<UIManager>();
         backgroundController = FindObjectOfType<BackgroundController>();
         backgroundShrinker = backgroundPanel.GetComponent<BackgroundPanelShrink>();
+
+        SoundManager.instance.PlayBGM(stage1NormalBgm);
         startTextFrame.transform.position = frameStartPos.position;
         uIManager.blackoutPanel.color = new Color(0f, 0f, 0f, 255f);
         StartCoroutine(SpawnRoutine());
@@ -197,10 +202,14 @@ public class EnemySpawnerStage1 : MonoBehaviour
     private IEnumerator BossAppearanceDirection()
     {
         StartCoroutine(StopBackgroundMove());
+        SoundManager.instance.StopBGM();
+        StartCoroutine(SoundManager.instance.PlayWarningSE(4f));
+
         warningPanel.SetActive(true);
         yield return new WaitForSecondsRealtime(4f);
         warningPanel.SetActive(false);
         yield return new WaitForSecondsRealtime(1f);
+        SoundManager.instance.PlayBGM(stage1BossBgm);
         backgroundShrinker.Shrink();
 
         playerCurrentSpeed = player.speed;
@@ -221,6 +230,7 @@ public class EnemySpawnerStage1 : MonoBehaviour
 
     IEnumerator LoadNextScene()
     {
+        StartCoroutine(SoundManager.instance.FadeOut(SoundManager.instance.bgmSource, 3f));
         EnemyBulletController[] enemyBullets = FindObjectsOfType<EnemyBulletController>();
 
         if (enemyBullets != null)

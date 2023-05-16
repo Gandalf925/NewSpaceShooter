@@ -21,10 +21,17 @@ public class Stage1OPFirstSM : MonoBehaviour
     public Sprite planet;
     public Sprite greenEgg;
     public Image blackoutPanel;
+    public Image textPanel1;
+
+    SoundManager soundManager;
+
+    public AudioClip OpBGM1;
+    public AudioClip OpBGM2;
 
     // Start is called before the first frame update
     void Start()
     {
+        soundManager = FindObjectOfType<AudioSource>().GetComponent<SoundManager>();
         blackoutPanel.color = new Color(0f, 0f, 0f, 0f);
         StartCoroutine(StartScene());
     }
@@ -34,12 +41,14 @@ public class Stage1OPFirstSM : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
+            soundManager.StopBGM();
             StartCoroutine(SkipScene());
         }
     }
 
     public IEnumerator StartScene()
     {
+        soundManager.PlayBGM(OpBGM1);
         yield return new WaitForSeconds(1f);
         Player.transform.DOMoveX(pepeStopPosition.position.x, 1f);
         yield return new WaitForSeconds(1f);
@@ -52,11 +61,22 @@ public class Stage1OPFirstSM : MonoBehaviour
         SpeechBubbleImage.GetComponent<Image>().sprite = heart;
         yield return new WaitForSeconds(2f);
         TextArea.transform.DOScale(new Vector3(0, 0, 0), 1f);
-        yield return new WaitForSeconds(1f);
+        soundManager.StopBGM();
+
+
+        yield return new WaitForSeconds(3f);
+        soundManager.PlayBGM(OpBGM2);
         FrogGirl.transform.DOScaleX(-4.94f, 0.01f);
         FrogGirl.transform.DOMoveX(girlStopPosition.position.x, 2f);
+
+
         yield return new WaitForSeconds(2f);
         Player.transform.DOShakePosition(2f, 10f, 30, 1, false, false);
+        yield return new WaitForSeconds(1.5f);
+        textPanel1.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3.5f);
+        textPanel1.gameObject.SetActive(false);
+
         yield return new WaitForSeconds(1.5f);
         Flower.transform.DORotate(new Vector3(0, 0, 5000), 1, RotateMode.FastBeyond360);
         Flower.transform.DOMove(flowerStopPosition.transform.position, 1f);

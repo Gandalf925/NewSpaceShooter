@@ -16,6 +16,9 @@ public class Stage1OPSecondSM : MonoBehaviour
 
     public bool isMove = false;
     public Image blackoutPanel;
+    public Image textPanel2;
+    public Image textPanel3;
+    public Image textPanel4;
 
 
     // Start is called before the first frame update
@@ -46,13 +49,24 @@ public class Stage1OPSecondSM : MonoBehaviour
         Player.transform.DOScale(new Vector3(250f, 250f, 0), 1f);
         yield return new WaitForSeconds(0.3f);
         isMove = true;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
+
+        textPanel2.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3.5f);
+        textPanel2.gameObject.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        textPanel3.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3.5f);
+        textPanel3.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(1f);
         Player.transform.DOShakePosition(2f, 500f, 8, 100, false, false);
         yield return new WaitForSeconds(2f);
         isMove = false;
         Player.transform.DOMove(pepeOutPosition.position, 1f);
         Player.transform.DOScale(new Vector3(0, 0, 0), 1f);
 
+        yield return new WaitForSeconds(2f);
         StartCoroutine(SkipScene());
     }
 

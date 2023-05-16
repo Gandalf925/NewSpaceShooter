@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public int powerupCount;
     EnemySpawnerStage1 enemySpawnerStage1;
     UIManager uIManager;
+    public SoundManager soundManager;
     bool isPaused;
 
     void Start()
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
         enemySpawnerStage1 = FindObjectOfType<EnemySpawnerStage1>();
         uIManager = FindObjectOfType<UIManager>();
         UpdateLives(0);
+        uIManager.fullscreenButton.onClick.AddListener(ToggleFullscreen);
     }
 
     public void UpdateLives(int livesDelta)
@@ -109,13 +111,23 @@ public class GameManager : MonoBehaviour
 
         if (isPaused)
         {
+            uIManager.pauseButtonIcon.sprite = uIManager.playbackImage;
             Time.timeScale = 0f;  // ゲームの時間を停止させる
             // 他の一時停止に関連する処理を実行する（BGM停止、ポーズメニューの表示など）
+            SoundManager.instance.PauseBGM();
+
         }
         else
         {
+            uIManager.pauseButtonIcon.sprite = uIManager.pauseImage;
             Time.timeScale = 1f;  // ゲームの時間を再開させる
             // 他の一時停止解除に関連する処理を実行する（BGM再生、ポーズメニューの非表示など）
+            SoundManager.instance.ResumeBGM();
         }
+    }
+
+    public void ToggleFullscreen()
+    {
+        Screen.fullScreen = !Screen.fullScreen;
     }
 }

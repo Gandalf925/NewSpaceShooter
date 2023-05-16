@@ -26,16 +26,23 @@ public class PlayerController : MonoBehaviour
     private Image playerImage;
 
     private int previousPowerupPoint;
-
     GameManager gameManager;
+
+    [Header("Audio")]
+    SoundManager soundManager;
+
+    [SerializeField] AudioClip shootSE;
+    AudioSource source;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<CircleCollider2D>();
+        source = GetComponents<AudioSource>()[0];
 
         playerImage = GetComponent<Image>();
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
 
         touchCircle.gameObject.SetActive(true);
 
@@ -131,6 +138,7 @@ public class PlayerController : MonoBehaviour
 
             // 弾のプレハブをインスタンス化
             GameObject bulletInstance = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+            source.PlayOneShot(shootSE);
 
             // BulletControllerの発射間隔、攻撃力を取得
             PlayerBulletController bulletController = bulletInstance.GetComponent<PlayerBulletController>();
@@ -217,6 +225,7 @@ public class PlayerController : MonoBehaviour
 
             if (gameManager.lives <= 0)
             {
+                soundManager.PlayExplosionSE();
                 // 爆発エフェクトを生成し、プレイヤーの位置に設定する
                 GameObject effectInstance = Instantiate(explosionEffect, transform.position, Quaternion.identity);
                 Destroy(effectInstance, 1f);  // エフェクトが終了したら破棄する

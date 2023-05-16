@@ -21,12 +21,17 @@ public class NormalEnemy : MonoBehaviour
     private Color originalColor;
     GameManager gameManager;
 
+    [Header("Sound")]
+    SoundManager soundManager;
+
     void Start()
     {
         currentHP = maxHP;
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
         player = GameObject.FindWithTag("Player");
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
 
         // 弾の発射
         StartCoroutine(FireRoutine());
@@ -61,8 +66,11 @@ public class NormalEnemy : MonoBehaviour
                 explosion.transform.DOScale(new Vector3(50f, 50f, 0), 0.5f);
                 explosion.GetComponent<SpriteRenderer>().DOColor(new Color(255, 0, 0, 0), 0.5f);
                 GeneratePowerUpItem();
+                soundManager.PlayExplosionSE();
+
 
                 Destroy(explosion, 0.5f);
+
                 Destroy(gameObject);
             }
 

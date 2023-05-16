@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WarningLoop : MonoBehaviour
 {
-    public float blinkSpeed = 0.5f; // 点滅の速さ
+    public float blinkSpeed = 0.8f; // 点滅の速さ
     public float blinkMinAlpha = 0f; // 点滅の最小アルファ値
     public float blinkMaxAlpha = 1f; // 点滅の最大アルファ値
 

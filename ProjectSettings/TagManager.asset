@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - GameManager
   - Boss
+  - SoundManager
   layers:
   - Default
   - TransparentFX

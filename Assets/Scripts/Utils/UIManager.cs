@@ -7,6 +7,15 @@ using DG.Tweening;
 public class UIManager : MonoBehaviour
 {
     public GameObject[] lifeObjects;
+    public Image pauseButtonIcon;
+    public Sprite pauseImage;
+    public Sprite playbackImage;
+
+    public Button fullscreenButton;
+    public Image fullscreenButtonIcon;
+    public Sprite fullscreenIcon;
+    public Sprite windowIcon;
+
 
     public Image blackoutPanel;
 
