@@ -217,25 +217,46 @@ public class PlayerController : MonoBehaviour
 
         if (other.CompareTag("EnemyBullet") || other.CompareTag("Enemy"))
         {
-            gameManager.UpdateLives(-1);
-            PowerDown();
-
-            DisableCollider();
-            isInvincible = true;
+            TakeDamage();
 
             if (gameManager.lives <= 0)
             {
-                soundManager.PlayExplosionSE();
-                // 爆発エフェクトを生成し、プレイヤーの位置に設定する
-                GameObject effectInstance = Instantiate(explosionEffect, transform.position, Quaternion.identity);
-                Destroy(effectInstance, 1f);  // エフェクトが終了したら破棄する
-
-                // プレイヤーを破棄する
-                Destroy(gameObject);
+                Death();
             }
         }
+
+        if (other.CompareTag("Wall"))
+        {
+            // ライフを減少させる処理
+            TakeDamage();
+
+            if (gameManager.lives <= 0)
+            {
+                Death();
+            }
+        }
+
+
     }
 
+    private void TakeDamage()
+    {
+        gameManager.UpdateLives(-1);
+        PowerDown();
+        DisableCollider();
+        isInvincible = true;
+    }
+
+    private void Death()
+    {
+        soundManager.PlayExplosionSE();
+        // 爆発エフェクトを生成し、プレイヤーの位置に設定する
+        GameObject effectInstance = Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        Destroy(effectInstance, 1f);  // エフェクトが終了したら破棄する
+
+        // プレイヤーを破棄する
+        Destroy(gameObject);
+    }
 
     public void Powerup()
     {

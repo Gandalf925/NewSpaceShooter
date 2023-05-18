@@ -64,7 +64,7 @@ public class Stage1OPFirstSM : MonoBehaviour
         soundManager.StopBGM();
 
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         soundManager.PlayBGM(OpBGM2);
         FrogGirl.transform.DOScaleX(-4.94f, 0.01f);
         FrogGirl.transform.DOMoveX(girlStopPosition.position.x, 2f);
@@ -72,10 +72,6 @@ public class Stage1OPFirstSM : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
         Player.transform.DOShakePosition(2f, 10f, 30, 1, false, false);
-        yield return new WaitForSeconds(1.5f);
-        textPanel1.gameObject.SetActive(true);
-        yield return new WaitForSeconds(3.5f);
-        textPanel1.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(1.5f);
         Flower.transform.DORotate(new Vector3(0, 0, 5000), 1, RotateMode.FastBeyond360);
