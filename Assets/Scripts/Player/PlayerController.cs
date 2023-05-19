@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioClip shootSE;
     AudioSource source;
 
+    private bool isPlayerActive = true;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -51,6 +53,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (!isPlayerActive)
+        {
+            rb.velocity = Vector2.zero;
+            return;
+        }
+
         // キャラクターの移動(マウスとスマホ)
         if (Input.GetMouseButton(0))
         {
@@ -305,5 +313,10 @@ public class PlayerController : MonoBehaviour
     public void DisableCollider()
     {
         col.enabled = false;
+    }
+
+    public void SetPlayerActive(bool isActive)
+    {
+        isPlayerActive = isActive;
     }
 }

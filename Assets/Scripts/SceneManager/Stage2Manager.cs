@@ -1,37 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class Stage2Manager : MonoBehaviour
 {
+    GameObject player;
+    PlayerController playerController;
+
     public float scrollSpeed = 5f;  // ステージのスクロール速度
     public float bossScrollSpeed = 2f;  // ボス戦時のスクロール速度
     public float bossDelayTime = 2f;  // ボス戦開始前の遅延時間
     public float bossReverseDelayTime = 3f;  // ボス戦開始後の逆向きスクロール開始までの遅延時間
 
-    private bool isBossBattle = false;  // ボス戦が開始されたかどうか
+    public bool isBossBattle = false;  // ボス戦が開始されたかどうか
     private bool isReverseScroll = false;  // 逆向きスクロールが開始されたかどうか
     private bool isScrollStopped = false;  // スクロールが一時停止中かどうか
 
     private float initialScrollSpeed;  // 初期のスクロール速度
-
     public GameObject walls;  // 画面上下の壁オブジェクト
 
-    private List<Transform> wallList;  // 壁オブジェクトのリスト
+    public GameObject warningPanel;
+    public Transform playerStayPos;
 
-    void Start()
+
+    [SerializeField] GameObject startTextFrame;
+    [SerializeField] Transform frameStartPos;
+    [SerializeField] Transform frameStopPos;
+    [SerializeField] Transform frameEndPos;
+    UIManager uIManager;
+
+    private void Start()
     {
-        initialScrollSpeed = scrollSpeed;
+        player = FindObjectOfType<PlayerController>().gameObject;
+        playerController = player.GetComponent<PlayerController>();
 
-        // 壁オブジェクトの子オブジェクトをリストに追加
-        wallList = new List<Transform>();
-        foreach (Transform child in walls.transform)
-        {
-            wallList.Add(child);
-        }
+        initialScrollSpeed = scrollSpeed;
+        uIManager = FindObjectOfType<UIManager>();
+        startTextFrame.transform.position = frameStartPos.position;
+
+        uIManager.FadeIn();
+        StartCoroutine(StartFrameIn());
+
     }
 
-    void Update()
+    private void Update()
     {
         if (isBossBattle)
         {
@@ -50,37 +64,41 @@ public class Stage2Manager : MonoBehaviour
         }
     }
 
-    void ScrollStage()
+    private void ScrollStage()
     {
-        // ステージを左にスクロール
-        transform.Translate(Vector3.left * scrollSpeed * Time.deltaTime);
+
+        walls.transform.Translate(Vector3.left * scrollSpeed * Time.deltaTime);
+
 
         // 背景の移動
         // (背景オブジェクトに対して適切なスクロール処理を行う必要があります)
-
     }
 
-    void StopScrollStage()
+    private void StopScrollStage()
     {
         // ステージのスクロールを一時停止
-        scrollSpeed = 0f;
-
-        // 一定時間後に逆向きスクロールを開始
-        StartCoroutine(StartReverseScrollDelay());
+        DOTween.To(() => scrollSpeed, x => scrollSpeed = x, 0f, 2f)
+            .OnComplete(() =>
+            {
+                // 一定時間後に逆向きスクロールを開始
+                StartCoroutine(StartReverseScrollDelay());
+            });
     }
 
-    IEnumerator StartReverseScrollDelay()
+    private IEnumerator StartReverseScrollDelay()
     {
         yield return new WaitForSeconds(bossDelayTime);
 
         // 逆向きスクロールを開始
         isReverseScroll = true;
 
+        playerController.SetPlayerActive(true);
+
         // 一定時間後にスクロール速度をリセット
         StartCoroutine(ResetScrollSpeedDelay());
     }
 
-    IEnumerator ResetScrollSpeedDelay()
+    private IEnumerator ResetScrollSpeedDelay()
     {
         yield return new WaitForSeconds(bossReverseDelayTime);
 
@@ -91,10 +109,11 @@ public class Stage2Manager : MonoBehaviour
         isScrollStopped = false;
     }
 
-    void ReverseScrollStage()
+    private void ReverseScrollStage()
     {
-        // ステージを右にスクロール
-        transform.Translate(Vector3.right * scrollSpeed * Time.deltaTime);
+        // 壁を右にスクロール
+        walls.transform.Translate(Vector3.right * scrollSpeed * Time.deltaTime);
+
 
         // 背景の移動
         // (背景オブジェクトに対して逆向きのスクロール処理を行う必要があります)
@@ -108,5 +127,29 @@ public class Stage2Manager : MonoBehaviour
         scrollSpeed = bossScrollSpeed;
 
         // ボス戦が始まったことを他のオブジェクトやスクリプトに通知する処理
+    }
+
+    IEnumerator StartFrameIn()
+    {
+        yield return new WaitForSecondsRealtime(1.5f);
+
+        startTextFrame.transform.DOMove(frameStopPos.position, 0.5f);
+
+        yield return new WaitForSecondsRealtime(2f);
+
+        startTextFrame.transform.DOMove(frameEndPos.position, 0.5f);
+
+        yield return new WaitForSecondsRealtime(1f);
+    }
+
+    public IEnumerator WarningBeforBossBattle()
+    {
+        playerController.SetPlayerActive(false);
+        player.transform.DOMove(new Vector3(playerStayPos.position.x, playerStayPos.position.y, playerStayPos.position.z), 4f);
+
+        warningPanel.SetActive(true);
+        yield return new WaitForSecondsRealtime(4f);
+        warningPanel.SetActive(false);
+        yield return new WaitForSecondsRealtime(1f);
     }
 }
