@@ -12,7 +12,7 @@ public class Stage2Manager : MonoBehaviour
     public float scrollSpeed = 5f;  // ステージのスクロール速度
     public float bossScrollSpeed = 2f;  // ボス戦時のスクロール速度
     public float bossDelayTime = 2f;  // ボス戦開始前の遅延時間
-    public float bossReverseDelayTime = 3f;  // ボス戦開始後の逆向きスクロール開始までの遅延時間
+    public float bossReverseDelayTime = 1f;  // ボス戦開始後の逆向きスクロール開始までの遅延時間
 
     public bool isBossBattle = false;  // ボス戦が開始されたかどうか
     private bool isReverseScroll = false;  // 逆向きスクロールが開始されたかどうか
@@ -25,11 +25,21 @@ public class Stage2Manager : MonoBehaviour
     public Transform playerStayPos;
 
 
+    public Transform bossStartPos;
+
+    public GameObject bossPrefab;
+
+    public GameObject bossDecoy;
+
+
+    public GameObject backgroundPanel;
     [SerializeField] GameObject startTextFrame;
     [SerializeField] Transform frameStartPos;
     [SerializeField] Transform frameStopPos;
     [SerializeField] Transform frameEndPos;
     UIManager uIManager;
+
+    bool isBossAppeared;
 
     private void Start()
     {
@@ -39,6 +49,8 @@ public class Stage2Manager : MonoBehaviour
         initialScrollSpeed = scrollSpeed;
         uIManager = FindObjectOfType<UIManager>();
         startTextFrame.transform.position = frameStartPos.position;
+
+        bossDecoy.SetActive(true);
 
         uIManager.FadeIn();
         StartCoroutine(StartFrameIn());
@@ -51,7 +63,7 @@ public class Stage2Manager : MonoBehaviour
         {
             if (isReverseScroll)
             {
-                ReverseScrollStage();
+                StartCoroutine(ReverseScrollStage());
             }
             else if (!isScrollStopped)
             {
@@ -69,6 +81,8 @@ public class Stage2Manager : MonoBehaviour
 
         walls.transform.Translate(Vector3.left * scrollSpeed * Time.deltaTime);
 
+        backgroundPanel.transform.Translate(Vector3.left * (scrollSpeed / 24) * Time.deltaTime);
+
 
         // 背景の移動
         // (背景オブジェクトに対して適切なスクロール処理を行う必要があります)
@@ -83,6 +97,12 @@ public class Stage2Manager : MonoBehaviour
                 // 一定時間後に逆向きスクロールを開始
                 StartCoroutine(StartReverseScrollDelay());
             });
+    }
+
+    public void EndScrollStage()
+    {
+        // ステージのスクロールを一時停止
+        DOTween.To(() => scrollSpeed, x => scrollSpeed = x, 0f, 2f);
     }
 
     private IEnumerator StartReverseScrollDelay()
@@ -109,14 +129,19 @@ public class Stage2Manager : MonoBehaviour
         isScrollStopped = false;
     }
 
-    private void ReverseScrollStage()
+    private IEnumerator ReverseScrollStage()
     {
         // 壁を右にスクロール
         walls.transform.Translate(Vector3.right * scrollSpeed * Time.deltaTime);
+        backgroundPanel.transform.Translate(Vector3.right * (scrollSpeed / 22) * Time.deltaTime);
 
 
-        // 背景の移動
-        // (背景オブジェクトに対して逆向きのスクロール処理を行う必要があります)
+        yield return new WaitForSecondsRealtime(2f);
+        if (!isBossAppeared)
+        {
+            isBossAppeared = true;
+            InstantiateBoss();
+        }
     }
 
     public void StartBossBattle()
@@ -151,5 +176,11 @@ public class Stage2Manager : MonoBehaviour
         yield return new WaitForSecondsRealtime(4f);
         warningPanel.SetActive(false);
         yield return new WaitForSecondsRealtime(1f);
+    }
+
+    public void InstantiateBoss()
+    {
+        bossDecoy.SetActive(false);
+        GameObject boss = Instantiate(bossPrefab, bossStartPos.position, Quaternion.identity);
     }
 }

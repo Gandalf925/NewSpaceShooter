@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private float invincibleTimer = 0f;
     private bool isInvincible = false;
     private bool isFiring = false;
+    public bool isActive = true;
     private Image playerImage;
 
     private int previousPowerupPoint;
@@ -262,6 +263,7 @@ public class PlayerController : MonoBehaviour
         GameObject effectInstance = Instantiate(explosionEffect, transform.position, Quaternion.identity);
         Destroy(effectInstance, 1f);  // エフェクトが終了したら破棄する
 
+        isActive = false;
         // プレイヤーを破棄する
         Destroy(gameObject);
     }
