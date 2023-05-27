@@ -171,6 +171,7 @@ public class Stage2Manager : MonoBehaviour
     {
         playerController.SetPlayerActive(false);
         player.transform.DOMove(new Vector3(playerStayPos.position.x, playerStayPos.position.y, playerStayPos.position.z), 4f);
+        StartCoroutine(SoundManager.instance.PlayWarningSE(4f));
 
         warningPanel.SetActive(true);
         yield return new WaitForSecondsRealtime(4f);

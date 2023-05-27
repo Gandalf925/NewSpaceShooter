@@ -4037,6 +4037,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FullscreenButton
       objectReference: {fileID: 0}
+    - target: {fileID: 3016832116709779945, guid: abc2d5e23e86f4587b4e10b38c668f34, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3016832116709779947, guid: abc2d5e23e86f4587b4e10b38c668f34, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -19560,6 +19564,7 @@ MonoBehaviour:
   scoreText: {fileID: 1259877191}
   powerupCount: 0
   soundManager: {fileID: 0}
+  fullscreenButton: {fileID: 646073997}
 --- !u!4 &852415110
 Transform:
   m_ObjectHideFlags: 0

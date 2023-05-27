@@ -31,7 +31,6 @@ public class NormalEnemy : MonoBehaviour
         originalColor = spriteRenderer.color;
         player = GameObject.FindWithTag("Player");
         soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
-        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
 
         // 弾の発射
         StartCoroutine(FireRoutine());

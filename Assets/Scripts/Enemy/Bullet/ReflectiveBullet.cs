@@ -3,6 +3,7 @@ using UnityEngine;
 public class ReflectiveBullet : MonoBehaviour
 {
     public float speed = 10f;  // Bulletの移動速度
+    public float rotationSpeed = 10f; // 回転速度
     [SerializeField] GameObject explosionPrefab;
 
     private Rigidbody2D rb;
@@ -16,6 +17,7 @@ public class ReflectiveBullet : MonoBehaviour
     private void Update()
     {
         rb.velocity = rb.velocity.normalized * speed;  // Bulletを移動速度に合わせて正しい進行方向に修正
+        transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
 
         // 画面外に出た弾を自動的に削除する
         Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);

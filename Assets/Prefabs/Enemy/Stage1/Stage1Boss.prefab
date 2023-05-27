@@ -105,9 +105,9 @@ MonoBehaviour:
   maxHP: 800
   moveSpeed: 1
   beamSpeed: 5
-  bulletSpeed: 8
+  bulletSpeed: 3
   beamFireRate: 8
-  bulletFireRate: 0.3
+  bulletFireRate: 0.5
   bulletCount: 20
   beamPrefab: {fileID: 8354351000625563102, guid: 1033531c5ec9ca74ca434cb8dbce1817, type: 3}
   bulletPrefab: {fileID: 8354351000625563102, guid: c846ef118cbe1284783dce81da90a1e9, type: 3}

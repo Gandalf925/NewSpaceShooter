@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 using TMPro;
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     UIManager uIManager;
     public SoundManager soundManager;
     bool isPaused;
+    public Button fullscreenButton;
 
     void Start()
     {
@@ -30,8 +32,18 @@ public class GameManager : MonoBehaviour
         player = FindObjectOfType<PlayerController>();
         enemySpawnerStage1 = FindObjectOfType<EnemySpawnerStage1>();
         uIManager = FindObjectOfType<UIManager>();
+
+        // スマホ画面の場合にのみボタンを表示する
+        if (IsMobileScreen())
+        {
+            fullscreenButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            fullscreenButton.gameObject.SetActive(false);
+        }
+
         UpdateLives(0);
-        uIManager.fullscreenButton.onClick.AddListener(ToggleFullscreen);
     }
 
     public void UpdateLives(int livesDelta)
@@ -115,7 +127,6 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0f;  // ゲームの時間を停止させる
             // 他の一時停止に関連する処理を実行する（BGM停止、ポーズメニューの表示など）
             SoundManager.instance.PauseBGM();
-
         }
         else
         {
@@ -126,8 +137,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    private bool IsMobileScreen()
+    {
+        float screenWidth = Screen.width;
+        float screenHeight = Screen.height;
+
+        // スマホ画面の条件を判定する（例: 幅が400未満、高さが600未満）
+        if (screenWidth < 400 && screenHeight < 600)
+        {
+            return true;
+        }
+
+        return false;
+    }
     public void ToggleFullscreen()
     {
-        Screen.fullScreen = !Screen.fullScreen;
+        if (Screen.fullScreen)
+        {
+            // スマートフォンの解像度を取得し、フルスクリーンモードに切り替える
+            Resolution currentResolution = Screen.currentResolution;
+            Screen.SetResolution(currentResolution.width, currentResolution.height, true);  // スマートフォンの解像度を設定
+        }
     }
 }

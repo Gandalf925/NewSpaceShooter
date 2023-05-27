@@ -24,7 +24,7 @@ public class TitleSceneManager : MonoBehaviour
     void Start()
     {
         soundManager = FindObjectOfType<AudioSource>().GetComponent<SoundManager>();
-        soundManager.PlayBGM(titleBGM);
+        // soundManager.PlayBGM(titleBGM);
         StartCoroutine(MoveTitleText());
     }
 

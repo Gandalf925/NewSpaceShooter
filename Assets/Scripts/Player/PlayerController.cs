@@ -220,8 +220,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // 敵のBulletがPlayerに当たった場合
-
         if (isInvincible) return;
 
         if (other.CompareTag("EnemyBullet") || other.CompareTag("Enemy"))
@@ -248,7 +246,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void TakeDamage()
+    public void TakeDamage()
     {
         gameManager.UpdateLives(-1);
         PowerDown();

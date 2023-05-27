@@ -48,7 +48,7 @@ public class Stage1OPFirstSM : MonoBehaviour
 
     public IEnumerator StartScene()
     {
-        soundManager.PlayBGM(OpBGM1);
+        // soundManager.PlayBGM(OpBGM1);
         yield return new WaitForSeconds(1f);
         Player.transform.DOMoveX(pepeStopPosition.position.x, 1f);
         yield return new WaitForSeconds(1f);
@@ -65,7 +65,7 @@ public class Stage1OPFirstSM : MonoBehaviour
 
 
         yield return new WaitForSeconds(1f);
-        soundManager.PlayBGM(OpBGM2);
+        // soundManager.PlayBGM(OpBGM2);
         FrogGirl.transform.DOScaleX(-4.94f, 0.01f);
         FrogGirl.transform.DOMoveX(girlStopPosition.position.x, 2f);
 

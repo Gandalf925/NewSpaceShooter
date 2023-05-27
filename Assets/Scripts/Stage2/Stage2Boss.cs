@@ -4,7 +4,7 @@ using DG.Tweening;
 
 public class Stage2Boss : MonoBehaviour
 {
-    private int maxHP = 700;
+    public int maxHP = 700;
     public int currentHP;
 
     public GameObject explosionPrefab;
@@ -23,7 +23,7 @@ public class Stage2Boss : MonoBehaviour
     PlayerController player;
 
     private float rotationSpeed = 200f;  // Bossの回転速度
-    private float bulletFireInterval = 3f;  // Bulletの発射間隔
+    public float bulletFireInterval = 3f;  // Bulletの発射間隔
     private float bulletSpeed = 10f;  // Bulletの移動速度
     private float verticalSpeed = 2f;  // 上下移動の速度
     private float minY = -2.5f;  // 移動の下限Y座標
@@ -47,8 +47,6 @@ public class Stage2Boss : MonoBehaviour
 
         // 最初のBullet発射時刻を設定
         nextBulletFireTime = Time.time + bulletFireInterval;
-
-
     }
 
     private void Update()
@@ -124,7 +122,7 @@ public class Stage2Boss : MonoBehaviour
                 // プレイヤーの座標上下±45度に向けた発射角度を設定
                 Vector3 playerPosition = player.transform.position;
                 Vector3 targetDirection = (playerPosition - bulletSpawner.position).normalized;
-                Vector3 bulletDirection = Quaternion.Euler(0f, 0f, Random.Range(-45f, 45f)) * targetDirection;
+                Vector3 bulletDirection = Quaternion.Euler(0f, 0f, Random.Range(-60f, 60f)) * targetDirection;
 
                 Rigidbody2D bulletRb = bulletInstance.GetComponent<Rigidbody2D>();
                 bulletRb.velocity = bulletDirection * bulletSpeed;
