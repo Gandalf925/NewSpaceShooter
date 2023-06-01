@@ -33,16 +33,6 @@ public class GameManager : MonoBehaviour
         enemySpawnerStage1 = FindObjectOfType<EnemySpawnerStage1>();
         uIManager = FindObjectOfType<UIManager>();
 
-        // スマホ画面の場合にのみボタンを表示する
-        if (IsMobileScreen())
-        {
-            fullscreenButton.gameObject.SetActive(true);
-        }
-        else
-        {
-            fullscreenButton.gameObject.SetActive(false);
-        }
-
         UpdateLives(0);
     }
 
@@ -137,27 +127,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-    private bool IsMobileScreen()
-    {
-        float screenWidth = Screen.width;
-        float screenHeight = Screen.height;
-
-        // スマホ画面の条件を判定する（例: 幅が400未満、高さが600未満）
-        if (screenWidth < 400 && screenHeight < 600)
-        {
-            return true;
-        }
-
-        return false;
-    }
     public void ToggleFullscreen()
     {
-        if (Screen.fullScreen)
-        {
-            // スマートフォンの解像度を取得し、フルスクリーンモードに切り替える
-            Resolution currentResolution = Screen.currentResolution;
-            Screen.SetResolution(currentResolution.width, currentResolution.height, true);  // スマートフォンの解像度を設定
-        }
+        Screen.fullScreen = !Screen.fullScreen;
     }
 }

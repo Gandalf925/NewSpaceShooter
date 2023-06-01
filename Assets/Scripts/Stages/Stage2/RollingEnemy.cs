@@ -35,6 +35,12 @@ public class RollingEnemy : MonoBehaviour
                 Vector3 direction = (player.position - transform.position).normalized;
                 transform.Translate(direction * approachSpeed * Time.deltaTime);
             }
+
+            // プレイヤーのx軸から-1以下の位置に来たら移動を停止する
+            if (transform.position.x <= player.position.x - 1f)
+            {
+                isMoving = false;
+            }
         }
     }
 
