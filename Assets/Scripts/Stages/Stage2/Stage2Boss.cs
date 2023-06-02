@@ -15,6 +15,7 @@ public class Stage2Boss : MonoBehaviour
 
 
     public bool isDefeated = false;
+    private bool isShowingDamage = false;
 
 
     public Transform bulletSpawner;  // Bulletを発射する位置
@@ -56,10 +57,6 @@ public class Stage2Boss : MonoBehaviour
 
         // 上下移動
         MoveVertically();
-
-        // HPに応じて色を変化させる
-        UpdateBossColor();
-
 
         // Bulletの発射
         if (Time.time >= nextBulletFireTime)
@@ -136,6 +133,9 @@ public class Stage2Boss : MonoBehaviour
         {
             int damage = collision.GetComponent<PlayerBulletController>().attackPower;
             currentHP -= damage;
+            StartCoroutine(ShowDamageRoutine());
+
+
             gameManager.UpdateScore(damage);
 
 
@@ -161,16 +161,32 @@ public class Stage2Boss : MonoBehaviour
         }
     }
 
-    private void UpdateBossColor()
-    {
-        float healthPercentage = (float)currentHP / maxHP;
-        Color targetColor = new Color(1f, 1f - healthPercentage, 1f - healthPercentage, 1f);
-        spriteRenderer.color = Color.Lerp(originalColor, targetColor, 1f - healthPercentage);
-    }
-
     private bool IsBossInsideScreen()
     {
         Vector3 screenPoint = Camera.main.WorldToViewportPoint(transform.position);
         return screenPoint.x >= 0 && screenPoint.x <= 1 && screenPoint.y >= 0 && screenPoint.y <= 1;
+    }
+
+    private IEnumerator ShowDamageRoutine()
+    {
+        if (isShowingDamage) yield break;
+
+        isShowingDamage = true;
+
+        float duration = 0.4f;
+        float halfDuration = duration / 3f;
+
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(halfDuration);
+
+        spriteRenderer.color = Color.black;
+        yield return new WaitForSeconds(halfDuration);
+
+        spriteRenderer.color = Color.Lerp(Color.black, originalColor, 0.3f);
+        yield return new WaitForSeconds(halfDuration);
+
+        spriteRenderer.color = originalColor;
+
+        isShowingDamage = false;
     }
 }

@@ -24,6 +24,11 @@ public class GameManager : MonoBehaviour
     bool isPaused;
     public Button fullscreenButton;
 
+    void Awake()
+    {
+        DOTween.SetTweensCapacity(1000, 200);
+    }
+
     void Start()
     {
         // スタート時にポイントを設定
