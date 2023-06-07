@@ -14,7 +14,7 @@ public class RadialEnemy : MonoBehaviour
     private BoxCollider2D col;
     public GameObject explosionPrefab;
     public Transform bulletSpawnPoint;
-    public GameObject player;
+    public PlayerController player;
 
     public GameObject smallPowerupPrefab;
     public GameObject largePowerupPrefab;
@@ -35,7 +35,7 @@ public class RadialEnemy : MonoBehaviour
     private int moveDirection;
 
     [Header("Audio")]
-    SoundManager soundManager;
+    BGMManager soundManager;
 
 
     void Start()
@@ -45,7 +45,8 @@ public class RadialEnemy : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
-        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<BGMManager>();
+        player = FindObjectOfType<PlayerController>();
 
 
         // 弾の発射
@@ -107,7 +108,7 @@ public class RadialEnemy : MonoBehaviour
 
                 GeneratePowerUpItemAndLife();
 
-                soundManager.PlayExplosionSE();
+                player.PlayExplosionSE();
 
                 Destroy(explosion, 0.5f);
                 Destroy(gameObject);

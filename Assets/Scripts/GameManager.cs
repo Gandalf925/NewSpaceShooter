@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public int powerupCount;
     EnemySpawnerStage1 enemySpawnerStage1;
     UIManager uIManager;
-    public SoundManager soundManager;
+    public BGMManager soundManager;
     bool isPaused;
     public Button fullscreenButton;
 
@@ -121,14 +121,14 @@ public class GameManager : MonoBehaviour
             uIManager.pauseButtonIcon.sprite = uIManager.playbackImage;
             Time.timeScale = 0f;  // ゲームの時間を停止させる
             // 他の一時停止に関連する処理を実行する（BGM停止、ポーズメニューの表示など）
-            SoundManager.instance.PauseBGM();
+            BGMManager.instance.PauseBGM();
         }
         else
         {
             uIManager.pauseButtonIcon.sprite = uIManager.pauseImage;
             Time.timeScale = 1f;  // ゲームの時間を再開させる
             // 他の一時停止解除に関連する処理を実行する（BGM再生、ポーズメニューの非表示など）
-            SoundManager.instance.ResumeBGM();
+            BGMManager.instance.ResumeBGM();
         }
     }
 

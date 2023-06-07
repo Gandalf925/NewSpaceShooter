@@ -22,7 +22,7 @@ public class NormalEnemy : MonoBehaviour
     GameManager gameManager;
 
     [Header("Sound")]
-    SoundManager soundManager;
+    BGMManager soundManager;
 
     void Start()
     {
@@ -30,7 +30,7 @@ public class NormalEnemy : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
         player = GameObject.FindWithTag("Player");
-        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<BGMManager>();
 
         // 弾の発射
         StartCoroutine(FireRoutine());
@@ -65,7 +65,7 @@ public class NormalEnemy : MonoBehaviour
                 explosion.transform.DOScale(new Vector3(50f, 50f, 0), 0.5f);
                 explosion.GetComponent<SpriteRenderer>().DOColor(new Color(255, 0, 0, 0), 0.5f);
                 GeneratePowerUpItem();
-                soundManager.PlayExplosionSE();
+                player.GetComponent<PlayerController>().PlayExplosionSE();
 
 
                 Destroy(explosion, 0.5f);

@@ -23034,8 +23034,8 @@ MonoBehaviour:
   frameStartPos: {fileID: 824872192}
   frameStopPos: {fileID: 587023777}
   frameEndPos: {fileID: 1309619303}
-  stage1NormalBgm: {fileID: 8300000, guid: d422e72f13a5f144c95993063bdc6665, type: 3}
-  stage1BossBgm: {fileID: 8300000, guid: 422a3c4c16969e942878cefd4e9751aa, type: 3}
+  stage1NormalBgm: {fileID: 8300000, guid: c2917fa8a39881348915ba31c69a9091, type: 3}
+  stage1BossBgm: {fileID: 8300000, guid: 3415565657d07d44aad8dd8bd57e3cd6, type: 3}
   backgroundStarsPanel: {fileID: 1177301384}
 --- !u!4 &1033395521
 Transform:
@@ -24746,8 +24746,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1098015076}
-  - component: {fileID: 1098015075}
   - component: {fileID: 1098015074}
+  - component: {fileID: 1098015075}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: SoundManager
@@ -24768,9 +24768,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgmSource: {fileID: 1098015075}
-  seSource: {fileID: 1098015075}
-  explosionSE: {fileID: 8300000, guid: 800465dc2aabec245b3c0d553c32079c, type: 3}
-  warningSE: {fileID: 8300000, guid: 652aabde5ab72c4499f02388dd0bbfc5, type: 3}
 --- !u!82 &1098015075
 AudioSource:
   m_ObjectHideFlags: 0
@@ -24782,8 +24779,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.225
   m_Pitch: 1.07
   Loop: 0
   Mute: 0
@@ -40775,6 +40772,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!82 &1896887152 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7308484306499651492, guid: 271f310d6dbd9164ca191af8038934b6, type: 3}
+  m_PrefabInstance: {fileID: 4703976456088044471}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1897911102
 GameObject:
   m_ObjectHideFlags: 0
@@ -46154,6 +46156,18 @@ PrefabInstance:
       propertyPath: speed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4703976458070735493, guid: 271f310d6dbd9164ca191af8038934b6, type: 3}
+      propertyPath: seSource
+      value: 
+      objectReference: {fileID: 1896887152}
+    - target: {fileID: 4703976458070735493, guid: 271f310d6dbd9164ca191af8038934b6, type: 3}
+      propertyPath: warningSE
+      value: 
+      objectReference: {fileID: 8300000, guid: 652aabde5ab72c4499f02388dd0bbfc5, type: 3}
+    - target: {fileID: 4703976458070735493, guid: 271f310d6dbd9164ca191af8038934b6, type: 3}
+      propertyPath: explosionSE
+      value: 
+      objectReference: {fileID: 8300000, guid: 800465dc2aabec245b3c0d553c32079c, type: 3}
     - target: {fileID: 4703976458070735493, guid: 271f310d6dbd9164ca191af8038934b6, type: 3}
       propertyPath: powerUpCount
       value: 1

@@ -12,6 +12,7 @@ TagManager:
   - SoundManager
   - Wall
   - DetectionCollider
+  - SEManager
   layers:
   - Default
   - TransparentFX

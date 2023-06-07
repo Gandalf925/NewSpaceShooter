@@ -30,7 +30,9 @@ public class PlayerController : MonoBehaviour
     GameManager gameManager;
 
     [Header("Audio")]
-    SoundManager soundManager;
+    public AudioSource seSource;
+    public AudioClip warningSE;
+    public AudioClip explosionSE;
 
     [SerializeField] AudioClip shootSE;
     AudioSource source;
@@ -45,7 +47,7 @@ public class PlayerController : MonoBehaviour
 
         playerImage = GetComponent<Image>();
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
-        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+        seSource = GetComponent<AudioSource>();
 
         touchCircle.gameObject.SetActive(true);
 
@@ -256,7 +258,7 @@ public class PlayerController : MonoBehaviour
 
     private void Death()
     {
-        soundManager.PlayExplosionSE();
+        PlayExplosionSE();
         // 爆発エフェクトを生成し、プレイヤーの位置に設定する
         GameObject effectInstance = Instantiate(explosionEffect, transform.position, Quaternion.identity);
         Destroy(effectInstance, 1f);  // エフェクトが終了したら破棄する
@@ -318,5 +320,22 @@ public class PlayerController : MonoBehaviour
     public void SetPlayerActive(bool isActive)
     {
         isPlayerActive = isActive;
+    }
+
+    public void PlayExplosionSE()
+    {
+        seSource.clip = explosionSE;
+        seSource.pitch = 1.2f;
+        seSource.PlayOneShot(explosionSE);
+    }
+
+    public IEnumerator PlayWarningSE(float duration)
+    {
+        seSource.clip = warningSE;
+        seSource.pitch = 0.8f;
+        seSource.PlayOneShot(warningSE);
+        yield return new WaitForSeconds(duration);
+
+        seSource.Stop();
     }
 }

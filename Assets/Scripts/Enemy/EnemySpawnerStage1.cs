@@ -55,7 +55,7 @@ public class EnemySpawnerStage1 : MonoBehaviour
         backgroundController = FindObjectOfType<BackgroundController>();
         backgroundShrinker = backgroundPanel.GetComponent<BackgroundPanelShrink>();
 
-        // SoundManager.instance.PlayBGM(stage1NormalBgm);
+        BGMManager.instance.PlayBGM(stage1NormalBgm);
         startTextFrame.transform.position = frameStartPos.position;
         uIManager.blackoutPanel.color = new Color(0f, 0f, 0f, 255f);
         StartCoroutine(SpawnRoutine());
@@ -202,14 +202,14 @@ public class EnemySpawnerStage1 : MonoBehaviour
     private IEnumerator BossAppearanceDirection()
     {
         StartCoroutine(StopBackgroundMove());
-        // SoundManager.instance.StopBGM();
-        StartCoroutine(SoundManager.instance.PlayWarningSE(4f));
+        BGMManager.instance.StopBGM();
+        StartCoroutine(player.PlayWarningSE(4f));
 
         warningPanel.SetActive(true);
         yield return new WaitForSecondsRealtime(4f);
         warningPanel.SetActive(false);
         yield return new WaitForSecondsRealtime(1f);
-        // SoundManager.instance.PlayBGM(stage1BossBgm);
+        BGMManager.instance.PlayBGM(stage1BossBgm);
         backgroundShrinker.Shrink();
 
         playerCurrentSpeed = player.speed;
@@ -251,6 +251,8 @@ public class EnemySpawnerStage1 : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
 
         player.speed = playerCurrentSpeed;
+
+        BGMManager.instance.StopBGM();
 
         uIManager.blackoutPanel.DOFade(1f, 2f);
         backgroundStarsPanel.SetActive(false);

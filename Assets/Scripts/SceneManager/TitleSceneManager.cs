@@ -14,7 +14,7 @@ public class TitleSceneManager : MonoBehaviour
 
     public Transform titleTextStopPosition;
     public Transform pressSpaceImageStopPosition;
-    SoundManager soundManager;
+    BGMManager soundManager;
     public AudioClip titleBGM;
     public AudioClip tapSE;
 
@@ -23,7 +23,7 @@ public class TitleSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        soundManager = FindObjectOfType<AudioSource>().GetComponent<SoundManager>();
+        soundManager = FindObjectOfType<AudioSource>().GetComponent<BGMManager>();
         // soundManager.PlayBGM(titleBGM);
         StartCoroutine(MoveTitleText());
     }
@@ -35,7 +35,7 @@ public class TitleSceneManager : MonoBehaviour
         {
             if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space))
             {
-                soundManager.PlaySE(tapSE);
+                BGMManager.instance.PlayBGM(tapSE);
                 isStart = true;
                 StartCoroutine(LoadNextScene());
             }

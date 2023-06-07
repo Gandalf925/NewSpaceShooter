@@ -14,7 +14,7 @@ public class RollingEnemy : MonoBehaviour
     private Transform player; // プレイヤーの位置
 
     [Header("Sound")]
-    SoundManager soundManager;
+    BGMManager soundManager;
 
     private void Start()
     {
@@ -22,7 +22,7 @@ public class RollingEnemy : MonoBehaviour
         player = FindObjectOfType<PlayerController>().transform;
         // Initialize currentHP to maxHP
         currentHP = maxHP;
-        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<BGMManager>();
     }
 
     private void Update()
@@ -68,7 +68,7 @@ public class RollingEnemy : MonoBehaviour
                 explosion.transform.DOScale(new Vector3(50f, 50f, 0), 0.5f);
                 explosion.GetComponent<SpriteRenderer>().DOColor(new Color(255, 0, 0, 0), 0.5f);
                 GeneratePowerUpItem();
-                soundManager.PlayExplosionSE();
+                player.GetComponent<PlayerController>().PlayExplosionSE();
 
 
                 Destroy(explosion, 3f);

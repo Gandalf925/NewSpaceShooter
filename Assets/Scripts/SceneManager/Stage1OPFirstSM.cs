@@ -23,7 +23,7 @@ public class Stage1OPFirstSM : MonoBehaviour
     public Image blackoutPanel;
     public Image textPanel1;
 
-    SoundManager soundManager;
+    BGMManager soundManager;
 
     public AudioClip OpBGM1;
     public AudioClip OpBGM2;
@@ -31,7 +31,7 @@ public class Stage1OPFirstSM : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        soundManager = FindObjectOfType<AudioSource>().GetComponent<SoundManager>();
+        soundManager = FindObjectOfType<AudioSource>().GetComponent<BGMManager>();
         blackoutPanel.color = new Color(0f, 0f, 0f, 0f);
         StartCoroutine(StartScene());
     }
