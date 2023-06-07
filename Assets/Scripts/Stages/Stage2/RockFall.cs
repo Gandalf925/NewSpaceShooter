@@ -57,7 +57,7 @@ public class RockFall : MonoBehaviour
         isPlayerApproaching = true;  // プレイヤーが接近中フラグを設定
 
         // 落下の予兆を示す振動アニメーション
-        transform.DOShakePosition(0.5f, strength: new Vector3(0.1f, 0f, 0f), vibrato: 10, fadeOut: false);
+        transform.DOShakePosition(1f, strength: new Vector3(0.3f, 0f, 0f), vibrato: 20, fadeOut: false);
 
         // Rigidbody2Dの重力を有効にして岩を落下させる
         Rigidbody2D rockRigidbody = GetComponent<Rigidbody2D>();

@@ -3254,9 +3254,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgmSource: {fileID: 198660100}
-  seSource: {fileID: 198660100}
-  explosionSE: {fileID: 8300000, guid: 800465dc2aabec245b3c0d553c32079c, type: 3}
-  warningSE: {fileID: 8300000, guid: 652aabde5ab72c4499f02388dd0bbfc5, type: 3}
 --- !u!82 &198660100
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6063,6 +6060,14 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4703976458070735493, guid: 271f310d6dbd9164ca191af8038934b6, type: 3}
+      propertyPath: warningSE
+      value: 
+      objectReference: {fileID: 8300000, guid: 652aabde5ab72c4499f02388dd0bbfc5, type: 3}
+    - target: {fileID: 4703976458070735493, guid: 271f310d6dbd9164ca191af8038934b6, type: 3}
+      propertyPath: explosionSE
+      value: 
+      objectReference: {fileID: 8300000, guid: 800465dc2aabec245b3c0d553c32079c, type: 3}
+    - target: {fileID: 4703976458070735493, guid: 271f310d6dbd9164ca191af8038934b6, type: 3}
       propertyPath: powerUpCount
       value: 1
       objectReference: {fileID: 0}
@@ -6077,6 +6082,10 @@ PrefabInstance:
     - target: {fileID: 4703976458070735494, guid: 271f310d6dbd9164ca191af8038934b6, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308484306499651492, guid: 271f310d6dbd9164ca191af8038934b6, type: 3}
+      propertyPath: m_Volume
+      value: 0.508
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 271f310d6dbd9164ca191af8038934b6, type: 3}

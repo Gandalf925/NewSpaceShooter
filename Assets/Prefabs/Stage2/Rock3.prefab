@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9e5549551e5a847948913c8585a13a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  warningDuration: 0.52
-  approachDistance: 4.38
+  warningDuration: 1
+  approachDistance: 6
 --- !u!50 &2773639312492302522
 Rigidbody2D:
   serializedVersion: 4
