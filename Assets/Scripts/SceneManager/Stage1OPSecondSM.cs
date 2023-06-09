@@ -46,16 +46,18 @@ public class Stage1OPSecondSM : MonoBehaviour
         Player.transform.DOScale(new Vector3(250f, 250f, 0), 1f);
         yield return new WaitForSeconds(0.3f);
         isMove = true;
+        yield return new WaitForSeconds(3.4f);
+
+        Player.transform.DOShakeScale(3f, 100f, 60, 90f, false);
+
+        yield return new WaitForSeconds(1.5f);
+        Player.transform.DOShakePosition(3.5f, 300f, 30, 100, false, false);
         yield return new WaitForSeconds(3f);
-
-        yield return new WaitForSeconds(1f);
-        Player.transform.DOShakePosition(2f, 500f, 8, 100, false, false);
-        yield return new WaitForSeconds(2f);
         isMove = false;
-        Player.transform.DOMove(pepeOutPosition.position, 1f);
-        Player.transform.DOScale(new Vector3(0, 0, 0), 1f);
+        Player.transform.DOMove(pepeOutPosition.position, 2f);
+        Player.transform.DOScale(new Vector3(0, 0, 0), 2f);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
         StartCoroutine(SkipScene());
     }
 
@@ -78,6 +80,7 @@ public class Stage1OPSecondSM : MonoBehaviour
 
     IEnumerator SkipScene()
     {
+        BGMManager.instance.StopBGM();
         blackoutPanel.DOFade(1f, 2f);
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene("Stage1");

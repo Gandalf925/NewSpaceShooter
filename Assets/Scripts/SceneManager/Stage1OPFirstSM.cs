@@ -26,7 +26,7 @@ public class Stage1OPFirstSM : MonoBehaviour
     BGMManager soundManager;
 
     public AudioClip OpBGM1;
-    public AudioClip OpBGM2;
+    // public AudioClip OpBGM2;
 
     // Start is called before the first frame update
     void Start()
@@ -41,15 +41,15 @@ public class Stage1OPFirstSM : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
-            soundManager.StopBGM();
+            BGMManager.instance.StopBGM();
             StartCoroutine(SkipScene());
         }
     }
 
     public IEnumerator StartScene()
     {
-        // soundManager.PlayBGM(OpBGM1);
-        yield return new WaitForSeconds(1f);
+        soundManager.PlayBGM(OpBGM1);
+        yield return new WaitForSeconds(2.5f);
         Player.transform.DOMoveX(pepeStopPosition.position.x, 1f);
         yield return new WaitForSeconds(1f);
         TextArea.transform.DOScale(new Vector3(9f, 4f, 0), 1f);
@@ -61,7 +61,7 @@ public class Stage1OPFirstSM : MonoBehaviour
         SpeechBubbleImage.GetComponent<Image>().sprite = heart;
         yield return new WaitForSeconds(2f);
         TextArea.transform.DOScale(new Vector3(0, 0, 0), 1f);
-        soundManager.StopBGM();
+        // soundManager.StopBGM();
 
 
         yield return new WaitForSeconds(1f);
@@ -70,15 +70,15 @@ public class Stage1OPFirstSM : MonoBehaviour
         FrogGirl.transform.DOMoveX(girlStopPosition.position.x, 2f);
 
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.2f);
         Player.transform.DOShakePosition(2f, 10f, 30, 1, false, false);
 
         yield return new WaitForSeconds(1.5f);
         Flower.transform.DORotate(new Vector3(0, 0, 5000), 1, RotateMode.FastBeyond360);
         Flower.transform.DOMove(flowerStopPosition.transform.position, 1f);
-        yield return new WaitForSeconds(1.5f);
-        Player.transform.DOShakeScale(1f, 100f, 60, 90f, false);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
+        Player.transform.DOShakeScale(3f, 100f, 60, 90f, false);
+        yield return new WaitForSeconds(3f);
         Player.transform.DOMove(pepeOutPosition.transform.position, 0.8f);
 
         yield return new WaitForSeconds(1f);
@@ -95,6 +95,7 @@ public class Stage1OPFirstSM : MonoBehaviour
     }
     private void LoadNextScene()
     {
+        // soundManager.StopBGM();
         SceneManager.LoadScene("Stage1OPSecond");
     }
 }

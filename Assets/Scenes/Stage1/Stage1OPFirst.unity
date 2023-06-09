@@ -363,7 +363,7 @@ GameObject:
   - component: {fileID: 269726177}
   - component: {fileID: 269726176}
   m_Layer: 0
-  m_Name: SoundManager
+  m_Name: BGMManager
   m_TagString: SoundManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -382,9 +382,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgmSource: {fileID: 269726177}
-  seSource: {fileID: 269726177}
-  explosionSE: {fileID: 8300000, guid: 800465dc2aabec245b3c0d553c32079c, type: 3}
-  warningSE: {fileID: 8300000, guid: 652aabde5ab72c4499f02388dd0bbfc5, type: 3}
 --- !u!82 &269726177
 AudioSource:
   m_ObjectHideFlags: 0
@@ -399,7 +396,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1366,8 +1363,7 @@ MonoBehaviour:
   greenEgg: {fileID: 21300000, guid: 5332ad1fbb4d6bc459bbb1292cb854f6, type: 3}
   blackoutPanel: {fileID: 155505569}
   textPanel1: {fileID: 1652880084}
-  OpBGM1: {fileID: 8300000, guid: 7d13c5926ef10cb40a775d6f705fd583, type: 3}
-  OpBGM2: {fileID: 8300000, guid: 928ee0df5f1e94f408af63c5d54a993c, type: 3}
+  OpBGM1: {fileID: 8300000, guid: 2200280240dd08842a4f1f375c6d6f05, type: 3}
 --- !u!4 &1824110352
 Transform:
   m_ObjectHideFlags: 0
