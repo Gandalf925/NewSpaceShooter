@@ -249,6 +249,11 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 4703976457202308060}
   touchCircle: {fileID: 2499741732697619261}
   explosionEffect: {fileID: 336278662954817479, guid: 07d5370df963b864f9f0deb0b68579aa, type: 3}
+  isActive: 1
+  seSource: {fileID: 0}
+  warningSE: {fileID: 8300000, guid: 652aabde5ab72c4499f02388dd0bbfc5, type: 3}
+  explosionSE: {fileID: 8300000, guid: 800465dc2aabec245b3c0d553c32079c, type: 3}
+  chargingSE: {fileID: 8300000, guid: 78432c2b41c4bd246ab92dac243731ab, type: 3}
   shootSE: {fileID: 8300000, guid: e151d52fe31c41b4aa58b8ba55c58e10, type: 3}
 --- !u!50 &4703976458070735489
 Rigidbody2D:

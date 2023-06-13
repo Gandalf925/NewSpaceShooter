@@ -3235,7 +3235,7 @@ GameObject:
   - component: {fileID: 198660100}
   - component: {fileID: 198660099}
   m_Layer: 0
-  m_Name: SoundManager
+  m_Name: BGMManager
   m_TagString: SoundManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3265,10 +3265,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1.07
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -3340,7 +3340,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -18087,6 +18087,8 @@ MonoBehaviour:
   frameStartPos: {fileID: 1121941843}
   frameStopPos: {fileID: 1612784538}
   frameEndPos: {fileID: 240138659}
+  stage2BGM: {fileID: 8300000, guid: 29a135eab73c5c345ac0ee9f0e34bb20, type: 3}
+  stage2BossBGM: {fileID: 8300000, guid: 0ef7041267a55c746b2b5d6931235fa3, type: 3}
 --- !u!4 &1067889992 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1414553847153405648, guid: 0bfbb8c7433be4a48932d68ab7502cc9, type: 3}

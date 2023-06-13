@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource seSource;
     public AudioClip warningSE;
     public AudioClip explosionSE;
+    public AudioClip chargingSE;
 
     [SerializeField] AudioClip shootSE;
     AudioSource source;
@@ -334,6 +335,16 @@ public class PlayerController : MonoBehaviour
         seSource.clip = warningSE;
         seSource.pitch = 0.8f;
         seSource.PlayOneShot(warningSE);
+        yield return new WaitForSeconds(duration);
+
+        seSource.Stop();
+    }
+
+    public IEnumerator PlayChargingSE(float duration)
+    {
+        seSource.clip = chargingSE;
+        seSource.pitch = 0.8f;
+        seSource.PlayOneShot(chargingSE);
         yield return new WaitForSeconds(duration);
 
         seSource.Stop();

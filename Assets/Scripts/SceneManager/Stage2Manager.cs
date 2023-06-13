@@ -41,10 +41,16 @@ public class Stage2Manager : MonoBehaviour
 
     bool isBossAppeared;
 
+    [Header("BGM")]
+    public AudioClip stage2BGM;
+    public AudioClip stage2BossBGM;
+
     private void Start()
     {
+        BGMManager.instance.PlayBGM(stage2BGM);
         player = FindObjectOfType<PlayerController>().gameObject;
         playerController = player.GetComponent<PlayerController>();
+
 
         initialScrollSpeed = scrollSpeed;
         uIManager = FindObjectOfType<UIManager>();
@@ -83,9 +89,6 @@ public class Stage2Manager : MonoBehaviour
 
         backgroundPanel.transform.Translate(Vector3.left * (scrollSpeed / 24) * Time.deltaTime);
 
-
-        // 背景の移動
-        // (背景オブジェクトに対して適切なスクロール処理を行う必要があります)
     }
 
     private void StopScrollStage()
@@ -107,6 +110,7 @@ public class Stage2Manager : MonoBehaviour
 
     private IEnumerator StartReverseScrollDelay()
     {
+
         yield return new WaitForSeconds(bossDelayTime);
 
         // 逆向きスクロールを開始
@@ -120,6 +124,7 @@ public class Stage2Manager : MonoBehaviour
 
     private IEnumerator ResetScrollSpeedDelay()
     {
+
         yield return new WaitForSeconds(bossReverseDelayTime);
 
         // スクロール速度をリセット
@@ -171,12 +176,20 @@ public class Stage2Manager : MonoBehaviour
     {
         playerController.SetPlayerActive(false);
         player.transform.DOMove(new Vector3(playerStayPos.position.x, playerStayPos.position.y, playerStayPos.position.z), 4f);
+        BGMManager.instance.StopBGM();
         StartCoroutine(player.GetComponent<PlayerController>().PlayWarningSE(4f));
 
         warningPanel.SetActive(true);
         yield return new WaitForSecondsRealtime(4f);
         warningPanel.SetActive(false);
+
         yield return new WaitForSecondsRealtime(1f);
+
+        BGMManager.instance.PlayBGM(stage2BossBGM);
+
+        yield return new WaitForSecondsRealtime(1f);
+
+
     }
 
     public void InstantiateBoss()

@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   warningDuration: 1
-  approachDistance: 5
+  approachDistance: 9
 --- !u!50 &-8158723852764406742
 Rigidbody2D:
   serializedVersion: 4

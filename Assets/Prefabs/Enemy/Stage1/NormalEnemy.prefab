@@ -159,13 +159,12 @@ MonoBehaviour:
   moveSpeed: 3
   bulletSpeed: 30
   bulletFireRate: 1.5
-  bulletPrefab: {fileID: 2119868004330559710, guid: 5e007da9345241846bae632e79921f4a, type: 3}
+  bulletPrefab: {fileID: 8744015093638318176, guid: 8416167966be51745b55126461b8685b, type: 3}
   player: {fileID: 0}
   explosionPrefab: {fileID: 336278662954817479, guid: b350deb427977454493eb242f505d753, type: 3}
   bulletSpawnPoint: {fileID: 5098067422842518569}
   smallPowerupPrefab: {fileID: 666197690854531664, guid: 767f4ab1bbe02e84ba699c6091ae398e, type: 3}
   largePowerupPrefab: {fileID: 6990624485992650979, guid: d24ad0cf399d9cb489dc30fb442fdb7e, type: 3}
-  explosionSE: {fileID: 8300000, guid: 800465dc2aabec245b3c0d553c32079c, type: 3}
 --- !u!222 &2969067001419220925
 CanvasRenderer:
   m_ObjectHideFlags: 0

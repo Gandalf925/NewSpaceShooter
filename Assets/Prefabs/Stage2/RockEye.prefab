@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   warningDuration: 1
-  approachDistance: 5
+  approachDistance: 8
 --- !u!61 &-5312771104127561334
 BoxCollider2D:
   m_ObjectHideFlags: 0
