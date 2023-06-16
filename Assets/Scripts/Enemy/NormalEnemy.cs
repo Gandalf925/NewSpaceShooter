@@ -5,6 +5,7 @@ using DG.Tweening;
 public class NormalEnemy : MonoBehaviour
 {
     public int maxHP = 1;
+    private float currentHP;
     public float moveSpeed = 2f;
     public float bulletSpeed = 10f;
     public float bulletFireRate = 2f;
@@ -15,7 +16,6 @@ public class NormalEnemy : MonoBehaviour
     public GameObject smallPowerupPrefab;
     public GameObject largePowerupPrefab;
 
-    private float currentHP;
     private bool isShowingDamage = false;
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
