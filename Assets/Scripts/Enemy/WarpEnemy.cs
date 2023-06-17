@@ -2,10 +2,8 @@ using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 
-
 public class WarpEnemy : MonoBehaviour
 {
-
     public int maxHP = 30;
     public float currentHP;
     public float speed = 5f;
@@ -19,7 +17,7 @@ public class WarpEnemy : MonoBehaviour
     public float fireRate = 1f;  // 1秒に1回弾を発射する
 
     private float currentAngle = 325f;  // Current angle to fire the bullet
-    private float angleStep = 8.3f;  // Angle step to increase/decrease the angle
+    private float angleStep = 8.33f;  // Angle step to increase/decrease the angle
     private bool isIncreasing = false;
 
     public GameObject smallPowerupPrefab;
@@ -43,6 +41,7 @@ public class WarpEnemy : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         dissolveMaterial = GetComponent<SpriteRenderer>().material;
         originalColor = spriteRenderer.color;
+        telepotation._Fade = 1f;
 
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
 
@@ -58,7 +57,7 @@ public class WarpEnemy : MonoBehaviour
             isIncreasing = true;
 
         // Update the current angle
-        currentAngle += (isIncreasing ? angleStep : -angleStep);
+        currentAngle += (isIncreasing ? angleStep - 3.3f : -angleStep + 3.3f);
     }
 
     IEnumerator EnemyRoutine()
@@ -116,7 +115,7 @@ public class WarpEnemy : MonoBehaviour
     {
         // ランダムな位置に移動
         float x = Random.Range(2f, 8f);
-        float y = Random.Range(0f, 4f);
+        float y = Random.Range(-3f, 3f);
         transform.position = new Vector2(x, y);
 
         yield return null;
