@@ -188,8 +188,6 @@ public class Stage2Manager : MonoBehaviour
         BGMManager.instance.PlayBGM(stage2BossBGM);
 
         yield return new WaitForSecondsRealtime(1f);
-
-
     }
 
     public void InstantiateBoss()

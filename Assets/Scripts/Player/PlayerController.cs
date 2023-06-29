@@ -287,6 +287,11 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    public void ForcePowerDown()
+    {
+        gameManager.powerupCount -= 1;
+        speed -= 1;
+    }
 
     IEnumerator BlinkTouchCircle()
     {
