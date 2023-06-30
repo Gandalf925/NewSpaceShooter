@@ -83,7 +83,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6921038005516896773, guid: 635dcfd64c93d944da28490428069878, type: 3}
       propertyPath: maxHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6921038005516896773, guid: 635dcfd64c93d944da28490428069878, type: 3}
       propertyPath: LaserPrefab
@@ -105,6 +105,10 @@ PrefabInstance:
       propertyPath: bulletSpawner2
       value: 
       objectReference: {fileID: 8352854586180004086}
+    - target: {fileID: 6921038005516896773, guid: 635dcfd64c93d944da28490428069878, type: 3}
+      propertyPath: explosionPrefab
+      value: 
+      objectReference: {fileID: 336278662954817479, guid: b350deb427977454493eb242f505d753, type: 3}
     - target: {fileID: 6921038005516896773, guid: 635dcfd64c93d944da28490428069878, type: 3}
       propertyPath: MagicCirclePrefab
       value: 

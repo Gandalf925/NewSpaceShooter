@@ -15,6 +15,13 @@ public class Stage3Manager : MonoBehaviour
     public GameObject stage3Boss;
     public Transform bossStartPos;
 
+    public GameObject magicCircleToFall;
+    public Transform[] magicCirclePos;
+
+    public Transform[] fallObjectsPos;
+
+    public GameObject[] fallObjects;
+
 
     private int waveCount = 1;  // 現在のウェーブ数
     private int[] enemyCounts = { 1, 1 };  // 各ウェーブの敵の出現数 , 2, 1, 2, 2 
