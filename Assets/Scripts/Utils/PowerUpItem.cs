@@ -9,8 +9,10 @@ public class PowerupItem : MonoBehaviour
         Small,  // 小アイテム
         Large,  // 大アイテム
         Life, // 回復アイテム
+        Powerup,
     }
 
+    PlayerController player;
     public PowerupType powerupType;  // アイテムの種類
     public float moveSpeed = 6f;  // 移動速度
     public float rotateSpeed = 180f;  // 回転速度
@@ -24,7 +26,6 @@ public class PowerupItem : MonoBehaviour
     private bool isMovingToTarget = false;
     private bool isMovingToLeft = false;
     GameManager gameManager;
-    GameObject player;
 
     private void Start()
     {
@@ -36,7 +37,7 @@ public class PowerupItem : MonoBehaviour
         Vector3 direction = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f);
         targetPosition = startPosition + direction * rightMoveDistance;
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
-        player = GameObject.FindWithTag("Player");
+        player = FindObjectOfType<PlayerController>();
     }
 
     private void Update()
@@ -94,12 +95,17 @@ public class PowerupItem : MonoBehaviour
             }
             else if (powerupType == PowerupType.Large)
             {
-                gameManager.UpdateScore(20);
                 gameManager.AddPowerupPoint(20);
+                gameManager.UpdateScore(20);
             }
             else if (powerupType == PowerupType.Life)
             {
                 gameManager.UpdateLives(1);
+            }
+            else if (powerupType == PowerupType.Powerup)
+            {
+                player.Powerup();
+                gameManager.UpdateScore(50);
             }
 
             Destroy(gameObject);

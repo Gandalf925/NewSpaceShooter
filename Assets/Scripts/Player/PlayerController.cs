@@ -281,10 +281,10 @@ public class PlayerController : MonoBehaviour
         {
             gameManager.powerupCount -= 1;
             speed -= 1;
-            if (gameManager.powerupCount < 0)
-            {
-                gameManager.powerupCount = 0;
-            }
+        }
+        else
+        {
+            gameManager.powerupCount = 0;
         }
     }
     public void ForcePowerDown()

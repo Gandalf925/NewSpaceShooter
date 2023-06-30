@@ -24,8 +24,8 @@ public class Stage3Manager : MonoBehaviour
 
 
     private int waveCount = 1;  // 現在のウェーブ数
-    private int[] enemyCounts = { 1, 1 };  // 各ウェーブの敵の出現数 , 2, 1, 2, 2 
-    private float[] waveDelays = { 5f, 10f };  // 各ウェーブの開始までの待機時間 , 15f, 10f, 15f, 15f 
+    private int[] enemyCounts = { 1, 1, 2, 2, 1 };  // 各ウェーブの敵の出現数  
+    private float[] waveDelays = { 5f, 10f, 15f, 15f, 15f };  // 各ウェーブの開始までの待機時間  
 
     private bool isWaveActive = false;  // ウェーブが進行中かどうか
     private bool isBossAppeared = false;

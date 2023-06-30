@@ -49,14 +49,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71fa76955ee7ebf418c3a5334fad473b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 1
+  maxHP: 60
   currentHP: 0
   speed: 5
   player: {fileID: 0}
   explosionPrefab: {fileID: 336278662954817479, guid: 21872e610cd19994cadd6232d97f93c3, type: 3}
   enemyBulletPrefab: {fileID: 8354351000625563102, guid: 3d2e8bbc588487145b0e5b4a2b779b91, type: 3}
   fireRate: 0.1
-  smallPowerupPrefab: {fileID: 666197690854531664, guid: 767f4ab1bbe02e84ba699c6091ae398e, type: 3}
+  smallPowerupPrefab: {fileID: 3419633685063174375, guid: eb909c69960ce6d41ba48aa03bc2866f, type: 3}
   largePowerupPrefab: {fileID: 6061619657933071244, guid: 200e8baadad3bed40bdca5cdb81711ee, type: 3}
 --- !u!212 &6501457416871340859
 SpriteRenderer:
