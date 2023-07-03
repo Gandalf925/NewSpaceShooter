@@ -87,7 +87,7 @@ public class WarpEnemy : MonoBehaviour
 
     private IEnumerator FireFanShapedBullets()
     {
-        for (int i = 0; i <= 14; i++)
+        for (int i = 0; i <= 10; i++)
         {
             yield return new WaitForSeconds(0.01f);
 

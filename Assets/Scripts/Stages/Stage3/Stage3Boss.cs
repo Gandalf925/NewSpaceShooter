@@ -68,7 +68,7 @@ public class Stage3Boss : MonoBehaviour
         {
             yield return new WaitForSeconds(4f);
 
-            for (int i = 0; i <= 15; i++)
+            for (int i = 0; i <= 11; i++)
             {
                 yield return new WaitForSeconds(0.01f);
 
