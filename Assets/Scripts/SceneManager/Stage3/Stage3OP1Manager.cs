@@ -78,8 +78,7 @@ public class Stage3OP1Manager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(1f);
 
-
-        StartCoroutine(SkipScene());
+        SceneManager.LoadScene("Stage3OP2");
     }
 
 

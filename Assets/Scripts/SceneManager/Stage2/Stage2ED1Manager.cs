@@ -95,7 +95,9 @@ public class Stage2ED1Manager : MonoBehaviour
 
         player.transform.DOMove(pepeStopPos2.transform.position, 0.3f);
 
-        // StartCoroutine(SkipScene());
+        yield return new WaitForSeconds(1.3f);
+
+        SceneManager.LoadScene("Stage3OP1");
     }
 
 
@@ -104,6 +106,6 @@ public class Stage2ED1Manager : MonoBehaviour
         blackoutPanel.DOFade(1f, 2f);
         yield return new WaitForSeconds(2f);
         BGMManager.instance.StopBGM();
-        SceneManager.LoadScene("Stage2");
+        SceneManager.LoadScene("Stage3");
     }
 }
