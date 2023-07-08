@@ -22,9 +22,20 @@ public class Stage3OP2Manager : MonoBehaviour
 
     public Image blackoutPanel;
 
+    SEManager SEManager;
+    public AudioClip Stage2EDBGM2;
+    public AudioClip Stage2EDPutTheGlassOnSE;
+    public AudioClip Stage2EDSlideTheGlassSE;
+    public AudioClip Stage2EDQuakeSE;
+
+
+
     private void Start()
     {
         blackoutPanel.color = new Color(0f, 0f, 0f, 255f);
+        GameObject SEManagerObj = GameObject.FindGameObjectWithTag("SEManager");
+        SEManager = SEManagerObj.GetComponent<SEManager>();
+        BGMManager.instance.PlayBGM(Stage2EDBGM2);
         StartCoroutine(Stage3OP2());
     }
     private void Update()
@@ -41,8 +52,12 @@ public class Stage3OP2Manager : MonoBehaviour
         yield return new WaitForSecondsRealtime(3f);
         cocktail.transform.position = cocktailStartPos.position;
         cocktail.SetActive(true);
+        SEManager.PlaySE(Stage2EDPutTheGlassOnSE);
+
         yield return new WaitForSecondsRealtime(1f);
         cocktail.transform.DOMove(cocktailStopPos.position, 1.5f);
+        SEManager.PlaySE(Stage2EDSlideTheGlassSE);
+
 
         yield return new WaitForSecondsRealtime(2f);
 
@@ -89,6 +104,8 @@ public class Stage3OP2Manager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(2f);
 
+        SEManager.PlaySE(Stage2EDQuakeSE);
+
         player.transform.DOShakePosition(2f, 20f, 30, 1, false, false);
         background0.transform.DOShakePosition(2f, 20f, 30, 1, false, false);
         background1.transform.DOShakePosition(2f, 20f, 30, 1, false, false);
@@ -96,9 +113,10 @@ public class Stage3OP2Manager : MonoBehaviour
         cocktail.transform.DOShakePosition(2f, 20f, 30, 1, false, false);
 
         yield return new WaitForSecondsRealtime(2.5f);
+        SEManager.StopSE();
 
         sweat.SetActive(true);
-        sweat.transform.DOMoveY(-0.1f, 1f);
+        sweat.transform.DOMoveY(-0.05f, 1f);
 
 
         yield return new WaitForSecondsRealtime(2f);
@@ -130,7 +148,7 @@ public class Stage3OP2Manager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(2f);
 
-        // BGMManager.instance.StopBGM();
+        BGMManager.instance.StopBGM();
 
         SceneManager.LoadScene("Stage3");
     }
@@ -141,6 +159,6 @@ public class Stage3OP2Manager : MonoBehaviour
         blackoutPanel.DOFade(1f, 2f);
         yield return new WaitForSeconds(2f);
         BGMManager.instance.StopBGM();
-        SceneManager.LoadScene("Stage2");
+        SceneManager.LoadScene("Stage3");
     }
 }

@@ -36,6 +36,9 @@ public class Stage3Manager : MonoBehaviour
     [SerializeField] Transform frameEndPos;
     UIManager uIManager;
 
+    public AudioClip stage3BGM;
+    public AudioClip stage3BossBGM;
+
     void Start()
     {
         player = FindObjectOfType<PlayerController>().gameObject;
@@ -44,6 +47,7 @@ public class Stage3Manager : MonoBehaviour
         startTextFrame.transform.position = frameStartPos.position;
 
         uIManager.FadeIn();
+        BGMManager.instance.PlayBGM(stage3BGM);
         StartCoroutine(StartFrameIn());
 
         StartCoroutine(StartWaves());
@@ -128,6 +132,7 @@ public class Stage3Manager : MonoBehaviour
 
     public IEnumerator WarningBeforBossBattle()
     {
+        BGMManager.instance.StopBGM();
         playerController.SetPlayerActive(false);
         player.transform.DOMove(new Vector3(playerStayPos.position.x, playerStayPos.position.y, playerStayPos.position.z), 4f);
         // BGMManager.instance.StopBGM();

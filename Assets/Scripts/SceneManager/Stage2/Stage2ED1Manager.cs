@@ -7,6 +7,7 @@ using DG.Tweening;
 public class Stage2ED1Manager : MonoBehaviour
 {
     public GameObject player;
+    PlayerController playerController;
     public Transform pepeStartPos;
     public Transform pepeStopPos1;
     public Transform pepeStopPos2;
@@ -21,9 +22,20 @@ public class Stage2ED1Manager : MonoBehaviour
 
     public Image blackoutPanel;
 
+    BGMManager BGMManager;
+    SEManager SEManager;
+    public AudioClip Stage2EDBGM;
+    public AudioClip Stage2EDShootSE;
+    public AudioClip Stage2EDExplosionSE;
+
     private void Start()
     {
         blackoutPanel.color = new Color(0f, 0f, 0f, 0f);
+        playerController = player.GetComponent<PlayerController>();
+        GameObject SEManagerObj = GameObject.FindGameObjectWithTag("SEManager");
+        SEManager = SEManagerObj.GetComponent<SEManager>();
+
+        BGMManager.instance.PlayBGM(Stage2EDBGM);
         StartCoroutine(Stage2ED());
     }
     private void Update()
@@ -47,11 +59,13 @@ public class Stage2ED1Manager : MonoBehaviour
 
         player.transform.DOPunchScale(new Vector3(30f, 30f, 0), 1f);
         GameObject pepeBullet1 = Instantiate(bullet, player.transform.position, Quaternion.identity);
-
+        SEManager.PlaySE(Stage2EDShootSE);
 
         yield return new WaitForSecondsRealtime(0.3f);
 
         GameObject explosion1 = Instantiate(explosion, explosionPos.transform.position, Quaternion.identity);
+        SEManager.PlaySE(Stage2EDExplosionSE);
+
         Destroy(pepeBullet1);
 
         box.transform.DOLocalPath(
@@ -73,10 +87,13 @@ public class Stage2ED1Manager : MonoBehaviour
 
         player.transform.DOPunchScale(new Vector3(30f, 30f, 0), 1f);
         GameObject pepeBullet2 = Instantiate(bullet, player.transform.position, Quaternion.identity);
+        SEManager.PlaySE(Stage2EDShootSE);
 
         yield return new WaitForSeconds(0.3f);
 
         GameObject explosion2 = Instantiate(explosion, explosionPos.transform.position, Quaternion.identity);
+        SEManager.PlaySE(Stage2EDExplosionSE);
+
         Destroy(shinyEgg);
         Destroy(pepeBullet2);
 
@@ -103,8 +120,8 @@ public class Stage2ED1Manager : MonoBehaviour
 
     IEnumerator SkipScene()
     {
-        blackoutPanel.DOFade(1f, 2f);
-        yield return new WaitForSeconds(2f);
+        // blackoutPanel.DOFade(1f, 2f);
+        yield return new WaitForSeconds(1.5f);
         BGMManager.instance.StopBGM();
         SceneManager.LoadScene("Stage3");
     }

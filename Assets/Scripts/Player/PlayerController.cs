@@ -328,6 +328,11 @@ public class PlayerController : MonoBehaviour
         isPlayerActive = isActive;
     }
 
+    public void PlayShootSE()
+    {
+        source.PlayOneShot(explosionSE);
+    }
+
     public void PlayExplosionSE()
     {
         seSource.clip = explosionSE;

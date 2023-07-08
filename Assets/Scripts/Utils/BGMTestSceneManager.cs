@@ -10,7 +10,7 @@ public class BGMTestSceneManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
-            SceneManager.LoadScene("Stage1ED");
+            SceneManager.LoadScene("Stage2ED1");
         }
     }
 }

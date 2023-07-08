@@ -79,6 +79,7 @@ public class Stage3OP1Manager : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
 
         SceneManager.LoadScene("Stage3OP2");
+        BGMManager.instance.StopBGM();
     }
 
 
@@ -87,7 +88,7 @@ public class Stage3OP1Manager : MonoBehaviour
         blackoutPanel.DOFade(1f, 2f);
         yield return new WaitForSeconds(2f);
         BGMManager.instance.StopBGM();
-        SceneManager.LoadScene("Stage2");
+        SceneManager.LoadScene("Stage3");
     }
 
     IEnumerator SpeakerMove(Transform pepe)
