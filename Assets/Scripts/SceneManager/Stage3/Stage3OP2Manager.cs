@@ -17,6 +17,8 @@ public class Stage3OP2Manager : MonoBehaviour
     public GameObject speachBubble;
     public Image speachImage;
     public Sprite[] speachImageSprites;
+
+    public GameObject randy;
     public GameObject background0;
     public GameObject background1;
 
@@ -64,7 +66,7 @@ public class Stage3OP2Manager : MonoBehaviour
         speachBubble.transform.localScale = new Vector3(0f, 0f, 0f);
         speachImage.sprite = speachImageSprites[0];
         speachBubble.SetActive(true);
-        speachBubble.transform.DOScale(new Vector3(4.35f, 4.35f, 4.35f), 1f);
+        speachBubble.transform.DOScale(new Vector3(2f, 2f, 2f), 1f);
 
         yield return new WaitForSecondsRealtime(1.8f);
 
@@ -111,12 +113,15 @@ public class Stage3OP2Manager : MonoBehaviour
         background1.transform.DOShakePosition(2f, 20f, 30, 1, false, false);
         bartender.transform.DOShakePosition(2f, 20f, 30, 1, false, false);
         cocktail.transform.DOShakePosition(2f, 20f, 30, 1, false, false);
+        randy.transform.DOShakePosition(2f, 20f, 30, 1, false, false);
 
         yield return new WaitForSecondsRealtime(2.5f);
         SEManager.StopSE();
 
         sweat.SetActive(true);
         sweat.transform.DOMoveY(-0.05f, 1f);
+
+        StartCoroutine(RandyMove());
 
 
         yield return new WaitForSecondsRealtime(2f);
@@ -160,5 +165,113 @@ public class Stage3OP2Manager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         BGMManager.instance.StopBGM();
         SceneManager.LoadScene("Stage3");
+    }
+
+    IEnumerator RandyMove()
+    {
+        randy.transform.Rotate(new Vector3(0f, 0f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+
+        randy.transform.Rotate(new Vector3(0f, 180f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+
+        randy.transform.Rotate(new Vector3(0f, 0f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+        randy.transform.Rotate(new Vector3(0f, 180f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+        randy.transform.Rotate(new Vector3(0f, 0f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+        randy.transform.Rotate(new Vector3(0f, 180f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+        randy.transform.Rotate(new Vector3(0f, 0f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+        randy.transform.Rotate(new Vector3(0f, 180f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+        randy.transform.Rotate(new Vector3(0f, 0f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+
+        randy.transform.Rotate(new Vector3(0f, 180f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+
+        randy.transform.Rotate(new Vector3(0f, 0f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+        randy.transform.Rotate(new Vector3(0f, 180f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+        randy.transform.Rotate(new Vector3(0f, 0f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+        randy.transform.Rotate(new Vector3(0f, 180f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+        randy.transform.Rotate(new Vector3(0f, 0f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+        randy.transform.Rotate(new Vector3(0f, 180f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+        randy.transform.Rotate(new Vector3(0f, 0f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+
+        randy.transform.Rotate(new Vector3(0f, 180f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+
+        randy.transform.Rotate(new Vector3(0f, 0f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+        randy.transform.Rotate(new Vector3(0f, 180f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+        randy.transform.Rotate(new Vector3(0f, 0f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+        randy.transform.Rotate(new Vector3(0f, 180f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+        randy.transform.Rotate(new Vector3(0f, 0f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+        randy.transform.Rotate(new Vector3(0f, 180f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+        randy.transform.Rotate(new Vector3(0f, 0f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+
+        randy.transform.Rotate(new Vector3(0f, 180f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+
+        randy.transform.Rotate(new Vector3(0f, 0f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+        randy.transform.Rotate(new Vector3(0f, 180f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+        randy.transform.Rotate(new Vector3(0f, 0f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+        randy.transform.Rotate(new Vector3(0f, 180f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+        randy.transform.Rotate(new Vector3(0f, 0f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
+        randy.transform.Rotate(new Vector3(0f, 180f, 0f));
+
+        yield return new WaitForSeconds(0.2f);
     }
 }
