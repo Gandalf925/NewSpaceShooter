@@ -10,6 +10,7 @@ public class Stage1OPSecondSM : MonoBehaviour
     public Transform pepeStopPosition;
     public Transform pepeOutPosition;
     public GameObject Player;
+    public GameObject pepeFire;
     public Transform[] backgrounds; // 背景のレイヤーを格納する配列
     public float[] speeds; // それぞれの背景の移動速度を格納する配列
     public Vector2 direction = new Vector2(-1, -1f); // 移動する方向（左斜め下）
@@ -22,6 +23,7 @@ public class Stage1OPSecondSM : MonoBehaviour
     void Start()
     {
         blackoutPanel.color = new Color(0f, 0f, 0f, 0f);
+        pepeFire.SetActive(false);
         StartCoroutine(StartScene());
     }
 
@@ -43,16 +45,22 @@ public class Stage1OPSecondSM : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         Player.transform.DOMove(pepeStopPosition.position, 1f);
-        Player.transform.DOScale(new Vector3(250f, 250f, 0), 1f);
+        Player.transform.DOScale(new Vector3(200f, 200f, 0), 1f);
         yield return new WaitForSeconds(0.3f);
         isMove = true;
         yield return new WaitForSeconds(3.4f);
 
-        Player.transform.DOShakeScale(3f, 100f, 60, 90f, false);
+        pepeFire.SetActive(true);
+
+        Player.transform.DOShakeScale(1.5f, 50f, 60, 90f, false);
 
         yield return new WaitForSeconds(1.5f);
-        Player.transform.DOShakePosition(3.5f, 300f, 30, 100, false, false);
-        yield return new WaitForSeconds(3f);
+
+        Player.transform.DOShakePosition(2f, 100f, 10, 100, false, false);
+        pepeFire.transform.DOScale(new Vector3(0f, 0f, 0f), 2f);
+        yield return new WaitForSeconds(2f);
+        pepeFire.SetActive(false);
+        yield return new WaitForSeconds(1f);
         isMove = false;
         Player.transform.DOMove(pepeOutPosition.position, 2f);
         Player.transform.DOScale(new Vector3(0, 0, 0), 2f);

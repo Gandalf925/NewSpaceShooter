@@ -52,7 +52,7 @@ public class Stage1OPFirstSM : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
         Player.transform.DOMoveX(pepeStopPosition.position.x, 1f);
         yield return new WaitForSeconds(1f);
-        TextArea.transform.DOScale(new Vector3(9f, 4f, 0), 1f);
+        TextArea.transform.DOScale(new Vector3(4f, 2f, 0), 1f);
         yield return new WaitForSeconds(2f);
         SpeechBubbleImage.GetComponent<Image>().sprite = planet;
         yield return new WaitForSeconds(2f);
@@ -66,7 +66,7 @@ public class Stage1OPFirstSM : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         // soundManager.PlayBGM(OpBGM2);
-        FrogGirl.transform.DOScaleX(-4.94f, 0.01f);
+        FrogGirl.transform.Rotate(new Vector3(0f, 180f, 0f));
         FrogGirl.transform.DOMoveX(girlStopPosition.position.x, 2f);
 
 
@@ -82,7 +82,6 @@ public class Stage1OPFirstSM : MonoBehaviour
         Player.transform.DOMove(pepeOutPosition.transform.position, 0.8f);
 
         yield return new WaitForSeconds(1f);
-        blackoutPanel.DOFade(1f, 2f);
 
         LoadNextScene();
     }
