@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class Stage2Manager : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class Stage2Manager : MonoBehaviour
     public GameObject bossPrefab;
 
     public GameObject bossDecoy;
+
+    GameObject boss;
 
 
     public GameObject backgroundPanel;
@@ -80,6 +83,14 @@ public class Stage2Manager : MonoBehaviour
         {
             ScrollStage();
         }
+
+        if (isBossAppeared && boss == null)
+        {
+
+            StartCoroutine(StageClear());
+
+        }
+
     }
 
     private void ScrollStage()
@@ -187,12 +198,20 @@ public class Stage2Manager : MonoBehaviour
 
         BGMManager.instance.PlayBGM(stage2BossBGM);
 
-        yield return new WaitForSecondsRealtime(1f);
     }
 
     public void InstantiateBoss()
     {
         bossDecoy.SetActive(false);
-        GameObject boss = Instantiate(bossPrefab, bossStartPos.position, Quaternion.identity);
+        boss = Instantiate(bossPrefab, bossStartPos.position, Quaternion.identity);
+    }
+
+    IEnumerator StageClear()
+    {
+        yield return new WaitForSeconds(1f);
+        uIManager.FadeOut();
+        yield return new WaitForSeconds(2.3f);
+
+        SceneManager.LoadScene("Stage2ED1");
     }
 }
