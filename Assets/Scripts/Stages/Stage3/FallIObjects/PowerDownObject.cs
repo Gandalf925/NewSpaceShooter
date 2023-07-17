@@ -19,7 +19,7 @@ public class PowerDownObject : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            player.ForcePowerDown();
+            player.PowerDown();
             Destroy(gameObject);
             GameObject explosion = Instantiate(explosionEffect, transform.position, Quaternion.identity);
             yield return new WaitForSecondsRealtime(1f);

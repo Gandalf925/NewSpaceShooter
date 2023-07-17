@@ -1,3 +1,5 @@
+
+using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,7 +24,7 @@ public class PlayerController : MonoBehaviour
     private float invincibleTime = 3f;
     private float invincibleTimer = 0f;
     private bool isInvincible = false;
-    private bool isFiring = false;
+    public bool isFiring = false;
     public bool isActive = true;
     private Image playerImage;
 
@@ -38,7 +40,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioClip shootSE;
     AudioSource source;
 
-    private bool isPlayerActive = true;
+    public bool isPlayerActive = true;
+
+    [Header("Companion")]
+    public CompanionController[] companionPrefab; // コンパニオンのプレハブ
+    public int maxCompanions = 4; // 最大コンパニオン数
 
     private void Start()
     {
@@ -57,6 +63,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+
         if (!isPlayerActive)
         {
             rb.velocity = Vector2.zero;
@@ -125,20 +132,11 @@ public class PlayerController : MonoBehaviour
             selectedBulletIndex = 2;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space))
         {
             isFiring = true;
         }
-        else if (Input.GetKeyUp(KeyCode.Space))
-        {
-            isFiring = false;
-        }
-
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
-        {
-            isFiring = true;
-        }
-        else if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space))
+        else
         {
             isFiring = false;
         }
@@ -158,21 +156,36 @@ public class PlayerController : MonoBehaviour
             int attackPower = bulletController.attackPower;
 
             //パワーアップ時の処理
-            if (gameManager.powerupCount >= 1)
+            switch (gameManager.powerupCount)
             {
-                float angleLeft = -15f;
-                float angleRight = 15f;
+                case 0:
+                    break;
 
-                GameObject bulletInstanceLeft = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
-                bulletInstanceLeft.transform.rotation = Quaternion.Euler(0f, 0f, angleLeft);
-                bulletInstanceLeft.GetComponent<PlayerBulletController>().fireRate = fireRate;
-                bulletInstanceLeft.GetComponent<PlayerBulletController>().attackPower = attackPower;
+                case 1:
+                    TripleShot(bulletPrefab, fireRate, attackPower);
+                    break;
 
-                GameObject bulletInstanceRight = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
-                bulletInstanceRight.transform.rotation = Quaternion.Euler(0f, 0f, angleRight);
-                bulletInstanceRight.GetComponent<PlayerBulletController>().fireRate = fireRate;
-                bulletInstanceRight.GetComponent<PlayerBulletController>().attackPower = attackPower;
+                case 2:
+                    TripleShot(bulletPrefab, fireRate, attackPower);
+                    SpawnCompanions(0);
+                    break;
+
+                case 3:
+                    TripleShot(bulletPrefab, fireRate, attackPower);
+                    SpawnCompanions(1);
+                    break;
+
+                case 4:
+                    TripleShot(bulletPrefab, fireRate, attackPower);
+                    SpawnCompanions(2);
+                    break;
+
+                case 5:
+                    TripleShot(bulletPrefab, fireRate, attackPower);
+                    SpawnCompanions(3);
+                    break;
             }
+
 
             // 次に弾を発射できる時刻を更新
             nextFireTime = Time.time + fireRate;
@@ -219,6 +232,22 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+    }
+
+    private void TripleShot(GameObject bulletPrefab, float fireRate, int attackPower)
+    {
+        float angleLeft = -15f;
+        float angleRight = 15f;
+
+        GameObject bulletInstanceLeft = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+        bulletInstanceLeft.transform.rotation = Quaternion.Euler(0f, 0f, angleLeft);
+        bulletInstanceLeft.GetComponent<PlayerBulletController>().fireRate = fireRate;
+        bulletInstanceLeft.GetComponent<PlayerBulletController>().attackPower = attackPower;
+
+        GameObject bulletInstanceRight = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+        bulletInstanceRight.transform.rotation = Quaternion.Euler(0f, 0f, angleRight);
+        bulletInstanceRight.GetComponent<PlayerBulletController>().fireRate = fireRate;
+        bulletInstanceRight.GetComponent<PlayerBulletController>().attackPower = attackPower;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -271,26 +300,38 @@ public class PlayerController : MonoBehaviour
 
     public void Powerup()
     {
+        if (gameManager.powerupCount >= 5) return;
         gameManager.powerupCount += 1;
         speed += 1;
     }
 
-    private void PowerDown()
+    public void PowerDown()
     {
         if (gameManager.powerupCount >= 1)
         {
             gameManager.powerupCount -= 1;
             speed -= 1;
+
+            switch (gameManager.powerupCount)
+            {
+                case 4:
+                    DeleteCompanions(3);
+                    break;
+                case 3:
+                    DeleteCompanions(2);
+                    break;
+                case 2:
+                    DeleteCompanions(1);
+                    break;
+                case 1:
+                    DeleteCompanions(0);
+                    break;
+            }
         }
         else
         {
             gameManager.powerupCount = 0;
         }
-    }
-    public void ForcePowerDown()
-    {
-        gameManager.powerupCount -= 1;
-        speed -= 1;
     }
 
     IEnumerator BlinkTouchCircle()
@@ -358,5 +399,21 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(duration);
 
         seSource.Stop();
+    }
+
+    public void SpawnCompanions(int num)
+    {
+        if (!companionPrefab[num].gameObject.activeSelf)
+        {
+            companionPrefab[num].gameObject.SetActive(true);
+        }
+    }
+
+    public void DeleteCompanions(int num)
+    {
+        if (companionPrefab[num].gameObject.activeSelf)
+        {
+            companionPrefab[num].gameObject.SetActive(false);
+        }
     }
 }

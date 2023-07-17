@@ -113,13 +113,16 @@ public class Stage3Boss : MonoBehaviour
                     // 偶数の場合の処理
                     Instantiate(stage3Manager.magicCircleToFall, stage3Manager.magicCirclePos[0].position, Quaternion.identity);
                     Instantiate(stage3Manager.magicCircleToFall, stage3Manager.magicCirclePos[2].position, Quaternion.identity);
+                    Instantiate(stage3Manager.magicCircleToFall, stage3Manager.magicCirclePos[4].position, Quaternion.identity);
                     yield return new WaitForSeconds(1f);
 
                     int randomIndex1 = Random.Range(0, stage3Manager.fallObjects.Length);
                     int randomIndex2 = Random.Range(0, stage3Manager.fallObjects.Length);
+                    int randomIndex3 = Random.Range(0, stage3Manager.fallObjects.Length);
 
                     Instantiate(stage3Manager.fallObjects[randomIndex1], stage3Manager.fallObjectsPos[0].position, Quaternion.identity);
                     Instantiate(stage3Manager.fallObjects[randomIndex2], stage3Manager.fallObjectsPos[2].position, Quaternion.identity);
+                    Instantiate(stage3Manager.fallObjects[randomIndex3], stage3Manager.fallObjectsPos[4].position, Quaternion.identity);
                 }
                 else
                 {
@@ -133,13 +136,16 @@ public class Stage3Boss : MonoBehaviour
                     // 偶数の場合の処理
                     Instantiate(stage3Manager.magicCircleToFall, stage3Manager.magicCirclePos[1].position, Quaternion.identity);
                     Instantiate(stage3Manager.magicCircleToFall, stage3Manager.magicCirclePos[3].position, Quaternion.identity);
+                    Instantiate(stage3Manager.magicCircleToFall, stage3Manager.magicCirclePos[5].position, Quaternion.identity);
                     yield return new WaitForSeconds(1f);
 
                     int randomIndex1 = Random.Range(0, stage3Manager.fallObjects.Length);
                     int randomIndex2 = Random.Range(0, stage3Manager.fallObjects.Length);
+                    int randomIndex3 = Random.Range(0, stage3Manager.fallObjects.Length);
 
                     Instantiate(stage3Manager.fallObjects[randomIndex1], stage3Manager.fallObjectsPos[1].position, Quaternion.identity);
                     Instantiate(stage3Manager.fallObjects[randomIndex2], stage3Manager.fallObjectsPos[3].position, Quaternion.identity);
+                    Instantiate(stage3Manager.fallObjects[randomIndex3], stage3Manager.fallObjectsPos[5].position, Quaternion.identity);
                 }
                 else
                 {

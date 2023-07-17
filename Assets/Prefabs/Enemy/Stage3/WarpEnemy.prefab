@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71fa76955ee7ebf418c3a5334fad473b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 60
+  maxHP: 70
   currentHP: 0
   speed: 5
   player: {fileID: 0}

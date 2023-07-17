@@ -83,7 +83,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6921038005516896773, guid: 635dcfd64c93d944da28490428069878, type: 3}
       propertyPath: maxHP
-      value: 1000
+      value: 1300
       objectReference: {fileID: 0}
     - target: {fileID: 6921038005516896773, guid: 635dcfd64c93d944da28490428069878, type: 3}
       propertyPath: LaserPrefab

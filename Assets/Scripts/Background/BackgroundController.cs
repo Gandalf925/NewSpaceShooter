@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BackgroundController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class BackgroundController : MonoBehaviour
 
     private List<Transform> starsFront = new List<Transform>();
     private List<Transform> starsBack = new List<Transform>();
+    private List<Image> planets = new List<Image>();
 
     private PlayerController playerController;
 
@@ -57,4 +59,13 @@ public class BackgroundController : MonoBehaviour
             }
         }
     }
+
+    // IEnumerator SpawnPlanets()
+    // {
+    //     yield return new WaitForSeconds(3f);
+
+
+    // }
+
+
 }
