@@ -131,13 +131,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13d6fd07f7484f34b8354dde6c2218a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 1
+  maxHP: 1300
   currentHP: 0
   explosionPrefab: {fileID: 336278662954817479, guid: 21872e610cd19994cadd6232d97f93c3, type: 3}
   isDefeated: 0
   bulletSpawner: {fileID: 414185898129604045}
   reflectiveBulletPrefab: {fileID: 8567652477754409758, guid: 661f3c648439a9145841ee2e274e9c55, type: 3}
-  bulletFireInterval: 2.5
+  bulletFireInterval: 2
 --- !u!50 &9073586884952371056
 Rigidbody2D:
   serializedVersion: 4

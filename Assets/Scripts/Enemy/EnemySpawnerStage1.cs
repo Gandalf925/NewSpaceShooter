@@ -80,72 +80,80 @@ public class EnemySpawnerStage1 : MonoBehaviour
         // Game Start
         yield return new WaitForSecondsRealtime(4f);
 
-        // startTextFrame.transform.DOMove(frameStopPos.position, 0.5f);
+        startTextFrame.transform.DOMove(frameStopPos.position, 0.5f);
 
-        // yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(2f);
 
-        // startTextFrame.transform.DOMove(frameEndPos.position, 0.5f);
+        startTextFrame.transform.DOMove(frameEndPos.position, 0.5f);
 
-        // yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(1f);
 
-        // // Topから4体出現
-        // SpawnNormalEnemy(spawnPositionTop);
-        // yield return new WaitForSecondsRealtime(0.5f);
-        // SpawnNormalEnemy(spawnPositionTop);
-        // yield return new WaitForSecondsRealtime(0.5f);
-        // SpawnNormalEnemy(spawnPositionTop);
-        // yield return new WaitForSecondsRealtime(0.5f);
-        // SpawnNormalEnemy(spawnPositionTop);
-        // yield return new WaitForSecondsRealtime(0.5f);
-
-
-        // yield return new WaitForSecondsRealtime(5f);
-
-        // // Bottmeから4体出現
-        // SpawnNormalEnemy(spwanPositionBottom);
-        // yield return new WaitForSecondsRealtime(0.5f);
-        // SpawnNormalEnemy(spwanPositionBottom);
-        // yield return new WaitForSecondsRealtime(0.5f);
-        // SpawnNormalEnemy(spwanPositionBottom);
-        // yield return new WaitForSecondsRealtime(0.5f);
-        // SpawnNormalEnemy(spwanPositionBottom);
-        // yield return new WaitForSecondsRealtime(0.5f);
+        // Topから4体出現
+        SpawnNormalEnemy(spawnPositionTop);
+        yield return new WaitForSecondsRealtime(0.5f);
+        SpawnNormalEnemy(spawnPositionTop);
+        yield return new WaitForSecondsRealtime(0.5f);
+        SpawnNormalEnemy(spawnPositionTop);
+        yield return new WaitForSecondsRealtime(0.5f);
+        SpawnNormalEnemy(spawnPositionTop);
+        yield return new WaitForSecondsRealtime(0.5f);
 
 
-        // yield return new WaitForSecondsRealtime(3f);
+        yield return new WaitForSecondsRealtime(5f);
 
-        // //middleのポジションから8体出現
-        // for (int i = 0; i < 8; i++)
-        // {
-        //     SpawnNormalEnemy(spawnPositionsMiddle[i]);
-        //     yield return new WaitForSecondsRealtime(0.4f);
-        // }
+        // Bottmeから4体出現
+        SpawnNormalEnemy(spwanPositionBottom);
+        yield return new WaitForSecondsRealtime(0.5f);
+        SpawnNormalEnemy(spwanPositionBottom);
+        yield return new WaitForSecondsRealtime(0.5f);
+        SpawnNormalEnemy(spwanPositionBottom);
+        yield return new WaitForSecondsRealtime(0.5f);
+        SpawnNormalEnemy(spwanPositionBottom);
+        yield return new WaitForSecondsRealtime(0.5f);
 
-        // yield return new WaitForSecondsRealtime(3f);
 
-        // SpawnNormalEnemy(spawnPositionsMiddle[2]);
-        // yield return new WaitForSecondsRealtime(0.4f);
-        // SpawnNormalEnemy(spawnPositionsMiddle[2]);
-        // yield return new WaitForSecondsRealtime(0.4f);
-        // SpawnNormalEnemy(spawnPositionsMiddle[2]);
-        // yield return new WaitForSecondsRealtime(0.4f);
-        // SpawnNormalEnemy(spawnPositionsMiddle[5]);
-        // yield return new WaitForSecondsRealtime(0.4f);
-        // SpawnNormalEnemy(spawnPositionsMiddle[5]);
-        // yield return new WaitForSecondsRealtime(0.4f);
-        // SpawnNormalEnemy(spawnPositionsMiddle[5]);
-        // yield return new WaitForSecondsRealtime(0.4f);
+        yield return new WaitForSecondsRealtime(3f);
 
-        // yield return new WaitForSecondsRealtime(3f);
+        //middleのポジションから8体出現
+        for (int i = 0; i < 8; i++)
+        {
+            SpawnNormalEnemy(spawnPositionsMiddle[i]);
+            yield return new WaitForSecondsRealtime(0.4f);
+        }
 
-        // SpawnRadialEnemy(radialPositionMiddle);
+        yield return new WaitForSecondsRealtime(3f);
 
-        // yield return new WaitForSecondsRealtime(3f);
+        for (int i = 7; i >= 0; i--)
+        {
+            SpawnNormalEnemy(spawnPositionsMiddle[i]);
+            yield return new WaitForSecondsRealtime(0.4f);
+        }
 
-        // SpawnRadialEnemy(radialPositionTop);
-        // SpawnRadialEnemy(radialPositionBottom);
+        yield return new WaitForSecondsRealtime(3f);
 
-        // yield return new WaitForSecondsRealtime(4f);
+        SpawnNormalEnemy(spawnPositionsMiddle[2]);
+        yield return new WaitForSecondsRealtime(0.4f);
+        SpawnNormalEnemy(spawnPositionsMiddle[2]);
+        yield return new WaitForSecondsRealtime(0.4f);
+        SpawnNormalEnemy(spawnPositionsMiddle[2]);
+        yield return new WaitForSecondsRealtime(0.4f);
+        SpawnNormalEnemy(spawnPositionsMiddle[5]);
+        yield return new WaitForSecondsRealtime(0.4f);
+        SpawnNormalEnemy(spawnPositionsMiddle[5]);
+        yield return new WaitForSecondsRealtime(0.4f);
+        SpawnNormalEnemy(spawnPositionsMiddle[5]);
+        yield return new WaitForSecondsRealtime(0.4f);
+
+        yield return new WaitForSecondsRealtime(3f);
+
+        SpawnRadialEnemy(radialPositionMiddle);
+
+        yield return new WaitForSecondsRealtime(3f);
+
+        SpawnRadialEnemy(radialPositionTop);
+        SpawnRadialEnemy(radialPositionBottom);
+
+        yield return new WaitForSecondsRealtime(4f);
 
         allEnemiesSpawned = true;
 

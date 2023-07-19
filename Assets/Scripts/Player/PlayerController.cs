@@ -338,18 +338,30 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(3f);
 
-        touchCircle.DOFade(0f, 0.3f);
-        yield return new WaitForSecondsRealtime(0.3f);
-        touchCircle.DOFade(1f, 0.3f);
-        yield return new WaitForSecondsRealtime(0.3f);
-        touchCircle.DOFade(0f, 0.3f);
-        yield return new WaitForSecondsRealtime(0.3f);
-        touchCircle.DOFade(1f, 0.3f);
-        yield return new WaitForSecondsRealtime(0.3f);
-        touchCircle.DOFade(0f, 0.3f);
-        yield return new WaitForSecondsRealtime(0.3f);
-        touchCircle.DOFade(1f, 0.3f);
-        yield return new WaitForSecondsRealtime(0.3f);
+        touchCircle.DOFade(0f, 0.1f);
+        yield return new WaitForSecondsRealtime(0.1f);
+        touchCircle.DOFade(1f, 0.1f);
+        yield return new WaitForSecondsRealtime(0.1f);
+        touchCircle.DOFade(0f, 0.1f);
+        yield return new WaitForSecondsRealtime(0.1f);
+        touchCircle.DOFade(1f, 0.1f);
+        yield return new WaitForSecondsRealtime(0.1f);
+        touchCircle.DOFade(0f, 0.1f);
+        yield return new WaitForSecondsRealtime(0.1f);
+        touchCircle.DOFade(1f, 0.1f);
+        yield return new WaitForSecondsRealtime(0.1f);
+        touchCircle.DOFade(1f, 0.1f);
+        yield return new WaitForSecondsRealtime(0.1f);
+        touchCircle.DOFade(1f, 0.1f);
+        yield return new WaitForSecondsRealtime(0.1f);
+        touchCircle.DOFade(1f, 0.1f);
+        yield return new WaitForSecondsRealtime(0.1f);
+        touchCircle.DOFade(1f, 0.1f);
+        yield return new WaitForSecondsRealtime(0.1f);
+        touchCircle.DOFade(1f, 0.1f);
+        yield return new WaitForSecondsRealtime(0.1f);
+        touchCircle.DOFade(1f, 0.1f);
+        yield return new WaitForSecondsRealtime(0.1f);
 
         touchCircle.gameObject.SetActive(false);
 

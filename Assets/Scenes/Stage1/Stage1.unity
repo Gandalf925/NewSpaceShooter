@@ -4596,7 +4596,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 183099194}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.4, y: -3.61, z: 0}
+  m_LocalPosition: {x: 13.4, y: -2.87, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9849,6 +9849,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &412518075 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4584680907257295162, guid: 271f310d6dbd9164ca191af8038934b6, type: 3}
+  m_PrefabInstance: {fileID: 4703976456088044471}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e2bd760b24673347895edc04c46d170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &415367203
 GameObject:
   m_ObjectHideFlags: 0
@@ -30610,7 +30621,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1337161694}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.4, y: 3.28, z: 0}
+  m_LocalPosition: {x: 13.4, y: 2.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -34732,6 +34743,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1540719468 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5442389576843434337, guid: 271f310d6dbd9164ca191af8038934b6, type: 3}
+  m_PrefabInstance: {fileID: 4703976456088044471}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e2bd760b24673347895edc04c46d170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1548503277
 GameObject:
   m_ObjectHideFlags: 0
@@ -46176,6 +46198,14 @@ PrefabInstance:
       propertyPath: powerupCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4703976458070735493, guid: 271f310d6dbd9164ca191af8038934b6, type: 3}
+      propertyPath: companionPrefab.Array.data[2]
+      value: 
+      objectReference: {fileID: 1540719468}
+    - target: {fileID: 4703976458070735493, guid: 271f310d6dbd9164ca191af8038934b6, type: 3}
+      propertyPath: companionPrefab.Array.data[3]
+      value: 
+      objectReference: {fileID: 412518075}
     - target: {fileID: 4703976458070735494, guid: 271f310d6dbd9164ca191af8038934b6, type: 3}
       propertyPath: m_Name
       value: Player

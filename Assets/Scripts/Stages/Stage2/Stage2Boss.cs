@@ -26,7 +26,7 @@ public class Stage2Boss : MonoBehaviour
     private float rotationSpeed = 200f;  // Bossの回転速度
     public float bulletFireInterval = 3f;  // Bulletの発射間隔
     private float bulletSpeed = 10f;  // Bulletの移動速度
-    private float verticalSpeed = 2f;  // 上下移動の速度
+    private float verticalSpeed = 1.5f;  // 上下移動の速度
     private float minY = -2.5f;  // 移動の下限Y座標
     private float maxY = 2.5f;  // 移動の上限Y座標
 
