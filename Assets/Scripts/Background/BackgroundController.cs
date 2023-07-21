@@ -12,7 +12,7 @@ public class BackgroundController : MonoBehaviour
 
     private List<Transform> starsFront = new List<Transform>();
     private List<Transform> starsBack = new List<Transform>();
-    private List<Image> planets = new List<Image>();
+    public List<SpriteRenderer> planets = new List<SpriteRenderer>();
 
     private PlayerController playerController;
 
