@@ -4,26 +4,34 @@ using DG.Tweening;
 
 public class Stage1BossController : MonoBehaviour
 {
+
+    // Variables related to boss properties
     public int maxHP = 100;
     public float moveSpeed = 2f;
-    public float beamSpeed = 5f;
-    public float bulletSpeed = 7f;
-    public float beamFireRate = 8f;
-    public float bulletFireRate = 8f;
-    public int bulletCount = 16;
-    public GameObject beamPrefab;
-    public GameObject bulletPrefab;
     public GameObject player;
     public GameObject explosionPrefab;
+    public bool isDefeated = false;
+
+    // Variables related to beam properties
+    public float beamSpeed = 5f;
+    public float beamFireRate = 8f;
+    public GameObject beamPrefab;
     public Transform beamSpawner;
+
+    // Variables related to bullet properties
+    public float bulletSpeed = 7f;
+    public float bulletFireRate = 8f;
+    public int bulletCount = 16;
+    public GameObject bulletPrefab;
     public Transform[] bulletSpawners;
 
+    // Variables related to boss state
     private float currentHP;
     private bool isShowingDamage = false;
-    public bool isDefeated = false;
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
     GameManager gameManager;
+
 
 
     void Start()

@@ -25,6 +25,7 @@ public class Stage3Boss : MonoBehaviour
     public GameObject explosionPrefab;
     private bool isShowingDamage = false;
     GameManager gameManager;
+    bool isDefeat = false;
 
     void Start()
     {
@@ -171,6 +172,7 @@ public class Stage3Boss : MonoBehaviour
                 explosion.transform.DOScale(new Vector3(50f, 50f, 0), 0.5f);
                 explosion.GetComponent<SpriteRenderer>().DOColor(new Color(255, 0, 0, 0), 0.5f);
                 player.GetComponent<PlayerController>().PlayExplosionSE();
+                isDefeat = true;
 
                 Destroy(explosion, 0.5f);
                 Destroy(gameObject);
@@ -201,5 +203,10 @@ public class Stage3Boss : MonoBehaviour
         spriteRenderer.color = originalColor;
 
         isShowingDamage = false;
+    }
+
+    public bool IsDefeated()
+    {
+        return isDefeat;
     }
 }

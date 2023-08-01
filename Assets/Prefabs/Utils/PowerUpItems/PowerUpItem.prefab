@@ -103,7 +103,7 @@ MonoBehaviour:
   moveSpeed: 8
   rotateSpeed: 180
   targetAngle: 25
-  rightMoveDistance: 2.5
+  rightMoveDistance: 3
   leftMoveSpeed: 5
 --- !u!60 &3419633685063174300
 PolygonCollider2D:

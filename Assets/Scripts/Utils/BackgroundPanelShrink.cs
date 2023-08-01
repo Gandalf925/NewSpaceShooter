@@ -25,13 +25,14 @@ public class BackgroundPanelShrink : MonoBehaviour
         rectTransform.DOScale(originalScale * scale, duration);
     }
 
-    public void Reset()
+    public void ResetAnimation()
     {
-        // アンカーポイントを元に戻す
-        rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
-        rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-
         // 元のスケールに戻すアニメーション
-        rectTransform.DOScale(originalScale, duration);
+        rectTransform.DOScale(originalScale, duration).OnComplete(() =>
+        {
+            // アンカーポイントを元に戻す
+            rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+            rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+        });
     }
 }

@@ -147,8 +147,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerupType: 0
-  moveSpeed: 6
+  moveSpeed: 10
   rotateSpeed: 180
-  targetAngle: 25
-  rightMoveDistance: 2.5
-  leftMoveSpeed: 2
+  targetAngle: 35
+  rightMoveDistance: 3
+  leftMoveSpeed: 5.5

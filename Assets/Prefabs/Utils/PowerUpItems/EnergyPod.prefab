@@ -150,5 +150,5 @@ MonoBehaviour:
   moveSpeed: 6
   rotateSpeed: 180
   targetAngle: 25
-  rightMoveDistance: 2.5
-  leftMoveSpeed: 6
+  rightMoveDistance: 3
+  leftMoveSpeed: 8

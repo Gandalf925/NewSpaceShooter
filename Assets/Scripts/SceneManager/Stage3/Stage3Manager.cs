@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 public class Stage3Manager : MonoBehaviour
@@ -12,7 +13,8 @@ public class Stage3Manager : MonoBehaviour
     public Transform playerStayPos;
 
     public GameObject middleTown;
-    public GameObject stage3Boss;
+    public GameObject bossPrefab;
+    public Stage3Boss stage3Boss;
     public Transform bossStartPos;
 
     public GameObject magicCircleToFall;
@@ -24,8 +26,8 @@ public class Stage3Manager : MonoBehaviour
 
 
     private int waveCount = 1;  // 現在のウェーブ数
-    private int[] enemyCounts = { 1, 1, 2, 2, 1 };  // 各ウェーブの敵の出現数  
-    private float[] waveDelays = { 5f, 10f, 15f, 15f, 7f };  // 各ウェーブの開始までの待機時間  
+    private int[] enemyCounts = { 1, 1, 2, 2, 1 };  // 各ウェーブの敵の出現数
+    private float[] waveDelays = { 5f, 10f, 15f, 15f, 7f };  // 各ウェーブの開始までの待機時間
 
     private bool isWaveActive = false;  // ウェーブが進行中かどうか
     private bool isBossAppeared = false;
@@ -38,6 +40,7 @@ public class Stage3Manager : MonoBehaviour
 
     public AudioClip stage3BGM;
     public AudioClip stage3BossBGM;
+    private bool hasStartedLoadingNextScene = false;
 
     void Start()
     {
@@ -59,9 +62,13 @@ public class Stage3Manager : MonoBehaviour
         {
             if (waveCount >= enemyCounts.Length && AreAllEnemiesDestroyed())
             {
-                isBossAppeared = true;
                 StartCoroutine(BossBattle());
             }
+        }
+        if (stage3Boss.IsDefeated() && !hasStartedLoadingNextScene)
+        {
+            hasStartedLoadingNextScene = true;
+            StartCoroutine(LoadNextScene());
         }
     }
 
@@ -124,7 +131,7 @@ public class Stage3Manager : MonoBehaviour
 
     IEnumerator BossBattle()
     {
-
+        isBossAppeared = true;
         StartCoroutine(WarningBeforBossBattle());
         yield return new WaitForSeconds(5f);
         StartCoroutine(StartBossBattle());
@@ -135,7 +142,6 @@ public class Stage3Manager : MonoBehaviour
         BGMManager.instance.StopBGM();
         playerController.SetPlayerActive(false);
         player.transform.DOMove(new Vector3(playerStayPos.position.x, playerStayPos.position.y, playerStayPos.position.z), 4f);
-        // BGMManager.instance.StopBGM();
         StartCoroutine(player.GetComponent<PlayerController>().PlayWarningSE(4f));
 
         warningPanel.SetActive(true);
@@ -144,7 +150,8 @@ public class Stage3Manager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(1f);
 
-        // BGMManager.instance.PlayBGM(stage3BossBGM);
+        BGMManager.instance.bgmSource.volume = 1;
+        BGMManager.instance.PlayBGM(stage3BossBGM);
 
         yield return new WaitForSecondsRealtime(1f);
 
@@ -152,12 +159,27 @@ public class Stage3Manager : MonoBehaviour
 
     IEnumerator StartBossBattle()
     {
-        stage3Boss = Instantiate(stage3Boss, bossStartPos.position, Quaternion.identity);
+        GameObject bossGameObject = Instantiate(bossPrefab, bossStartPos.position, Quaternion.identity);
+        stage3Boss = bossGameObject.GetComponent<Stage3Boss>();
+
         middleTown.transform.DOMoveY(-4.5f, 4f);
         stage3Boss.transform.DOMoveY(-1f, 4f);
         // stage3Boss.transform.DOShakePosition(2f, 10f, 20f, 0, false, false);
         yield return new WaitForSeconds(4f);
         playerController.SetPlayerActive(true);
         // stage3Boss bossController = stage3Boss.GetComponent<Stage3Boss>();
+    }
+
+    IEnumerator LoadNextScene()
+    {
+        yield return new WaitForSeconds(2f);
+
+        uIManager.FadeOut();
+
+        yield return new WaitForSeconds(2f);
+
+        BGMManager.instance.StopBGM();
+        BGMManager.instance.bgmSource.volume = 0.43f;
+        SceneManager.LoadScene("ToBeContinue");
     }
 }
