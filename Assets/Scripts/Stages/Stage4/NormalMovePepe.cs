@@ -32,10 +32,10 @@ public class NormalMovePepe : MonoBehaviour
         originalColor = image.color;
         player = GameObject.FindWithTag("Player");
         soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<BGMManager>();
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
 
         // 弾の発射
         StartCoroutine(FireRoutine());
-        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
     }
 
     void Update()

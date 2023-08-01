@@ -14,6 +14,7 @@ TagManager:
   - DetectionCollider
   - SEManager
   - FxTemporaire
+  - WallNoDamage
   layers:
   - Default
   - TransparentFX

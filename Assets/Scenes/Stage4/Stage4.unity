@@ -2733,7 +2733,7 @@ GameObject:
   m_Component:
   - component: {fileID: 316250930}
   m_Layer: 4
-  m_Name: Magician
+  m_Name: Elite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4422,7 +4422,7 @@ GameObject:
   - component: {fileID: 571367837}
   m_Layer: 4
   m_Name: TopWall
-  m_TagString: Wall
+  m_TagString: WallNoDamage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4506,7 +4506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf48b2c3bfe647c47b7634964296dd43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normal: {x: 0, y: 0}
+  normal: {x: 0, y: 1}
 --- !u!1 &597322217
 GameObject:
   m_ObjectHideFlags: 0
@@ -4725,140 +4725,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 600253087}
   m_CullTransparentMesh: 0
---- !u!1 &616646895
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 616646896}
-  - component: {fileID: 616646901}
-  - component: {fileID: 616646898}
-  - component: {fileID: 616646897}
-  - component: {fileID: 616646900}
-  - component: {fileID: 616646899}
-  m_Layer: 4
-  m_Name: CrownPepe
-  m_TagString: Enemy
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &616646896
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 616646895}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.74367, y: 0.74367, z: 0.74367}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 769433409}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 71.096, y: -90.084}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &616646897
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 616646895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f953c2d00baaadb43b0568ebf008946e, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &616646898
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 616646895}
-  m_CullTransparentMesh: 1
---- !u!58 &616646899
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 616646895}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5981095}
-  serializedVersion: 2
-  m_Radius: 26.218712
---- !u!50 &616646900
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 616646895}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &616646901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 616646895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48ed39c99d6e3764983fc5874900be58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startPos: {fileID: 739832362}
-  stopPos: {fileID: 621624601}
-  moveSpeed: 8
-  waitTime: 1
-  maxReflections: 10
-  reflectionDelay: 3
 --- !u!1 &621624600
 GameObject:
   m_ObjectHideFlags: 0
@@ -4869,7 +4735,7 @@ GameObject:
   m_Component:
   - component: {fileID: 621624601}
   m_Layer: 4
-  m_Name: MagicianStopPos
+  m_Name: EliteStopPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5451,7 +5317,7 @@ GameObject:
   m_Component:
   - component: {fileID: 739832362}
   m_Layer: 4
-  m_Name: MagicianStartPos
+  m_Name: EliteStartPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5748,7 +5614,6 @@ RectTransform:
   - {fileID: 1195635896}
   - {fileID: 492413599}
   - {fileID: 1004342055}
-  - {fileID: 616646896}
   - {fileID: 1837775824}
   - {fileID: 1500981444}
   - {fileID: 1480356916}
@@ -9783,7 +9648,7 @@ GameObject:
   - component: {fileID: 1350916517}
   m_Layer: 4
   m_Name: LeftWall
-  m_TagString: Wall
+  m_TagString: WallNoDamage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9842,7 +9707,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350916514}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -9867,7 +9732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf48b2c3bfe647c47b7634964296dd43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normal: {x: 0, y: 0}
+  normal: {x: 1, y: 0}
 --- !u!1 &1359377274
 GameObject:
   m_ObjectHideFlags: 0
@@ -11171,7 +11036,7 @@ RectTransform:
   - {fileID: 2005920858}
   - {fileID: 1350916515}
   m_Father: {fileID: 769433409}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11210,7 +11075,7 @@ RectTransform:
   - {fileID: 1715695217}
   - {fileID: 316250930}
   m_Father: {fileID: 769433409}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14192,7 +14057,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 769433409}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15331,7 +15196,7 @@ GameObject:
   - component: {fileID: 2005920860}
   m_Layer: 4
   m_Name: RightWall
-  m_TagString: Wall
+  m_TagString: WallNoDamage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15390,7 +15255,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2005920857}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -15415,7 +15280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf48b2c3bfe647c47b7634964296dd43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normal: {x: 0, y: 0}
+  normal: {x: -1, y: 0}
 --- !u!1 &2022388526
 GameObject:
   m_ObjectHideFlags: 0
@@ -16130,7 +15995,7 @@ GameObject:
   - component: {fileID: 2105796247}
   m_Layer: 4
   m_Name: BottomWall
-  m_TagString: Wall
+  m_TagString: WallNoDamage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16189,7 +16054,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2105796244}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -16214,7 +16079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf48b2c3bfe647c47b7634964296dd43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normal: {x: 0, y: 0}
+  normal: {x: 0, y: -1}
 --- !u!1 &2109645849
 GameObject:
   m_ObjectHideFlags: 0
