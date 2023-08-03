@@ -8,6 +8,9 @@ public class Stage4Manager : MonoBehaviour
 {
     GameObject player;
     PlayerController playerController;
+
+    public Transform canvasTransform;
+
     [Header("Elites")]
     public GameObject magicianPepePrefab;
     public GameObject crownPepePrefab;
@@ -48,14 +51,40 @@ public class Stage4Manager : MonoBehaviour
         // BGMManager.instance.PlayBGM(stage3BGM);
         StartCoroutine(StartFrameIn());
 
-        StartCoroutine(StageStart());
+        StartCoroutine(SpawnEnemies(6f));
     }
 
-    IEnumerator StageStart()
+    private IEnumerator SpawnEnemies(float delayTime)
     {
-        yield return new WaitForSeconds(6f);
-        Debug.Log("Start Stage4");
+        yield return new WaitForSeconds(delayTime);
+
+        // 6秒後に強敵を生成
+        GameObject strongEnemy1 = Instantiate(magicianPepePrefab, canvasTransform);
+
+
+        // 強敵の死亡を監視
+        while (strongEnemy1 != null && strongEnemy1.activeSelf)
+        {
+            yield return null;
+        }
+
+        // 強敵が倒されたら、3秒後に次の強敵を生成
+        yield return new WaitForSeconds(3f);
+
+        GameObject strongEnemy2 = Instantiate(crownPepePrefab, canvasTransform);
+
+
+        // 強敵の死亡を監視
+        while (strongEnemy2 != null && strongEnemy2.activeSelf)
+        {
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(3f);
+
+        Instantiate(bossPrefab, canvasTransform);
     }
+
 
     IEnumerator StartFrameIn()
     {

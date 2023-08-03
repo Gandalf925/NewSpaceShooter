@@ -62,8 +62,8 @@ MonoBehaviour:
   stopPos: {fileID: 0}
   bulletSpawner: {fileID: 77234682776316900}
   bulletPrefab: {fileID: 7476102789157036486, guid: d4be1be7ad63cef43b9081cac02400e8, type: 3}
-  fireRate: 0.2
-  rotationSpeed: 60
+  fireRate: 0.1
+  rotationSpeed: 90
 --- !u!222 &77234681227641951
 CanvasRenderer:
   m_ObjectHideFlags: 0
