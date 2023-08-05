@@ -62,8 +62,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de454f4c96d74c447bd01f9c7ad8beaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 10
-  moveSpeed: -3
+  maxHP: 5
+  moveSpeed: 4
   bulletSpeed: 8
   bulletFireRate: 2
   bulletPrefab: {fileID: 7476102789157036486, guid: e86fcfcabfe911944b3d8a61665eb486, type: 3}

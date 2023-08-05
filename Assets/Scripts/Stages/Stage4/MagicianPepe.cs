@@ -38,8 +38,10 @@ public class MagicianPepe : MonoBehaviour
         image = GetComponent<Image>();
         originalColor = image.color;
         player = FindObjectOfType<PlayerController>();
+        startPos = GameObject.FindGameObjectWithTag("EliteStartPos").transform;
+        stopPos = GameObject.FindGameObjectWithTag("EliteStopPos").transform;
         soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<BGMManager>();
-        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 
         // スタート位置から停止位置まで移動
         transform.position = startPos.position;

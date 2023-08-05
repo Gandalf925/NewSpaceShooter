@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ae006e2e8ad3d548bbed006ca2fde81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 90
+  maxHP: 100
   explosionPrefab: {fileID: 336278662954817479, guid: 21872e610cd19994cadd6232d97f93c3, type: 3}
   smallPowerupPrefab: {fileID: 6990624485992650979, guid: d24ad0cf399d9cb489dc30fb442fdb7e, type: 3}
   largePowerupPrefab: {fileID: 6061619657933071244, guid: 200e8baadad3bed40bdca5cdb81711ee, type: 3}
@@ -62,7 +62,7 @@ MonoBehaviour:
   stopPos: {fileID: 0}
   bulletSpawner: {fileID: 77234682776316900}
   bulletPrefab: {fileID: 7476102789157036486, guid: d4be1be7ad63cef43b9081cac02400e8, type: 3}
-  fireRate: 0.1
+  fireRate: 0.2
   rotationSpeed: 90
 --- !u!222 &77234681227641951
 CanvasRenderer:

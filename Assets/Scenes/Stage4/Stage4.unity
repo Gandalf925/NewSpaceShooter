@@ -4506,7 +4506,7 @@ GameObject:
   - component: {fileID: 621624601}
   m_Layer: 4
   m_Name: EliteStopPos
-  m_TagString: Untagged
+  m_TagString: EliteStopPos
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5088,7 +5088,7 @@ GameObject:
   - component: {fileID: 739832362}
   m_Layer: 4
   m_Name: EliteStartPos
-  m_TagString: Untagged
+  m_TagString: EliteStartPos
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10726,6 +10726,7 @@ RectTransform:
   - {fileID: 2025074390}
   - {fileID: 1715695217}
   - {fileID: 316250930}
+  - {fileID: 1665287880}
   m_Father: {fileID: 769433409}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12244,6 +12245,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1659758018}
   m_CullTransparentMesh: 1
+--- !u!1 &1665287879
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1665287880}
+  m_Layer: 4
+  m_Name: NormalStartPosMiddleBottom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1665287880
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665287879}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1500981444}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 532, y: -72}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1670008695
 GameObject:
   m_ObjectHideFlags: 0
@@ -12998,10 +13035,22 @@ MonoBehaviour:
   bossPrefab: {fileID: 0}
   bossStartPos: {fileID: 0}
   bossStopPos: {fileID: 0}
-  normalEnemies: []
-  NormalStartPos1: {fileID: 9043880}
-  NormalStartPos2: {fileID: 2025074390}
-  NormalStartPos3: {fileID: 1715695217}
+  normalEnemies:
+  - {fileID: 8011279362828091634, guid: 7147f72be6eaefb4c8070907792bbd94, type: 3}
+  - {fileID: 3142530781658750060, guid: 7da2ed92734a54643a7574bff11b1c3e, type: 3}
+  - {fileID: 2257921648230015234, guid: ef193c23761737e46a3b71024d75fd52, type: 3}
+  - {fileID: 5056342144873845433, guid: ea273b7ccbb9a694593afa583e146270, type: 3}
+  - {fileID: 3344756641028906807, guid: 9e3ada993c5680148b9986182ae9f060, type: 3}
+  - {fileID: 5074876259295657410, guid: c14d4b9ed82399b448475056532d2018, type: 3}
+  - {fileID: 7761096400565963833, guid: 7420abebf534ef84baf2eaad759f30e7, type: 3}
+  - {fileID: 5444759250371740766, guid: 70a531003accfe44eb272282c2a3ff84, type: 3}
+  - {fileID: 495216082456028696, guid: dc98908e4612b0745b8336d4833e79a8, type: 3}
+  - {fileID: 455317613747704836, guid: 8b4a648e0ec8ff34392186a5ef57fc46, type: 3}
+  normalStartPos:
+  - {fileID: 1715695217}
+  - {fileID: 9043880}
+  - {fileID: 2025074390}
+  - {fileID: 1665287880}
   startTextFrame: {fileID: 1135190528}
   frameStartPos: {fileID: 426317925}
   frameStopPos: {fileID: 1041694780}
@@ -15009,7 +15058,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2025074390}
   m_Layer: 4
-  m_Name: NormalStartPosMiddle
+  m_Name: NormalStartPosMiddleTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15032,7 +15081,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 532, y: 4}
+  m_AnchoredPosition: {x: 532, y: 75}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2057848079

@@ -39,6 +39,8 @@ public class ReflectingMovePepe : MonoBehaviour
         rb.simulated = false;
 
         currentHP = maxHP;
+        startPos = GameObject.FindGameObjectWithTag("EliteStartPos").transform;
+        stopPos = GameObject.FindGameObjectWithTag("EliteStopPos").transform;
         image = GetComponent<Image>();
         originalColor = image.color;
         player = GameObject.FindWithTag("Player");
