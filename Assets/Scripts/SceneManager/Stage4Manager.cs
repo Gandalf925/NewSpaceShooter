@@ -8,8 +8,11 @@ public class Stage4Manager : MonoBehaviour
 {
     GameObject player;
     PlayerController playerController;
+    public Transform playerStayPos;
 
     public Transform canvasTransform;
+
+    public GameObject warningPanel;
 
     [Header("Elites")]
     public GameObject magicianPepePrefab;
@@ -17,8 +20,8 @@ public class Stage4Manager : MonoBehaviour
 
     [Header("Boss")]
     public GameObject bossPrefab;
-    public Transform bossStartPos;
-    public Transform bossStopPos;
+    public Transform bossStayPos1;
+    public Transform bossStayPos2;
 
     [Header("Normal Enemies")]
     public GameObject[] normalEnemies;
@@ -54,49 +57,51 @@ public class Stage4Manager : MonoBehaviour
 
     private IEnumerator SpawnEnemies(float delayTime)
     {
-        yield return new WaitForSeconds(delayTime);
+        // yield return new WaitForSeconds(delayTime);
 
-        // 6秒後に強敵を生成
-        GameObject strongEnemy1 = Instantiate(magicianPepePrefab, canvasTransform);
+        // // 6秒後に強敵を生成
+        // GameObject strongEnemy1 = Instantiate(magicianPepePrefab, canvasTransform);
 
-        while (strongEnemy1 != null && strongEnemy1.activeSelf)
-        {
-            yield return new WaitForSeconds(4f);
+        // while (strongEnemy1 != null && strongEnemy1.activeSelf)
+        // {
+        //     yield return new WaitForSeconds(4f);
 
-            Transform spawnPos = normalStartPos[Random.Range(0, normalStartPos.Length)];
-            GameObject normalEnemy = normalEnemies[Random.Range(0, normalEnemies.Length)];
-            Instantiate(normalEnemy, spawnPos.position, Quaternion.identity, canvasTransform);
-        }
+        //     Transform spawnPos = normalStartPos[Random.Range(0, normalStartPos.Length)];
+        //     GameObject normalEnemy = normalEnemies[Random.Range(0, normalEnemies.Length)];
+        //     Instantiate(normalEnemy, spawnPos.position, Quaternion.identity, canvasTransform);
+        // }
 
-        // 強敵の死亡を監視
-        while (strongEnemy1 != null && strongEnemy1.activeSelf)
-        {
-            yield return null;
-        }
+        // // 強敵の死亡を監視
+        // while (strongEnemy1 != null && strongEnemy1.activeSelf)
+        // {
+        //     yield return null;
+        // }
 
-        // 強敵が倒されたら、3秒後に次の強敵を生成
-        yield return new WaitForSeconds(3f);
+        // // 強敵が倒されたら、3秒後に次の強敵を生成
+        // yield return new WaitForSeconds(3f);
 
-        GameObject strongEnemy2 = Instantiate(crownPepePrefab, canvasTransform);
+        // GameObject strongEnemy2 = Instantiate(crownPepePrefab, canvasTransform);
 
-        while (strongEnemy2 != null && strongEnemy2.activeSelf)
-        {
-            yield return new WaitForSeconds(4f);
+        // while (strongEnemy2 != null && strongEnemy2.activeSelf)
+        // {
+        //     yield return new WaitForSeconds(4f);
 
-            Transform spawnPos = normalStartPos[Random.Range(0, normalStartPos.Length)];
-            GameObject normalEnemy = normalEnemies[Random.Range(0, normalEnemies.Length)];
-            Instantiate(normalEnemy, spawnPos.position, Quaternion.identity, canvasTransform);
-        }
+        //     Transform spawnPos = normalStartPos[Random.Range(0, normalStartPos.Length)];
+        //     GameObject normalEnemy = normalEnemies[Random.Range(0, normalEnemies.Length)];
+        //     Instantiate(normalEnemy, spawnPos.position, Quaternion.identity, canvasTransform);
+        // }
 
 
-        // 強敵の死亡を監視
-        while (strongEnemy2 != null && strongEnemy2.activeSelf)
-        {
-            yield return null;
-        }
+        // // 強敵の死亡を監視
+        // while (strongEnemy2 != null && strongEnemy2.activeSelf)
+        // {
+        //     yield return null;
+        // }
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
 
+        StartCoroutine(WarningBeforBossBattle());
+        yield return new WaitForSeconds(7f);
 
 
         Instantiate(bossPrefab, canvasTransform);
@@ -114,5 +119,25 @@ public class Stage4Manager : MonoBehaviour
         startTextFrame.transform.DOMove(frameEndPos.position, 0.5f);
 
         yield return new WaitForSecondsRealtime(1f);
+    }
+
+    public IEnumerator WarningBeforBossBattle()
+    {
+        BGMManager.instance.StopBGM();
+        playerController.SetPlayerActive(false);
+        player.transform.DOMove(new Vector3(playerStayPos.position.x, playerStayPos.position.y, playerStayPos.position.z), 4f);
+        StartCoroutine(player.GetComponent<PlayerController>().PlayWarningSE(4f));
+
+        warningPanel.SetActive(true);
+        yield return new WaitForSecondsRealtime(4f);
+        warningPanel.SetActive(false);
+
+        yield return new WaitForSecondsRealtime(1f);
+
+        BGMManager.instance.bgmSource.volume = 1;
+        // BGMManager.instance.PlayBGM(stage3BossBGM);
+
+        yield return new WaitForSecondsRealtime(1f);
+        playerController.SetPlayerActive(true);
     }
 }

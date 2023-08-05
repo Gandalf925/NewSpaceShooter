@@ -154,7 +154,6 @@ public class Stage3Manager : MonoBehaviour
         BGMManager.instance.PlayBGM(stage3BossBGM);
 
         yield return new WaitForSecondsRealtime(1f);
-
     }
 
     IEnumerator StartBossBattle()

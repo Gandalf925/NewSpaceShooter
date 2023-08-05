@@ -10727,6 +10727,7 @@ RectTransform:
   - {fileID: 1715695217}
   - {fileID: 316250930}
   - {fileID: 1665287880}
+  - {fileID: 2111421135}
   m_Father: {fileID: 769433409}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13029,12 +13030,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dee0d15bd312f7146bf4ad2c1fd86a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStayPos: {fileID: 2111421135}
   canvasTransform: {fileID: 769433409}
+  warningPanel: {fileID: 1703068301}
   magicianPepePrefab: {fileID: 77234681227641922, guid: bdcfa09dd5637024bbb9ecc47851926d, type: 3}
   crownPepePrefab: {fileID: 9043858228665622655, guid: cc63256606afc5446991ac50ecbe69a4, type: 3}
-  bossPrefab: {fileID: 0}
-  bossStartPos: {fileID: 0}
-  bossStopPos: {fileID: 0}
+  bossPrefab: {fileID: 5287725813637029284, guid: 14a55a66c9086e3499e21f693a1d7afb, type: 3}
+  bossStayPos1: {fileID: 0}
+  bossStayPos2: {fileID: 0}
   normalEnemies:
   - {fileID: 8011279362828091634, guid: 7147f72be6eaefb4c8070907792bbd94, type: 3}
   - {fileID: 3142530781658750060, guid: 7da2ed92734a54643a7574bff11b1c3e, type: 3}
@@ -15807,6 +15810,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2109645849}
   m_CullTransparentMesh: 1
+--- !u!1 &2111421134
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2111421135}
+  m_Layer: 4
+  m_Name: PlayerStayPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2111421135
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2111421134}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1500981444}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -277, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2112159169
 GameObject:
   m_ObjectHideFlags: 0
