@@ -22,6 +22,9 @@ public class Stage4Manager : MonoBehaviour
     public GameObject bossPrefab;
     public Transform bossStayPos1;
     public Transform bossStayPos2;
+    public GameObject[] shieldPepes;
+    public Transform[] shieldPepePos;
+    public Transform[] shieldPepeStartPos;
 
     [Header("Normal Enemies")]
     public GameObject[] normalEnemies;
@@ -57,46 +60,46 @@ public class Stage4Manager : MonoBehaviour
 
     private IEnumerator SpawnEnemies(float delayTime)
     {
-        // yield return new WaitForSeconds(delayTime);
+        yield return new WaitForSeconds(delayTime);
 
-        // // 6秒後に強敵を生成
-        // GameObject strongEnemy1 = Instantiate(magicianPepePrefab, canvasTransform);
+        // 6秒後に強敵を生成
+        GameObject strongEnemy1 = Instantiate(magicianPepePrefab, canvasTransform);
 
-        // while (strongEnemy1 != null && strongEnemy1.activeSelf)
-        // {
-        //     yield return new WaitForSeconds(4f);
+        while (strongEnemy1 != null && strongEnemy1.activeSelf)
+        {
+            yield return new WaitForSeconds(4f);
 
-        //     Transform spawnPos = normalStartPos[Random.Range(0, normalStartPos.Length)];
-        //     GameObject normalEnemy = normalEnemies[Random.Range(0, normalEnemies.Length)];
-        //     Instantiate(normalEnemy, spawnPos.position, Quaternion.identity, canvasTransform);
-        // }
+            Transform spawnPos = normalStartPos[Random.Range(0, normalStartPos.Length)];
+            GameObject normalEnemy = normalEnemies[Random.Range(0, normalEnemies.Length)];
+            Instantiate(normalEnemy, spawnPos.position, Quaternion.identity, canvasTransform);
+        }
 
-        // // 強敵の死亡を監視
-        // while (strongEnemy1 != null && strongEnemy1.activeSelf)
-        // {
-        //     yield return null;
-        // }
+        // 強敵の死亡を監視
+        while (strongEnemy1 != null && strongEnemy1.activeSelf)
+        {
+            yield return null;
+        }
 
-        // // 強敵が倒されたら、3秒後に次の強敵を生成
-        // yield return new WaitForSeconds(3f);
+        // 強敵が倒されたら、3秒後に次の強敵を生成
+        yield return new WaitForSeconds(3f);
 
-        // GameObject strongEnemy2 = Instantiate(crownPepePrefab, canvasTransform);
+        GameObject strongEnemy2 = Instantiate(crownPepePrefab, canvasTransform);
 
-        // while (strongEnemy2 != null && strongEnemy2.activeSelf)
-        // {
-        //     yield return new WaitForSeconds(4f);
+        while (strongEnemy2 != null && strongEnemy2.activeSelf)
+        {
+            yield return new WaitForSeconds(4f);
 
-        //     Transform spawnPos = normalStartPos[Random.Range(0, normalStartPos.Length)];
-        //     GameObject normalEnemy = normalEnemies[Random.Range(0, normalEnemies.Length)];
-        //     Instantiate(normalEnemy, spawnPos.position, Quaternion.identity, canvasTransform);
-        // }
+            Transform spawnPos = normalStartPos[Random.Range(0, normalStartPos.Length)];
+            GameObject normalEnemy = normalEnemies[Random.Range(0, normalEnemies.Length)];
+            Instantiate(normalEnemy, spawnPos.position, Quaternion.identity, canvasTransform);
+        }
 
 
-        // // 強敵の死亡を監視
-        // while (strongEnemy2 != null && strongEnemy2.activeSelf)
-        // {
-        //     yield return null;
-        // }
+        // 強敵の死亡を監視
+        while (strongEnemy2 != null && strongEnemy2.activeSelf)
+        {
+            yield return null;
+        }
 
         yield return new WaitForSeconds(2f);
 
@@ -137,7 +140,20 @@ public class Stage4Manager : MonoBehaviour
         BGMManager.instance.bgmSource.volume = 1;
         // BGMManager.instance.PlayBGM(stage3BossBGM);
 
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(3f);
         playerController.SetPlayerActive(true);
+    }
+
+    public IEnumerator SetShieldPepes()
+    {
+        yield return new WaitForSeconds(1f);
+
+        for (int i = 0; i < shieldPepes.Length; i++)
+        {
+            GameObject shieldPepe = Instantiate(shieldPepes[i], canvasTransform);
+            shieldPepe.transform.position = shieldPepeStartPos[i].position;
+            shieldPepe.transform.DOMove(shieldPepePos[i].transform.position, 1f);
+        }
+        yield return new WaitForSeconds(2f);
     }
 }

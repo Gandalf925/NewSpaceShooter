@@ -45,7 +45,7 @@ public class MagicianPepe : MonoBehaviour
 
         // スタート位置から停止位置まで移動
         transform.position = startPos.position;
-        transform.DOMove(stopPos.position, 2f).OnComplete(() => hasReachedStopPos = true);
+        transform.DOMove(stopPos.position, 1f).OnComplete(() => hasReachedStopPos = true);
     }
 
     void Update()

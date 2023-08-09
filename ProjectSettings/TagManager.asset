@@ -17,6 +17,7 @@ TagManager:
   - WallNoDamage
   - EliteStartPos
   - EliteStopPos
+  - BossStopPos
   layers:
   - Default
   - TransparentFX

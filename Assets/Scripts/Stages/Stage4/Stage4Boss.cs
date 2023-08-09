@@ -11,6 +11,7 @@ public class Stage4Boss : MonoBehaviour
     private PlayerController player;
     public GameObject explosionPrefab;
     private bool isShowingDamage = false;
+
     private Image image;
     public Transform bossStartPos;    // 画面右外のスタート位置
     public Transform bossStopPos;     // 停止する位置
@@ -21,13 +22,13 @@ public class Stage4Boss : MonoBehaviour
     public float fireRate = 0.2f;     // 弾の発射間隔（秒）
     public float rotationSpeed = 30f; // 回転速度（度/秒）
 
-    private bool hasReachedStopPos = false;
     private bool isShooting = false;
     private Color originalColor;
 
 
     [Header("Manager")]
     GameManager gameManager;
+    Stage4Manager stage4Manager;
 
     void Start()
     {
@@ -36,20 +37,23 @@ public class Stage4Boss : MonoBehaviour
         originalColor = image.color;
         player = FindObjectOfType<PlayerController>();
         bossStartPos = GameObject.FindGameObjectWithTag("EliteStartPos").transform;
-        bossStopPos = GameObject.FindGameObjectWithTag("EliteStopPos").transform;
+        bossStopPos = GameObject.FindGameObjectWithTag("BossStopPos").transform;
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        stage4Manager = FindObjectOfType<Stage4Manager>();
 
         // スタート位置から停止位置まで移動
         transform.position = bossStartPos.position;
-        transform.DOMove(bossStopPos.position, 2f).OnComplete(StartMoving);
+        transform.DOMove(bossStopPos.position, 1f).OnComplete(() => StartCoroutine(stage4Manager.SetShieldPepes()));
     }
 
-    void StartMoving()
+    IEnumerator StartMoving()
     {
+        yield return new WaitForSeconds(3f);
+
         if (!isShooting && currentHP >= 80)
         {
             isShooting = true;
-            StartCoroutine(ShootRotateBulletCoroutine());
+            // StartCoroutine(ShootRotateBulletCoroutine());
         }
         else if (currentHP < 80 && currentHP >= 40)
         {
@@ -61,7 +65,7 @@ public class Stage4Boss : MonoBehaviour
         }
     }
 
-    private IEnumerator ShootRotateBulletCoroutine()
+    IEnumerator ShootRotateBulletCoroutine()
     {
         // 停止位置に到達したら、弾を連射
         InvokeRepeating("ShootBullets", fireRate, fireRate);
@@ -126,7 +130,7 @@ public class Stage4Boss : MonoBehaviour
         bulletSpawner.Rotate(new Vector3(0f, 0f, rotationSpeed * Time.deltaTime));
     }
 
-    private IEnumerator ShowDamageRoutine()
+    IEnumerator ShowDamageRoutine()
     {
         if (isShowingDamage) yield break;
 

@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48ed39c99d6e3764983fc5874900be58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
+  maxHP: 1
   explosionPrefab: {fileID: 336278662954817479, guid: 21872e610cd19994cadd6232d97f93c3, type: 3}
   startPos: {fileID: 0}
   stopPos: {fileID: 0}
