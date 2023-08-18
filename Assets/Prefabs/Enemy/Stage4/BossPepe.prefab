@@ -28,15 +28,15 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5287725813637029284}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
+  m_LocalScale: {x: -1.3, y: 1.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5287725813720709286}
+  - {fileID: 2671496780449530606}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -0.04, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 119, y: -97}
@@ -56,12 +56,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 100
   explosionPrefab: {fileID: 336278662954817479, guid: 21872e610cd19994cadd6232d97f93c3, type: 3}
+  laserPrefab: {fileID: 1142459517750458112, guid: 5e09005a4bd5dc246b0e000710b32e1a, type: 3}
+  laserSpawner: {fileID: 2671496780449530606}
   bossStartPos: {fileID: 0}
-  bossStopPos: {fileID: 0}
-  bulletSpawner: {fileID: 5287725813720709286}
-  bulletPrefab: {fileID: 7476102789157036486, guid: e86fcfcabfe911944b3d8a61665eb486, type: 3}
-  fireRate: 0.05
-  rotationSpeed: 30
+  bossStopPosMiddle: {fileID: 0}
+  bossStopPosUp: {fileID: 0}
+  bossStopPosDown: {fileID: 0}
 --- !u!222 &5287725813637029289
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -137,7 +137,7 @@ CircleCollider2D:
   m_Offset: {x: -0.5000003, y: -0.18066618}
   serializedVersion: 2
   m_Radius: 26.918844
---- !u!1 &5287725813720709287
+--- !u!1 &9113983827786438721
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,21 +145,21 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5287725813720709286}
+  - component: {fileID: 2671496780449530606}
   m_Layer: 4
-  m_Name: BulletSpawner
+  m_Name: LaserSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &5287725813720709286
+--- !u!224 &2671496780449530606
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5287725813720709287}
+  m_GameObject: {fileID: 9113983827786438721}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -170,6 +170,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 40.6, y: -6.9}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}

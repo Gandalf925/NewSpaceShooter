@@ -18,6 +18,9 @@ TagManager:
   - EliteStartPos
   - EliteStopPos
   - BossStopPos
+  - BossStopPosUp
+  - BossStopPosMiddle
+  - BossStopPosDown
   layers:
   - Default
   - TransparentFX

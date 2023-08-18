@@ -69,13 +69,13 @@ public class ShieldPepe : MonoBehaviour
     {
         yield return new WaitForSeconds(4f);
 
-        float randomValue = Random.Range(0f, 1f);
-        yield return new WaitForSeconds(randomValue);
+
 
         while (player != null)
         {
-            // 0より小さい場合は弾の発射をやめる
-            if (transform.position.x < 0) yield break;
+
+            float randomValue = Random.Range(0f, 1f);
+            yield return new WaitForSeconds(randomValue);
 
             // 発射時に現在のPlayerの位置を取得する
             if (player != null)

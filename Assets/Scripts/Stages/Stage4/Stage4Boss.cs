@@ -10,19 +10,16 @@ public class Stage4Boss : MonoBehaviour
     private float currentHP;
     private PlayerController player;
     public GameObject explosionPrefab;
+    public GameObject laserPrefab;
+    public Transform laserSpawner;
     private bool isShowingDamage = false;
 
     private Image image;
     public Transform bossStartPos;    // 画面右外のスタート位置
-    public Transform bossStopPos;     // 停止する位置
-    public Transform bulletSpawner;   // 弾を発射する位置
+    public Transform bossStopPosMiddle;     // 停止する位置
+    public Transform bossStopPosUp;     // 停止する位置
+    public Transform bossStopPosDown;     // 停止する位置
 
-    public GameObject bulletPrefab;   // 弾のプレハブ
-
-    public float fireRate = 0.2f;     // 弾の発射間隔（秒）
-    public float rotationSpeed = 30f; // 回転速度（度/秒）
-
-    private bool isShooting = false;
     private Color originalColor;
 
 
@@ -37,45 +34,84 @@ public class Stage4Boss : MonoBehaviour
         originalColor = image.color;
         player = FindObjectOfType<PlayerController>();
         bossStartPos = GameObject.FindGameObjectWithTag("EliteStartPos").transform;
-        bossStopPos = GameObject.FindGameObjectWithTag("BossStopPos").transform;
+        bossStopPosUp = GameObject.FindGameObjectWithTag("BossStopPosUp").transform;
+        bossStopPosMiddle = GameObject.FindGameObjectWithTag("BossStopPosMiddle").transform;
+        bossStopPosDown = GameObject.FindGameObjectWithTag("BossStopPosDown").transform;
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         stage4Manager = FindObjectOfType<Stage4Manager>();
 
         // スタート位置から停止位置まで移動
         transform.position = bossStartPos.position;
-        transform.DOMove(bossStopPos.position, 1f).OnComplete(() => StartCoroutine(stage4Manager.SetShieldPepes()));
+        transform.DOMove(bossStopPosMiddle.position, 1f).OnComplete(() => StartCoroutine(stage4Manager.SetShieldPepes()));
+        StartCoroutine(StartMoving());
     }
 
     IEnumerator StartMoving()
     {
         yield return new WaitForSeconds(3f);
 
-        if (!isShooting && currentHP >= 80)
+        while (player != null)
         {
-            isShooting = true;
-            // StartCoroutine(ShootRotateBulletCoroutine());
-        }
-        else if (currentHP < 80 && currentHP >= 40)
-        {
-            Debug.Log("Next Move1");
-        }
-        else if (currentHP < 40 && currentHP >= 0)
-        {
-            Debug.Log("Next Move2");
+            // ランダムな移動時間を設定（4秒から7秒の間）
+            float randomMoveTime = Random.Range(4f, 6f);
+
+            // 画面内に収まる範囲で上下移動を繰り返す
+            StartCoroutine(MoveUpDownCoroutine(randomMoveTime));
+
+            yield return new WaitForSeconds(randomMoveTime); // 移動時間
+
+            StartCoroutine(ShootLaser());
+
+            yield return new WaitForSeconds(8f); // ビーム発射と待機時間
         }
     }
 
-    IEnumerator ShootRotateBulletCoroutine()
+    IEnumerator ShootLaser()
     {
-        // 停止位置に到達したら、弾を連射
-        InvokeRepeating("ShootBullets", fireRate, fireRate);
-
-        // 1秒後に弾の発射位置を回転させる
-        RotateBulletSpawner();
+        transform.DOShakePosition(0.5f, 10, 10);
         yield return new WaitForSeconds(1f);
+        Instantiate(laserPrefab, laserSpawner.position, Quaternion.identity);
+        yield return new WaitForSeconds(5f);
+    }
 
-        // 1秒後に再びコルーチンを呼び出し、弾の発射位置を再度回転させる
-        StartCoroutine(ShootRotateBulletCoroutine());
+    IEnumerator MoveUpDownCoroutine(float moveTime)
+    {
+        float maxY = Camera.main.ViewportToWorldPoint(new Vector3(0, 0.8f, 0)).y;
+        float minY = Camera.main.ViewportToWorldPoint(new Vector3(0, 0.2f, 0)).y;
+
+        float elapsedTime = 0f;
+        Transform currentStopPosition = transform; // 初期位置を設定
+
+        while (elapsedTime < moveTime)
+        {
+            // ランダムな停止位置を選択
+            Transform randomStopPos = GetRandomStopPosition(currentStopPosition);
+
+            // ランダムな停止位置に移動
+            transform.DOMove(randomStopPos.position, 0.5f).SetEase(Ease.Linear);
+
+            // 現在の停止位置を更新
+            currentStopPosition = randomStopPos;
+
+            // 経過時間を加算
+            elapsedTime += 0.5f;
+
+            // 待機
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+    Transform GetRandomStopPosition(Transform currentPosition)
+    {
+        Transform[] possiblePositions = { bossStopPosUp, bossStopPosMiddle, bossStopPosDown };
+
+        // 除外する座標を削除した配列を作成
+        List<Transform> availablePositions = new List<Transform>(possiblePositions);
+        availablePositions.Remove(currentPosition);
+
+        int randomIndex = Random.Range(0, availablePositions.Count);
+
+        return availablePositions[randomIndex];
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -104,30 +140,6 @@ public class Stage4Boss : MonoBehaviour
 
             Destroy(other.gameObject);
         }
-    }
-
-    void ShootBullets()
-    {
-        // 上下左右から弾を発射
-        ShootBullet(bulletSpawner.TransformDirection(Vector3.up));
-        ShootBullet(bulletSpawner.TransformDirection(Vector3.down));
-        ShootBullet(bulletSpawner.TransformDirection(Vector3.left));
-        ShootBullet(bulletSpawner.TransformDirection(Vector3.right));
-    }
-
-    void ShootBullet(Vector2 direction)
-    {
-        GameObject bullet = Instantiate(bulletPrefab, bulletSpawner.position, Quaternion.identity);
-        Vector2 lookDirection = direction; // 弾の発射方向
-        float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg; // ベクトルの角度を計算
-        bullet.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle)); // 弾の回転を設定
-        bullet.GetComponent<Rigidbody2D>().velocity = lookDirection * 5f; // 弾の速度を設定
-    }
-
-    void RotateBulletSpawner()
-    {
-        // BulletSpawner を回転させる
-        bulletSpawner.Rotate(new Vector3(0f, 0f, rotationSpeed * Time.deltaTime));
     }
 
     IEnumerator ShowDamageRoutine()
