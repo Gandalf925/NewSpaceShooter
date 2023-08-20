@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5287725813637029288}
   m_Layer: 4
   m_Name: BossPepe
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,6 +62,7 @@ MonoBehaviour:
   bossStopPosMiddle: {fileID: 0}
   bossStopPosUp: {fileID: 0}
   bossStopPosDown: {fileID: 0}
+  isDead: 0
 --- !u!222 &5287725813637029289
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -54,9 +54,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ae006e2e8ad3d548bbed006ca2fde81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 1
+  maxHP: 80
   explosionPrefab: {fileID: 336278662954817479, guid: 21872e610cd19994cadd6232d97f93c3, type: 3}
-  smallPowerupPrefab: {fileID: 6990624485992650979, guid: d24ad0cf399d9cb489dc30fb442fdb7e, type: 3}
+  smallPowerupPrefab: {fileID: 3419633685063174375, guid: eb909c69960ce6d41ba48aa03bc2866f, type: 3}
   largePowerupPrefab: {fileID: 6061619657933071244, guid: 200e8baadad3bed40bdca5cdb81711ee, type: 3}
   startPos: {fileID: 0}
   stopPos: {fileID: 0}

@@ -19,6 +19,7 @@ public class Stage4Boss : MonoBehaviour
     public Transform bossStopPosMiddle;     // 停止する位置
     public Transform bossStopPosUp;     // 停止する位置
     public Transform bossStopPosDown;     // 停止する位置
+    public bool isDead = false;
 
     private Color originalColor;
 
@@ -131,6 +132,7 @@ public class Stage4Boss : MonoBehaviour
                 explosion.transform.DOScale(new Vector3(50f, 50f, 0), 0.5f);
                 explosion.GetComponent<SpriteRenderer>().DOColor(new Color(255, 0, 0, 0), 0.5f);
                 player.GetComponent<PlayerController>().PlayExplosionSE();
+                BossDead();
 
 
                 Destroy(explosion, 0.5f);
@@ -174,5 +176,10 @@ public class Stage4Boss : MonoBehaviour
         image.color = originalColor;
 
         isShowingDamage = false;
+    }
+
+    public void BossDead()
+    {
+        isDead = true;
     }
 }

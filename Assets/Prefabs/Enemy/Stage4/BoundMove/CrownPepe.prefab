@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48ed39c99d6e3764983fc5874900be58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 1
+  maxHP: 80
   explosionPrefab: {fileID: 336278662954817479, guid: 21872e610cd19994cadd6232d97f93c3, type: 3}
   startPos: {fileID: 0}
   stopPos: {fileID: 0}
@@ -62,7 +62,7 @@ MonoBehaviour:
   maxReflections: 10
   reflectionDelay: 2
   player: {fileID: 0}
-  smallPowerupPrefab: {fileID: 6990624485992650979, guid: d24ad0cf399d9cb489dc30fb442fdb7e, type: 3}
+  smallPowerupPrefab: {fileID: 3419633685063174375, guid: eb909c69960ce6d41ba48aa03bc2866f, type: 3}
   largePowerupPrefab: {fileID: 6061619657933071244, guid: 200e8baadad3bed40bdca5cdb81711ee, type: 3}
 --- !u!222 &9043858228665622626
 CanvasRenderer:

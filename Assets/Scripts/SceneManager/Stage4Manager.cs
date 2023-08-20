@@ -38,6 +38,7 @@ public class Stage4Manager : MonoBehaviour
 
     [Header("Manager")]
     GameManager gameManager;
+    BGMManager bGMManager;
     UIManager uIManager;
 
     public AudioClip stage4BGM;
@@ -52,7 +53,7 @@ public class Stage4Manager : MonoBehaviour
         startTextFrame.transform.position = frameStartPos.position;
 
         uIManager.FadeIn();
-        // BGMManager.instance.PlayBGM(stage3BGM);
+        BGMManager.instance.PlayBGM(stage4BGM);
         StartCoroutine(StartFrameIn());
 
         StartCoroutine(SpawnEnemies(6f));
@@ -138,7 +139,7 @@ public class Stage4Manager : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
 
         BGMManager.instance.bgmSource.volume = 1;
-        // BGMManager.instance.PlayBGM(stage3BossBGM);
+        BGMManager.instance.PlayBGM(stage4BossBGM);
 
         yield return new WaitForSecondsRealtime(3f);
         playerController.SetPlayerActive(true);

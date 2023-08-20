@@ -81,6 +81,7 @@ public class ReflectingMovePepe : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
         else if (hasHitWall)
         {
             hasHitWall = false;

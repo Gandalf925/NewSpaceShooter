@@ -19,6 +19,7 @@ public class ShieldPepe : MonoBehaviour
     private bool isShowingDamage = false;
     private Image image;
     private Color originalColor;
+    private Stage4Boss boss;
     GameManager gameManager;
 
     [Header("Sound")]
@@ -32,9 +33,18 @@ public class ShieldPepe : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<BGMManager>();
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        boss = GameObject.FindWithTag("Boss").GetComponent<Stage4Boss>();
 
         // 弾の発射
         StartCoroutine(FireRoutine());
+    }
+
+    private void Update()
+    {
+        if (boss.isDead)
+        {
+            Dead();
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -47,28 +57,32 @@ public class ShieldPepe : MonoBehaviour
 
             // ダメージを受けた際の演出
             StartCoroutine(ShowDamageRoutine());
-
             if (currentHP <= 0)
             {
-                GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-                explosion.transform.DOScale(new Vector3(50f, 50f, 0), 0.5f);
-                explosion.GetComponent<SpriteRenderer>().DOColor(new Color(255, 0, 0, 0), 0.5f);
-                player.GetComponent<PlayerController>().PlayExplosionSE();
-
-
-                Destroy(explosion, 0.5f);
-
-                Destroy(gameObject);
+                Dead();
             }
 
             Destroy(other.gameObject);
         }
     }
 
+    private void Dead()
+    {
+        GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        explosion.transform.DOScale(new Vector3(50f, 50f, 0), 0.5f);
+        explosion.GetComponent<SpriteRenderer>().DOColor(new Color(255, 0, 0, 0), 0.5f);
+        player.GetComponent<PlayerController>().PlayExplosionSE();
+
+
+        Destroy(explosion, 0.5f);
+
+        Destroy(gameObject);
+
+    }
+
     private IEnumerator FireRoutine()
     {
         yield return new WaitForSeconds(4f);
-
 
 
         while (player != null)

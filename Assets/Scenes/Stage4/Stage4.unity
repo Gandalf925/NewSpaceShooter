@@ -13898,8 +13898,8 @@ MonoBehaviour:
   frameStartPos: {fileID: 426317925}
   frameStopPos: {fileID: 1041694780}
   frameEndPos: {fileID: 1822285415}
-  stage4BGM: {fileID: 0}
-  stage4BossBGM: {fileID: 0}
+  stage4BGM: {fileID: 8300000, guid: 6f01ab64aca270a40bef46ea95b2208c, type: 3}
+  stage4BossBGM: {fileID: 8300000, guid: 9deb7a7691aebee4fa45f09d8d17abba, type: 3}
 --- !u!1 &1734344024
 GameObject:
   m_ObjectHideFlags: 0
