@@ -87,8 +87,8 @@ public class ShieldPepe : MonoBehaviour
 
         while (player != null)
         {
+            float randomValue = Random.Range(0.7f, 1f);
 
-            float randomValue = Random.Range(0f, 1f);
             yield return new WaitForSeconds(randomValue);
 
             // 発射時に現在のPlayerの位置を取得する

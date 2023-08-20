@@ -158,7 +158,7 @@ public class MagicianPepe : MonoBehaviour
         float smallProbability = 0.8f;  // 80％の確率で小アイテムを生成する
 
         // ランダムな値を生成して、小アイテムか大アイテムを決定する
-        float randomValue = Random.value;
+        float randomValue = Random.Range(0f, 1f);
         if (randomValue < smallProbability)
         {
             // 小アイテムを生成する
