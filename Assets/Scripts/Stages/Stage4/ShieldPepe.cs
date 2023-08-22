@@ -87,7 +87,7 @@ public class ShieldPepe : MonoBehaviour
 
         while (player != null)
         {
-            float randomValue = Random.Range(0.7f, 1f);
+            float randomValue = Random.Range(0.5f, 1f);
 
             yield return new WaitForSeconds(randomValue);
 

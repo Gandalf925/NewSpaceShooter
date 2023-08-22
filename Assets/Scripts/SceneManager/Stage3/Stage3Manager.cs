@@ -179,6 +179,6 @@ public class Stage3Manager : MonoBehaviour
 
         BGMManager.instance.StopBGM();
         BGMManager.instance.bgmSource.volume = 0.43f;
-        SceneManager.LoadScene("ToBeContinue");
+        SceneManager.LoadScene("Stage4");
     }
 }
