@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 
-public class Stage4ED1Manager : MonoBehaviour
+public class Stage3ED1Manager : MonoBehaviour
 {
     public GameObject player;
     public Transform pepeStartPos;
@@ -18,7 +18,15 @@ public class Stage4ED1Manager : MonoBehaviour
     public Transform back2;
     public Transform CEO;
     public Transform bartender;
+    public Transform map;
+    public Transform mapStopPos;
     public GameObject backgroundPanel;
+
+    [Header("Sounds")]
+    [SerializeField] AudioSource seManager;
+    [SerializeField] AudioClip cheerSE;
+
+    [SerializeField] AudioClip Stage3ED1BGM;
 
 
     public Image blackoutPanel;
@@ -26,7 +34,7 @@ public class Stage4ED1Manager : MonoBehaviour
     private void Start()
     {
         blackoutPanel.color = new Color(0f, 0f, 0f, 0f);
-        StartCoroutine(Stage4ED1());
+        StartCoroutine(Stage3ED1());
     }
     private void Update()
     {
@@ -36,8 +44,12 @@ public class Stage4ED1Manager : MonoBehaviour
         }
     }
 
-    IEnumerator Stage4ED1()
+    IEnumerator Stage3ED1()
     {
+
+        BGMManager.instance.PlayBGM(Stage3ED1BGM);
+        seManager.PlayOneShot(cheerSE);
+
         yield return new WaitForSecondsRealtime(1f);
 
         StartCoroutine(cheerPepes(front1));
@@ -53,11 +65,13 @@ public class Stage4ED1Manager : MonoBehaviour
 
         StartCoroutine(PepeAnimationSequence());
 
+        yield return new WaitForSecondsRealtime(1f);
 
-        yield return new WaitForSecondsRealtime(6f);
+        StartCoroutine(MapAnimationSequence());
 
-        // SceneManager.LoadScene("Stage3OP2");
-        // BGMManager.instance.StopBGM();
+        yield return new WaitForSecondsRealtime(3f);
+
+        SceneManager.LoadScene("Stage3ED2");
     }
 
 
@@ -66,7 +80,7 @@ public class Stage4ED1Manager : MonoBehaviour
         blackoutPanel.DOFade(1f, 2f);
         yield return new WaitForSeconds(2f);
         BGMManager.instance.StopBGM();
-        SceneManager.LoadScene("Stage3");
+        SceneManager.LoadScene("Stage4");
     }
 
     IEnumerator cheerPepes(Transform pepe)
@@ -85,13 +99,6 @@ public class Stage4ED1Manager : MonoBehaviour
 
     }
 
-    void PepeFadeOut(Transform pepe)
-    {
-        // pepe.DOMoveX(frontPepeStopPos.position.x, 2f);
-        pepe.GetComponent<SpriteRenderer>().DOFade(0f, 2);
-        pepe.DOScale(100f, 2f);
-    }
-
     IEnumerator PepeAnimationSequence()
     {
         // Pepeの初期位置に移動
@@ -99,7 +106,7 @@ public class Stage4ED1Manager : MonoBehaviour
 
         // パスを定義してアニメーション
         Vector3[] path = new Vector3[] { pepeStartPos.position, pepeTurnPos.position, pepeStopPos.position };
-        Tweener pathTween = player.transform.DOPath(path, 3f, PathType.CatmullRom);
+        player.transform.DOPath(path, 3f, PathType.CatmullRom);
         yield return new WaitForSeconds(1f);
 
         // 大きくなるアニメーション
@@ -119,5 +126,14 @@ public class Stage4ED1Manager : MonoBehaviour
 
         // オブジェクトを破棄
         Destroy(player.gameObject);
+    }
+
+    IEnumerator MapAnimationSequence()
+    {
+        map.DORotate(new Vector3(0f, 0f, 90f), 1f);
+        map.DOMove(mapStopPos.position, 0.6f);
+
+        yield return new WaitForSeconds(0.8f);
+        Destroy(map.gameObject);
     }
 }
