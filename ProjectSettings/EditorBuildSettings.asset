@@ -50,10 +50,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stage3/Stage3ED2.unity
     guid: 361f523c1b544844a91c0f9ff9413bbd
-  - enabled: 0
-    path: Assets/Scenes/ToBeContinued.unity
-    guid: cbf52d290468cfe469b610e3248b5d94
+  - enabled: 1
+    path: Assets/Scenes/Stage4/Stage4OP1.unity
+    guid: d637d994eef7d0f4fbe6eeab215f7a3c
   - enabled: 0
     path: Assets/Scenes/Stage4/Stage4.unity
     guid: f4ac6cbbb0d762e4daf2c7a4ec5886b4
+  - enabled: 0
+    path: Assets/Scenes/ToBeContinued.unity
+    guid: cbf52d290468cfe469b610e3248b5d94
   m_configObjects: {}

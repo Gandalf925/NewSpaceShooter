@@ -87,7 +87,7 @@ public class Stage3ED2Manager : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         BGMManager.instance.StopBGM();
-        // SceneManager.LoadScene("ToBeContinued");
+        SceneManager.LoadScene("Stage4OP1");
     }
 
 
