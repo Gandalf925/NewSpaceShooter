@@ -22,6 +22,8 @@ public class Stage4OP1Manager : MonoBehaviour
 
     public Image blackoutPanel;
 
+    [SerializeField] AudioClip stage4OP1BGM;
+
     private void Start()
     {
 
@@ -39,6 +41,7 @@ public class Stage4OP1Manager : MonoBehaviour
 
     IEnumerator Stage4OP1()
     {
+        BGMManager.instance.PlayBGM(stage4OP1BGM);
         yield return new WaitForSecondsRealtime(2f);
 
         POPanel.gameObject.transform.DOScale(2f, 1f);
@@ -92,7 +95,7 @@ public class Stage4OP1Manager : MonoBehaviour
         blackoutPanel.DOFade(1f, 2f);
         yield return new WaitForSeconds(2.5f);
 
-
+        BGMManager.instance.StopBGM();
         SceneManager.LoadScene("Stage4");
     }
 

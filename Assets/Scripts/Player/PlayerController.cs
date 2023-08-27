@@ -28,7 +28,6 @@ public class PlayerController : MonoBehaviour
     public bool isActive = true;
     private Image playerImage;
 
-    private int previousPowerupPoint;
     GameManager gameManager;
 
     [Header("Audio")]
