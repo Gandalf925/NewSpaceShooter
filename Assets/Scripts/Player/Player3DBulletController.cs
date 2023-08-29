@@ -20,6 +20,11 @@ public class Player3DBulletController : MonoBehaviour
             nextFire = Time.time + 1.0f / fireRate;  // 次に発射できる時間を更新
             ShootBullet();
         }
+
+        if (transform.position.z > 75)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void ShootBullet()
