@@ -253,7 +253,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isInvincible) return;
 
-        if (other.CompareTag("EnemyBullet") || other.CompareTag("Enemy"))
+        if (other.CompareTag("EnemyBullet") || other.CompareTag("Enemy") || other.CompareTag("Boss"))
         {
             TakeDamage();
 

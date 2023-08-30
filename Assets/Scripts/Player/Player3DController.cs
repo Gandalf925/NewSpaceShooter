@@ -5,6 +5,7 @@ public class Player3DController : MonoBehaviour
     public float speed = 5.0f;
     public float touchSensitivity = 0.1f;
     private Rigidbody rb;
+    public GameObject iconPrefab;
     private float fixedZPosition;
     public Camera mainCamera; // MainCameraをインスペクタからアタッチする
     public Vector3 cameraOffset; // カメラがプレイヤーからどれだけ離れているか
@@ -34,8 +35,8 @@ public class Player3DController : MonoBehaviour
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
             mouseWorldPos.z = fixedZPosition;
 
-            float offsetX = 4f;
-            float offsetY = 0.3f;
+            float offsetX = 6f;
+            float offsetY = 1f;
             Vector3 targetPosition = mouseWorldPos + new Vector3(offsetX, offsetY, 0);
 
             Vector3 diff = targetPosition - transform.position;
@@ -43,12 +44,20 @@ public class Player3DController : MonoBehaviour
 
             if (diff.magnitude > touchSensitivity)
             {
+                if (rb.isKinematic)
+                {
+                    rb.isKinematic = false;  // 物理演算を有効にする
+                }
                 rb.velocity = diff.normalized * speed;
             }
             else
             {
+                if (!rb.isKinematic)
+                {
+                    rb.isKinematic = true;  // 物理演算を無効にする
+                }
                 transform.position = targetPosition;
-                rb.velocity = Vector3.zero;
+                rb.isKinematic = false;  // すぐに物理演算を有効に戻す
             }
         }
 

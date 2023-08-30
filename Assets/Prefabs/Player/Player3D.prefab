@@ -102,9 +102,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7169585669544198896, guid: 520f711497cc01a4299a16bd3fae243e, type: 3}
   shootSpeedZ: 20
-  shootSpeedY: 5
   fireRate: 3
-  explosionPrefab: {fileID: 0}
+  iconPrefab: {fileID: 7556579367477831420, guid: 4996cae6d332f444db136b56722cdfff, type: 3}
 --- !u!114 &7096902263673154609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,8 +116,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b117cc99d6e8af47afb900ed0d11aa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  touchSensitivity: 0.1
+  speed: 12
+  touchSensitivity: 0.03
+  iconPrefab: {fileID: 0}
+  mainCamera: {fileID: 0}
+  cameraOffset: {x: 0, y: 0, z: 0}
 --- !u!136 &7096902263673154615
 CapsuleCollider:
   m_ObjectHideFlags: 0
