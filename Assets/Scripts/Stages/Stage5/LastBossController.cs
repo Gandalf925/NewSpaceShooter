@@ -10,6 +10,18 @@ public class LastBossController : MonoBehaviour
 
     public GameObject player;
     public Transform[] BossPositions;
+    [SerializeField] Sprite bossNormal;
+    [SerializeField] Sprite bossSmile;
+    [SerializeField] Sprite bossUseMagic;
+    [SerializeField] Sprite bossAngry;
+    [SerializeField] Sprite bossSad;
+
+    [SerializeField] GameObject bossUseMagicEffect;
+
+
+
+    public GameObject[] asteroidPrefabs; // AsteroidのPrefab
+    public Transform[] asteroidPoints; // Asteroidが生成される場所
 
     private BoxCollider col;
 
@@ -48,12 +60,15 @@ public class LastBossController : MonoBehaviour
         while (player != null)
         {
             yield return BossMoveLevel1();
+            yield return SpawnAndShootAsteroidLevel2();
             yield return new WaitForSeconds(3f);
         }
     }
 
     IEnumerator BossMoveLevel1()
     {
+        spriteRenderer.sprite = bossNormal;
+
         // 1または2回の動作をランダムで決定
         if (currentHP > maxHP / 2)
         {
@@ -73,8 +88,66 @@ public class LastBossController : MonoBehaviour
                 yield return SingleBossMove();
             }
         }
+    }
 
 
+    IEnumerator SpawnAndShootAsteroidLevel1()
+    {
+        spriteRenderer.sprite = bossUseMagic;
+        bossUseMagicEffect.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+
+        // AsteroidPointsからランダムな位置を選ぶ
+        int spawnRandomIndex = Random.Range(0, asteroidPoints.Length);
+        int asteroidRandomIndex = Random.Range(0, asteroidPrefabs.Length);
+        Transform spawnPoint = asteroidPoints[spawnRandomIndex];
+
+        // Asteroidを生成
+        GameObject asteroid = Instantiate(asteroidPrefabs[asteroidRandomIndex], spawnPoint.position, Quaternion.identity);
+        asteroid.transform.localScale = new Vector3(7f, 7f, 7f);
+
+        // Asteroidに力を加えてPlayerに向かって飛ばす
+        Rigidbody rb = asteroid.GetComponent<Rigidbody>();
+        Vector3 direction = (player.transform.position - spawnPoint.position).normalized;
+        rb.AddForce(direction * 500000f, ForceMode.Impulse);
+
+        yield return new WaitForSeconds(2f);
+
+        bossUseMagicEffect.SetActive(false);
+        spriteRenderer.sprite = bossNormal;
+
+        yield return new WaitForSeconds(3f);
+
+        Destroy(asteroid);
+    }
+
+    IEnumerator SpawnAndShootAsteroidLevel2()
+    {
+        spriteRenderer.sprite = bossUseMagic;
+        bossUseMagicEffect.SetActive(true);
+        yield return new WaitForSeconds(0.7f);
+
+        for (int i = 0; i < 3; i++)
+        {
+            // AsteroidPointsからランダムな位置を選ぶ
+            int spawnRandomIndex = Random.Range(0, asteroidPoints.Length);
+            int asteroidRandomIndex = Random.Range(0, asteroidPrefabs.Length);
+            Transform spawnPoint = asteroidPoints[spawnRandomIndex];
+
+            // Asteroidを生成
+            GameObject asteroid = Instantiate(asteroidPrefabs[asteroidRandomIndex], spawnPoint.position, Quaternion.identity);
+            asteroid.transform.localScale = new Vector3(7f, 7f, 7f);
+
+            // Asteroidに力を加えてPlayerに向かって飛ばす
+            Rigidbody rb = asteroid.GetComponent<Rigidbody>();
+            Vector3 direction = (player.transform.position - spawnPoint.position).normalized;
+            rb.AddForce(direction * 500000f, ForceMode.Impulse);
+
+            yield return new WaitForSeconds(1.5f);
+        }
+
+        bossUseMagicEffect.SetActive(false);
+        spriteRenderer.sprite = bossNormal;
     }
 
     // シングルのボスの動き（出現→消失→移動→出現）をまとめたコルーチン
