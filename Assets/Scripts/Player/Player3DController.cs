@@ -45,11 +45,8 @@ public class Player3DController : MonoBehaviour
         mainCamera.transform.position = transform.position + cameraOffset;
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        Vector3 newPosition = transform.position;
-        newPosition.z = fixedZPosition;
-        transform.position = newPosition;
 
         if (!Input.GetMouseButton(0))
         {
@@ -59,7 +56,6 @@ public class Player3DController : MonoBehaviour
         {
             Vector3 mouseScreenPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
-            mouseWorldPos.z = fixedZPosition;
 
             float offsetX = 6f;
             float offsetY = 1f;
@@ -68,22 +64,26 @@ public class Player3DController : MonoBehaviour
             Vector3 diff = targetPosition - transform.position;
             diff.z = 0;
 
+
+            Vector3 currentDirection = rb.velocity.normalized;
+            Vector3 newDirection = diff.normalized;
+            float angle = Vector3.Angle(currentDirection, newDirection);
+
+            float currentSpeed = speed;
+
+            // 現在の進行方向と逆側の角度（±30度）にドラッグされたら、スピードを遅くする
+            if (Mathf.Abs(angle - 180) <= 60 && diff.magnitude >= touchSensitivity)
+            {
+                currentSpeed = speed / 10.0f;
+            }
+
             if (diff.magnitude > touchSensitivity)
             {
-                if (rb.isKinematic)
-                {
-                    rb.isKinematic = false;  // 物理演算を有効にする
-                }
-                rb.velocity = diff.normalized * speed;
+                rb.velocity = newDirection * currentSpeed;
             }
             else
             {
-                if (!rb.isKinematic)
-                {
-                    rb.isKinematic = true;  // 物理演算を無効にする
-                }
-                transform.position = targetPosition;
-                rb.isKinematic = false;  // すぐに物理演算を有効に戻す
+                rb.velocity = Vector3.zero;
             }
         }
 
@@ -114,6 +114,7 @@ public class Player3DController : MonoBehaviour
         // カメラをプレイヤーに追随させる
         mainCamera.transform.position = transform.position + cameraOffset;
     }
+
 
     private void OnTriggerEnter(Collider other)
     {

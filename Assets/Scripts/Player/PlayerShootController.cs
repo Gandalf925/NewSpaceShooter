@@ -20,6 +20,11 @@ public class PlayerShootController : MonoBehaviour
             nextFire = Time.time + 1.0f / fireRate;
             ShootBullet();
         }
+        if (Time.time > nextFire && Input.GetKey(KeyCode.Space))
+        {
+            nextFire = Time.time + 1.0f / fireRate;
+            ShootBullet();
+        }
     }
 
     void ShowIcon()

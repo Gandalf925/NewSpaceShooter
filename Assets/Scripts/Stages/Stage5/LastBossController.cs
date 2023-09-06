@@ -104,7 +104,15 @@ public class LastBossController : MonoBehaviour
 
         // Asteroidを生成
         GameObject asteroid = Instantiate(asteroidPrefabs[asteroidRandomIndex], spawnPoint.position, Quaternion.identity);
-        asteroid.transform.localScale = new Vector3(7f, 7f, 7f);
+        if (asteroidPrefabs[2])
+        {
+            asteroid.transform.localScale = new Vector3(6f, 6f, 6f);
+        }
+        else
+        {
+            asteroid.transform.localScale = new Vector3(7f, 7f, 7f);
+        }
+
 
         // Asteroidに力を加えてPlayerに向かって飛ばす
         Rigidbody rb = asteroid.GetComponent<Rigidbody>();
@@ -136,12 +144,12 @@ public class LastBossController : MonoBehaviour
 
             // Asteroidを生成
             GameObject asteroid = Instantiate(asteroidPrefabs[asteroidRandomIndex], spawnPoint.position, Quaternion.identity);
-            asteroid.transform.localScale = new Vector3(7f, 7f, 7f);
+            asteroid.transform.localScale = new Vector3(7.5f, 7.5f, 7.5f);
 
             // Asteroidに力を加えてPlayerに向かって飛ばす
             Rigidbody rb = asteroid.GetComponent<Rigidbody>();
             Vector3 direction = (player.transform.position - spawnPoint.position).normalized;
-            rb.AddForce(direction * 500000f, ForceMode.Impulse);
+            rb.AddForce(direction * 560000f, ForceMode.Impulse);
 
             yield return new WaitForSeconds(1.5f);
         }

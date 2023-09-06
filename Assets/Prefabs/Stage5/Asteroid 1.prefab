@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a718c138b20419b499c3d92b17e6ff7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tumble: 1
+  tumble: 3
 --- !u!135 &5189385528306938318
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -303,8 +303,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.65085495
-  m_Center: {x: 0.31515038, y: 0, z: 0.06595588}
+  m_Radius: 0.8108887
+  m_Center: {x: -0.03, y: 0, z: 0.06595588}
 --- !u!1 &176588
 GameObject:
   m_ObjectHideFlags: 0
