@@ -1,9 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class LastBossController : MonoBehaviour
 {
+
+    enum BossState
+    {
+        Normal,
+        Angry,
+        Mad
+    }
 
     public int maxHP = 1;
     public float currentHP;
@@ -11,10 +19,13 @@ public class LastBossController : MonoBehaviour
     public GameObject player;
     public Transform[] BossPositions;
     [SerializeField] Sprite bossNormal;
-    [SerializeField] Sprite bossSmile;
     [SerializeField] Sprite bossUseMagic;
     [SerializeField] Sprite bossAngry;
-    [SerializeField] Sprite bossSad;
+    [SerializeField] Sprite bossTired;
+
+    BossState bossState = BossState.Normal;
+
+
 
     [SerializeField] GameObject bossUseMagicEffect;
 
@@ -23,11 +34,11 @@ public class LastBossController : MonoBehaviour
     public GameObject[] asteroidPrefabs; // AsteroidのPrefab
     public Transform[] asteroidPoints; // Asteroidが生成される場所
 
+    [SerializeField] GameObject chargeFirePrefab;
+
     private BoxCollider col;
 
-    private bool isShowingDamage = false;
     private SpriteRenderer spriteRenderer;
-    private Color originalColor;
     _2dxFX_NewTeleportation2 telepotation;
 
     GameManager gameManager;
@@ -39,29 +50,75 @@ public class LastBossController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         telepotation = GetComponent<_2dxFX_NewTeleportation2>();
         col = GetComponent<BoxCollider>();
-        originalColor = spriteRenderer.color;
         telepotation._Fade = 0f;
         player = GameObject.FindWithTag("Player");
         // soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<BGMManager>();
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
 
         StartCoroutine(BossMoveRoutine());
-
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // HP が 0 の場合を先に評価
+        if (currentHP == 0)
+        {
+            bossState = BossState.Mad;
+            spriteRenderer.sprite = bossTired;
+        }
+        else if (currentHP <= maxHP / 2)
+        {
+            bossState = BossState.Angry;
+            spriteRenderer.sprite = bossAngry;
+        }
 
+        if (bossState == BossState.Mad)
+        {
+            // StartCoroutine(StartLastEvent());
+            Debug.Log("LastEvent");
+        }
     }
 
     IEnumerator BossMoveRoutine()
     {
         while (player != null)
         {
-            yield return BossMoveLevel1();
-            yield return SpawnAndShootAsteroidLevel2();
-            yield return new WaitForSeconds(3f);
+            if (bossState == BossState.Normal)
+            {
+                int randomIndex = Random.Range(0, 2);
+
+                yield return BossMoveLevel1();
+
+                if (randomIndex == 0)
+                {
+                    yield return AttackChargeFireArrowLevel1();
+                }
+                else
+                {
+                    yield return SpawnAndShootAsteroidLevel1();
+                }
+                yield return new WaitForSeconds(2f);
+            }
+            else if (bossState == BossState.Angry)
+            {
+                int randomIndex = Random.Range(0, 2);
+
+                yield return BossMoveLevel2();
+                if (randomIndex == 0)
+                {
+                    yield return AttackChargeFireArrowLevel2();
+                }
+                else
+                {
+                    yield return SpawnAndShootAsteroidLevel2();
+                }
+                yield return new WaitForSeconds(1.5f);
+            }
+            else
+            {
+                // StartCoroutine(BossMoveLevel3());
+                StartCoroutine(BossLastAttack());
+            }
         }
     }
 
@@ -69,67 +126,37 @@ public class LastBossController : MonoBehaviour
     {
         spriteRenderer.sprite = bossNormal;
 
-        // 1または2回の動作をランダムで決定
-        if (currentHP > maxHP / 2)
-        {
-            int randomCount = Random.Range(1, 3);
+        int randomCount = Random.Range(1, 3);
 
-            for (int i = 0; i < randomCount; i++)
-            {
-                yield return SingleBossMove();
-            }
-        }
-        else
+        for (int i = 0; i < randomCount; i++)
         {
-            int randomCount = Random.Range(2, 5);
-            for (int i = 0; i < randomCount; i++)
-            {
-
-                yield return SingleBossMove();
-            }
+            yield return SingleBossMove(0.2f);
         }
     }
 
+    IEnumerator BossMoveLevel2()
+    {
+        spriteRenderer.sprite = bossAngry;
+
+        int randomCount = Random.Range(2, 7);
+
+        for (int i = 0; i < randomCount; i++)
+        {
+            yield return SingleBossMove(0.1f);
+        }
+    }
+    IEnumerator BossMoveLevel3()
+    {
+        int randomCount = Random.Range(5, 8);
+
+        for (int i = 0; i < randomCount; i++)
+        {
+            yield return SingleBossMove(0.1f);
+        }
+        yield return new WaitForSeconds(1.5f);
+    }
 
     IEnumerator SpawnAndShootAsteroidLevel1()
-    {
-        spriteRenderer.sprite = bossUseMagic;
-        bossUseMagicEffect.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
-
-        // AsteroidPointsからランダムな位置を選ぶ
-        int spawnRandomIndex = Random.Range(0, asteroidPoints.Length);
-        int asteroidRandomIndex = Random.Range(0, asteroidPrefabs.Length);
-        Transform spawnPoint = asteroidPoints[spawnRandomIndex];
-
-        // Asteroidを生成
-        GameObject asteroid = Instantiate(asteroidPrefabs[asteroidRandomIndex], spawnPoint.position, Quaternion.identity);
-        if (asteroidPrefabs[2])
-        {
-            asteroid.transform.localScale = new Vector3(6f, 6f, 6f);
-        }
-        else
-        {
-            asteroid.transform.localScale = new Vector3(7f, 7f, 7f);
-        }
-
-
-        // Asteroidに力を加えてPlayerに向かって飛ばす
-        Rigidbody rb = asteroid.GetComponent<Rigidbody>();
-        Vector3 direction = (player.transform.position - spawnPoint.position).normalized;
-        rb.AddForce(direction * 500000f, ForceMode.Impulse);
-
-        yield return new WaitForSeconds(2f);
-
-        bossUseMagicEffect.SetActive(false);
-        spriteRenderer.sprite = bossNormal;
-
-        yield return new WaitForSeconds(3f);
-
-        Destroy(asteroid);
-    }
-
-    IEnumerator SpawnAndShootAsteroidLevel2()
     {
         spriteRenderer.sprite = bossUseMagic;
         bossUseMagicEffect.SetActive(true);
@@ -144,26 +171,187 @@ public class LastBossController : MonoBehaviour
 
             // Asteroidを生成
             GameObject asteroid = Instantiate(asteroidPrefabs[asteroidRandomIndex], spawnPoint.position, Quaternion.identity);
-            asteroid.transform.localScale = new Vector3(7.5f, 7.5f, 7.5f);
+            if (asteroidRandomIndex == 2)
+            {
+                asteroid.transform.localScale = new Vector3(6f, 6f, 6f);
+            }
+            else
+            {
+                asteroid.transform.localScale = new Vector3(7f, 7f, 7f);
+            }
 
             // Asteroidに力を加えてPlayerに向かって飛ばす
             Rigidbody rb = asteroid.GetComponent<Rigidbody>();
             Vector3 direction = (player.transform.position - spawnPoint.position).normalized;
-            rb.AddForce(direction * 560000f, ForceMode.Impulse);
+            rb.AddForce(direction * 500000f, ForceMode.Impulse);
 
             yield return new WaitForSeconds(1.5f);
         }
 
-        bossUseMagicEffect.SetActive(false);
-        spriteRenderer.sprite = bossNormal;
+        yield return new WaitForSeconds(2f);
+
+        GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+        foreach (GameObject enemyBullet in enemyBullets)
+        {
+            Destroy(enemyBullet);
+        }
+    }
+
+    IEnumerator SpawnAndShootAsteroidLevel2()
+    {
+        spriteRenderer.sprite = bossUseMagic;
+        bossUseMagicEffect.SetActive(true);
+        yield return new WaitForSeconds(0.7f);
+
+        for (int i = 0; i < 6; i++)
+        {
+            // AsteroidPointsからランダムな位置を選ぶ
+            int spawnRandomIndex = Random.Range(0, asteroidPoints.Length);
+            int asteroidRandomIndex = Random.Range(0, asteroidPrefabs.Length);
+            Transform spawnPoint = asteroidPoints[spawnRandomIndex];
+
+            // Asteroidを生成
+            GameObject asteroid = Instantiate(asteroidPrefabs[asteroidRandomIndex], spawnPoint.position, Quaternion.identity);
+            if (asteroidRandomIndex == 2)
+            {
+                asteroid.transform.localScale = new Vector3(6f, 6f, 6f);
+            }
+            else
+            {
+                asteroid.transform.localScale = new Vector3(7f, 7f, 7f);
+            }
+
+            // Asteroidに力を加えてPlayerに向かって飛ばす
+            Rigidbody rb = asteroid.GetComponent<Rigidbody>();
+            Vector3 direction = (player.transform.position - spawnPoint.position).normalized;
+            rb.AddForce(direction * 500000f, ForceMode.Impulse);
+
+            yield return new WaitForSeconds(1f);
+        }
+
+        yield return new WaitForSeconds(2f);
+
+        GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+        foreach (GameObject enemyBullet in enemyBullets)
+        {
+            Destroy(enemyBullet);
+        }
+    }
+
+    IEnumerator AttackChargeFireArrowLevel1()
+    {
+
+        spriteRenderer.sprite = bossUseMagic;
+        bossUseMagicEffect.SetActive(true);
+
+        for (int i = 0; i < 15; i++) // 25個生成
+        {
+            float randomX = Random.Range(-25f, 25f);
+            float randomY = Random.Range(20f, 35f);
+            float randomZ = Random.Range(transform.position.z + 7, transform.position.z + 15);
+
+            Vector3 spawnPosition = new Vector3(randomX, randomY, randomZ);
+
+            GameObject chargeFireArrow = Instantiate(chargeFirePrefab, spawnPosition, Quaternion.identity);
+
+            chargeFireArrow.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+
+            yield return new WaitForSeconds(0.1f); // 生成間隔（必要に応じて調整）
+        }
+
+        yield return new WaitForSeconds(2f);
+
+        GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+        foreach (GameObject enemyBullet in enemyBullets)
+        {
+            Destroy(enemyBullet);
+        }
+    }
+
+    IEnumerator AttackChargeFireArrowLevel2()
+    {
+
+        spriteRenderer.sprite = bossUseMagic;
+        bossUseMagicEffect.SetActive(true);
+
+        for (int i = 0; i < 30; i++) // 25個生成
+        {
+            float randomX = Random.Range(-25f, 25f);
+            float randomY = Random.Range(20f, 35f);
+            float randomZ = Random.Range(transform.position.z + 10, transform.position.z + 20);
+
+            Vector3 spawnPosition = new Vector3(randomX, randomY, randomZ);
+
+            GameObject chargeFireArrow = Instantiate(chargeFirePrefab, spawnPosition, Quaternion.identity);
+
+            chargeFireArrow.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+
+            yield return new WaitForSeconds(0.07f); // 生成間隔（必要に応じて調整）
+        }
+
+        yield return new WaitForSeconds(2f);
+
+        GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+        foreach (GameObject enemyBullet in enemyBullets)
+        {
+            Destroy(enemyBullet);
+        }
+    }
+
+    IEnumerator BossLastAttack()
+    {
+        bossUseMagicEffect.SetActive(true);
+
+        for (int i = 0; i < 30; i++) // 25個生成
+        {
+            float randomX = Random.Range(-25f, 25f);
+            float randomY = Random.Range(20f, 35f);
+            float randomZ = Random.Range(transform.position.z + 10, transform.position.z + 20);
+
+            Vector3 spawnPosition = new Vector3(randomX, randomY, randomZ);
+
+            GameObject chargeFireArrow = Instantiate(chargeFirePrefab, spawnPosition, Quaternion.identity);
+
+            chargeFireArrow.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+
+            yield return new WaitForSeconds(0.07f); // 生成間隔（必要に応じて調整）
+        }
+
+        for (int i = 0; i < 6; i++)
+        {
+            // AsteroidPointsからランダムな位置を選ぶ
+            int spawnRandomIndex = Random.Range(0, asteroidPoints.Length);
+            int asteroidRandomIndex = Random.Range(0, asteroidPrefabs.Length);
+            Transform spawnPoint = asteroidPoints[spawnRandomIndex];
+
+            // Asteroidを生成
+            GameObject asteroid = Instantiate(asteroidPrefabs[asteroidRandomIndex], spawnPoint.position, Quaternion.identity);
+            if (asteroidRandomIndex == 2)
+            {
+                asteroid.transform.localScale = new Vector3(6f, 6f, 6f);
+            }
+            else
+            {
+                asteroid.transform.localScale = new Vector3(7f, 7f, 7f);
+            }
+
+            // Asteroidに力を加えてPlayerに向かって飛ばす
+            Rigidbody rb = asteroid.GetComponent<Rigidbody>();
+            Vector3 direction = (player.transform.position - spawnPoint.position).normalized;
+            rb.AddForce(direction * 500000f, ForceMode.Impulse);
+
+            yield return new WaitForSeconds(2f);
+
+            Destroy(asteroid);
+        }
     }
 
     // シングルのボスの動き（出現→消失→移動→出現）をまとめたコルーチン
-    IEnumerator SingleBossMove()
+    IEnumerator SingleBossMove(float duration)
     {
-        yield return Dissolve(0.2f, false); // ボスを消す
+        yield return Dissolve(duration, false); // ボスを消す
         yield return Move();                // ランダムな位置に移動
-        yield return Dissolve(0.2f, true);  // ボスを登場させる
+        yield return Dissolve(duration, true);  // ボスを登場させる
     }
 
     IEnumerator Dissolve(float duration, bool appear)
@@ -174,8 +362,6 @@ public class LastBossController : MonoBehaviour
         float endFade = appear ? 0f : 1f;
 
         float elapsedTime = 0f;
-
-
 
         while (elapsedTime < duration)
         {
@@ -208,40 +394,13 @@ public class LastBossController : MonoBehaviour
         {
             int damage = other.GetComponent<Player3DBulletController>().attackPower;
             currentHP -= damage;
+            if (currentHP <= 0)
+            {
+                currentHP = 0;
+                bossState = BossState.Mad;  // ここで状態を Mad に設定
+                spriteRenderer.sprite = bossTired;  // ここで Sprite を設定
+            }
             gameManager.UpdateScore(damage);
-
-            // ダメージを受けた際の演出
-            StartCoroutine(ShowDamageRoutine());
         }
     }
-
-
-    private IEnumerator ShowDamageRoutine()
-    {
-        if (isShowingDamage) yield break;
-
-        isShowingDamage = true;
-
-        float blinkInterval = 0.07f;
-
-        spriteRenderer.color = Color.red;
-        yield return new WaitForSeconds(blinkInterval);
-
-        spriteRenderer.color = Color.white;
-        yield return new WaitForSeconds(blinkInterval);
-
-        spriteRenderer.color = Color.red;
-        yield return new WaitForSeconds(blinkInterval);
-
-        spriteRenderer.color = Color.white;
-        yield return new WaitForSeconds(blinkInterval);
-
-        spriteRenderer.color = Color.red;
-        yield return new WaitForSeconds(blinkInterval);
-
-        spriteRenderer.color = originalColor;
-
-        isShowingDamage = false;
-    }
-
 }

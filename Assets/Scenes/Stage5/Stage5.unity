@@ -458,52 +458,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 87180170}
   m_CullTransparentMesh: 1
---- !u!21 &179148629
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 2DxFX/Standard/NewTeleportation2
-  m_Shader: {fileID: 4800000, guid: 81a8c4a625e2be24abb96978d8656203, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex2:
-        m_Texture: {fileID: 2800000, guid: 736337323af22b344b976fd026e86740, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _Alpha: 0
-    - _ColorMask: 15
-    - _Distortion: 1
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _Value2: 0
-    - _Value3: 0
-    - _Value4: 0
-    - _Value5: 0
-    m_Colors:
-    - TeleportationColor: {r: 0, g: 1, b: 0.30675244, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-  m_BuildTextureStacks: []
 --- !u!1 &189997084
 GameObject:
   m_ObjectHideFlags: 0
@@ -1508,7 +1462,7 @@ Transform:
   - {fileID: 1623238209}
   - {fileID: 189997085}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &617490247
 GameObject:
@@ -1946,7 +1900,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &878381517
 GameObject:
@@ -3035,6 +2989,52 @@ Transform:
   m_Father: {fileID: 1623238209}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!21 &1339177998
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 2DxFX/Standard/NewTeleportation2
+  m_Shader: {fileID: 4800000, guid: 81a8c4a625e2be24abb96978d8656203, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex2:
+        m_Texture: {fileID: 2800000, guid: 736337323af22b344b976fd026e86740, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Alpha: 0
+    - _ColorMask: 15
+    - _Distortion: 1
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _Value2: 0
+    - _Value3: 0
+    - _Value4: 0
+    - _Value5: 0
+    m_Colors:
+    - TeleportationColor: {r: 1, g: 0, b: 0.9023075, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
 --- !u!1 &1466813187
 GameObject:
   m_ObjectHideFlags: 0
@@ -3952,7 +3952,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1770504697
 GameObject:
@@ -4263,6 +4263,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1819954929}
   m_CullTransparentMesh: 0
+--- !u!21 &1851608863
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 2DxFX/Standard/NewTeleportation2
+  m_Shader: {fileID: 4800000, guid: 81a8c4a625e2be24abb96978d8656203, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex2:
+        m_Texture: {fileID: 2800000, guid: 736337323af22b344b976fd026e86740, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Alpha: 0
+    - _ColorMask: 15
+    - _Distortion: 1
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _Value2: 0
+    - _Value3: 0
+    - _Value4: 0
+    - _Value5: 0
+    m_Colors:
+    - TeleportationColor: {r: 1, g: 0, b: 0.9023075, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
 --- !u!1 &1867096848
 GameObject:
   m_ObjectHideFlags: 0
@@ -4572,7 +4618,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2104453069
 GameObject:
@@ -4797,7 +4843,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2144986363}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1500, z: 4000}
+  m_LocalPosition: {x: 0, y: 1000, z: 4500}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4813,7 +4859,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4013813710209406253, guid: 8bc4dbeb278194c4c8100b34ac297861, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4013813710209406253, guid: 8bc4dbeb278194c4c8100b34ac297861, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4856,24 +4902,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4013813710209406258, guid: 8bc4dbeb278194c4c8100b34ac297861, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: db5a2e7945547014ea5a305a76f43be5, type: 3}
-    - target: {fileID: 4013813710209406258, guid: 8bc4dbeb278194c4c8100b34ac297861, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 179148629}
+      objectReference: {fileID: 1339177998}
     - target: {fileID: 4013813710209406259, guid: 8bc4dbeb278194c4c8100b34ac297861, type: 3}
-      propertyPath: bossUseMagic
-      value: 
-      objectReference: {fileID: 21300000, guid: c85923e8dad0d954a9325ff41f0db5ef, type: 3}
-    - target: {fileID: 4013813710209406259, guid: 8bc4dbeb278194c4c8100b34ac297861, type: 3}
-      propertyPath: asteroidPoints.Array.size
-      value: 3
+      propertyPath: maxHP
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4013813710209406259, guid: 8bc4dbeb278194c4c8100b34ac297861, type: 3}
-      propertyPath: asteroidPrefabs.Array.size
-      value: 3
+      propertyPath: bossAngry
+      value: 
+      objectReference: {fileID: 21300000, guid: 5a042b932dac9c642bac1ccdb0200a65, type: 3}
+    - target: {fileID: 4013813710209406259, guid: 8bc4dbeb278194c4c8100b34ac297861, type: 3}
+      propertyPath: bossSmile
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4013813710209406259, guid: 8bc4dbeb278194c4c8100b34ac297861, type: 3}
       propertyPath: BossPositions.Array.data[0]
@@ -4931,18 +4973,18 @@ PrefabInstance:
       propertyPath: asteroidPoints.Array.data[2]
       value: 
       objectReference: {fileID: 885731571}
-    - target: {fileID: 4013813710209406259, guid: 8bc4dbeb278194c4c8100b34ac297861, type: 3}
-      propertyPath: asteroidPrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 151664, guid: af5ef26becc5e5549891bedc2cc3d7fa, type: 3}
-    - target: {fileID: 4013813710209406259, guid: 8bc4dbeb278194c4c8100b34ac297861, type: 3}
-      propertyPath: asteroidPrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 141316, guid: b597ad9feb304a444893a455cb70b60e, type: 3}
-    - target: {fileID: 4013813710209406259, guid: 8bc4dbeb278194c4c8100b34ac297861, type: 3}
-      propertyPath: asteroidPrefabs.Array.data[2]
-      value: 
-      objectReference: {fileID: 130102, guid: 8bd3d7e47194b9c40b44a3150627f771, type: 3}
+    - target: {fileID: 4013813710209406262, guid: 8bc4dbeb278194c4c8100b34ac297861, type: 3}
+      propertyPath: TeleportationColor.b
+      value: 0.9023075
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013813710209406262, guid: 8bc4dbeb278194c4c8100b34ac297861, type: 3}
+      propertyPath: TeleportationColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013813710209406262, guid: 8bc4dbeb278194c4c8100b34ac297861, type: 3}
+      propertyPath: TeleportationColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4013813710209406263, guid: 8bc4dbeb278194c4c8100b34ac297861, type: 3}
       propertyPath: m_Name
       value: LastBossPrefab
@@ -5014,7 +5056,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7096902263673154609, guid: 0252457915a10ee44a4b89867575b047, type: 3}
       propertyPath: speed
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7096902263673154609, guid: 0252457915a10ee44a4b89867575b047, type: 3}
       propertyPath: mainCamera
@@ -5038,7 +5080,7 @@ PrefabInstance:
       objectReference: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
     - target: {fileID: 7096902263673154609, guid: 0252457915a10ee44a4b89867575b047, type: 3}
       propertyPath: touchSensitivity
-      value: 0.8
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0252457915a10ee44a4b89867575b047, type: 3}
@@ -5055,7 +5097,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8912551850318838656, guid: 4996cae6d332f444db136b56722cdfff, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8912551850318838656, guid: 4996cae6d332f444db136b56722cdfff, type: 3}
       propertyPath: m_LocalPosition.x

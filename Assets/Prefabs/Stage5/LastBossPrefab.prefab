@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4e93fa9d0bdd27249a62f7f81e41d75d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: db5a2e7945547014ea5a305a76f43be5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088a37348fbafcf4fb386657d009ee2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 1
+  maxHP: 20
   currentHP: 0
   player: {fileID: 0}
   BossPositions:
@@ -117,13 +117,19 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   bossNormal: {fileID: 21300000, guid: db5a2e7945547014ea5a305a76f43be5, type: 3}
-  bossSmile: {fileID: 21300000, guid: 5a042b932dac9c642bac1ccdb0200a65, type: 3}
-  bossUseMagic: {fileID: 21300000, guid: 4e93fa9d0bdd27249a62f7f81e41d75d, type: 3}
-  bossAngry: {fileID: 0}
-  bossSad: {fileID: 0}
+  bossUseMagic: {fileID: 21300000, guid: c85923e8dad0d954a9325ff41f0db5ef, type: 3}
+  bossAngry: {fileID: 21300000, guid: 5a042b932dac9c642bac1ccdb0200a65, type: 3}
+  bossTired: {fileID: 21300000, guid: 92e921e9eaa7ceb4e9997fda6d5816c9, type: 3}
   bossUseMagicEffect: {fileID: 6153542906969540631}
-  asteroidPrefabs: []
-  asteroidPoints: []
+  asteroidPrefabs:
+  - {fileID: 151664, guid: af5ef26becc5e5549891bedc2cc3d7fa, type: 3}
+  - {fileID: 141316, guid: b597ad9feb304a444893a455cb70b60e, type: 3}
+  - {fileID: 130102, guid: 8bd3d7e47194b9c40b44a3150627f771, type: 3}
+  asteroidPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  chargeFirePrefab: {fileID: 756767681691528159, guid: c9d36daff426eaf4c96e1b791a07c580, type: 3}
 --- !u!54 &4013813710209406256
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -171,7 +177,7 @@ MonoBehaviour:
   __MainTex2: {fileID: 2800000, guid: 736337323af22b344b976fd026e86740, type: 3}
   _Fade: 0
   _HDR_Intensity: 1
-  TeleportationColor: {r: 0, g: 1, b: 0.30675244, a: 1}
+  TeleportationColor: {r: 1, g: 0, b: 0.9023075, a: 1}
   _Distortion: 1
   _Value4: 0
   _AutoScrollX: 0

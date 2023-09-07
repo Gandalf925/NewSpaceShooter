@@ -48,6 +48,16 @@ public class Player3DController : MonoBehaviour
     void Update()
     {
 
+        float horizontalInput = Input.GetAxis("Horizontal"); // ADキーまたは左右矢印キー
+        float verticalInput = Input.GetAxis("Vertical"); // WSキーまたは上下矢印キー
+
+        Vector3 direction = new Vector3(horizontalInput, verticalInput, 0).normalized;
+
+        if (direction != Vector3.zero)
+        {
+            rb.velocity = direction * speed;
+        }
+
         if (!Input.GetMouseButton(0))
         {
             rb.velocity = Vector3.zero;
