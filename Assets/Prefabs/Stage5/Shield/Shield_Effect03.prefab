@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impactVfx: {fileID: 5396202672727008102, guid: 4de9aed9446dfef44bd4c2c42f082fa7, type: 3}
-  crashVfx: {fileID: 0}
+  crashVfx: {fileID: 2124065397379052162, guid: a9939c231e8419343a1a0d36268e076f, type: 3}
   waitBeforeDestroyImpact: 1
 --- !u!1 &4669344533427657738
 GameObject:

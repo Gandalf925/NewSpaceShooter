@@ -30,8 +30,9 @@ public class ShieldImpact : MonoBehaviour
 
         if (other.CompareTag("SpecialBullet"))
         {
-            var crash = Instantiate(impactVfx, transform);
+            var crash = Instantiate(crashVfx, transform);
             Destroy(crash, waitBeforeDestroyImpact);
+            Destroy(this.gameObject);
         }
     }
 }

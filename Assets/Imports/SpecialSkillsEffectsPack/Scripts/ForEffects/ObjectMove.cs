@@ -45,7 +45,7 @@ public class ObjectMove : MonoBehaviour
 
     void HitObj(RaycastHit hit)
     {
-        if (hit.collider.CompareTag("PlayerBullet"))
+        if (hit.collider.CompareTag("Player"))
         {
             m_makedObject = Instantiate(m_hitObject, hit.point, Quaternion.LookRotation(hit.normal)).gameObject;
             Destroy(m_makedObject, DestroyTime2);

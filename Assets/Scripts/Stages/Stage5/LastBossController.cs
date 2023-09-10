@@ -75,7 +75,7 @@ public class LastBossController : MonoBehaviour
 
         if (bossState == BossState.Mad)
         {
-            // StartCoroutine(StartLastEvent());
+
         }
     }
 
@@ -168,6 +168,9 @@ public class LastBossController : MonoBehaviour
 
     IEnumerator SpawnAndShootAsteroidLevel1()
     {
+
+        List<GameObject> createdObjects = new List<GameObject>();  // 生成したオブジェクトを保存するリスト
+
         spriteRenderer.sprite = bossUseMagic;
         bossUseMagicEffect.SetActive(true);
         yield return new WaitForSeconds(0.7f);
@@ -200,15 +203,18 @@ public class LastBossController : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
-        GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
-        foreach (GameObject enemyBullet in enemyBullets)
+
+        // ルーチンの最後でリスト内のオブジェクトだけを破壊
+        foreach (GameObject obj in createdObjects)
         {
-            Destroy(enemyBullet);
+            Destroy(obj);
         }
     }
 
     IEnumerator SpawnAndShootAsteroidLevel2()
     {
+        List<GameObject> createdObjects = new List<GameObject>();  // 生成したオブジェクトを保存するリスト
+
         spriteRenderer.sprite = bossUseMagic;
         bossUseMagicEffect.SetActive(true);
         yield return new WaitForSeconds(0.7f);
@@ -241,15 +247,16 @@ public class LastBossController : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
-        GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
-        foreach (GameObject enemyBullet in enemyBullets)
+        // ルーチンの最後でリスト内のオブジェクトだけを破壊
+        foreach (GameObject obj in createdObjects)
         {
-            Destroy(enemyBullet);
+            Destroy(obj);
         }
     }
 
     IEnumerator AttackChargeFireArrowLevel1()
     {
+        List<GameObject> createdObjects = new List<GameObject>();  // 生成したオブジェクトを保存するリスト
 
         spriteRenderer.sprite = bossUseMagic;
         bossUseMagicEffect.SetActive(true);
@@ -271,15 +278,16 @@ public class LastBossController : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
-        GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("ChargeFire");
-        foreach (GameObject enemyBullet in enemyBullets)
+        // ルーチンの最後でリスト内のオブジェクトだけを破壊
+        foreach (GameObject obj in createdObjects)
         {
-            Destroy(enemyBullet);
+            Destroy(obj);
         }
     }
 
     IEnumerator AttackChargeFireArrowLevel2()
     {
+        List<GameObject> createdObjects = new List<GameObject>();  // 生成したオブジェクトを保存するリスト
 
         spriteRenderer.sprite = bossUseMagic;
         bossUseMagicEffect.SetActive(true);
@@ -301,10 +309,10 @@ public class LastBossController : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
-        GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("Asteroids");
-        foreach (GameObject enemyBullet in enemyBullets)
+        // ルーチンの最後でリスト内のオブジェクトだけを破壊
+        foreach (GameObject obj in createdObjects)
         {
-            Destroy(enemyBullet);
+            Destroy(obj);
         }
     }
 
@@ -360,8 +368,8 @@ public class LastBossController : MonoBehaviour
             if (currentHP <= 0)
             {
                 currentHP = 0;
-                bossState = BossState.Mad;  // ここで状態を Mad に設定
-                spriteRenderer.sprite = bossTired;  // ここで Sprite を設定
+                bossState = BossState.Mad;
+                spriteRenderer.sprite = bossTired;
                 bossShield.SetActive(true);
             }
             gameManager.UpdateScore(damage);
