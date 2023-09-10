@@ -23,6 +23,7 @@ public class LastBossController : MonoBehaviour
     [SerializeField] Sprite bossAngry;
     [SerializeField] Sprite bossTired;
 
+    [SerializeField] GameObject bossShield;
     BossState bossState = BossState.Normal;
 
 
@@ -75,7 +76,6 @@ public class LastBossController : MonoBehaviour
         if (bossState == BossState.Mad)
         {
             // StartCoroutine(StartLastEvent());
-            Debug.Log("LastEvent");
         }
     }
 
@@ -116,8 +116,18 @@ public class LastBossController : MonoBehaviour
             }
             else
             {
-                // StartCoroutine(BossMoveLevel3());
-                StartCoroutine(BossLastAttack());
+                int randomIndex = Random.Range(0, 2);
+
+                yield return BossMoveLevel3();
+                if (randomIndex == 0)
+                {
+                    StartCoroutine(AttackChargeFireArrowLevel2());
+                }
+                else
+                {
+                    StartCoroutine(SpawnAndShootAsteroidLevel2());
+                }
+                yield return new WaitForSeconds(1f);
             }
         }
     }
@@ -261,7 +271,7 @@ public class LastBossController : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
-        GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+        GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("ChargeFire");
         foreach (GameObject enemyBullet in enemyBullets)
         {
             Destroy(enemyBullet);
@@ -291,60 +301,13 @@ public class LastBossController : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
-        GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+        GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("Asteroids");
         foreach (GameObject enemyBullet in enemyBullets)
         {
             Destroy(enemyBullet);
         }
     }
 
-    IEnumerator BossLastAttack()
-    {
-        bossUseMagicEffect.SetActive(true);
-
-        for (int i = 0; i < 30; i++) // 25個生成
-        {
-            float randomX = Random.Range(-25f, 25f);
-            float randomY = Random.Range(20f, 35f);
-            float randomZ = Random.Range(transform.position.z + 10, transform.position.z + 20);
-
-            Vector3 spawnPosition = new Vector3(randomX, randomY, randomZ);
-
-            GameObject chargeFireArrow = Instantiate(chargeFirePrefab, spawnPosition, Quaternion.identity);
-
-            chargeFireArrow.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-
-            yield return new WaitForSeconds(0.07f); // 生成間隔（必要に応じて調整）
-        }
-
-        for (int i = 0; i < 6; i++)
-        {
-            // AsteroidPointsからランダムな位置を選ぶ
-            int spawnRandomIndex = Random.Range(0, asteroidPoints.Length);
-            int asteroidRandomIndex = Random.Range(0, asteroidPrefabs.Length);
-            Transform spawnPoint = asteroidPoints[spawnRandomIndex];
-
-            // Asteroidを生成
-            GameObject asteroid = Instantiate(asteroidPrefabs[asteroidRandomIndex], spawnPoint.position, Quaternion.identity);
-            if (asteroidRandomIndex == 2)
-            {
-                asteroid.transform.localScale = new Vector3(6f, 6f, 6f);
-            }
-            else
-            {
-                asteroid.transform.localScale = new Vector3(7f, 7f, 7f);
-            }
-
-            // Asteroidに力を加えてPlayerに向かって飛ばす
-            Rigidbody rb = asteroid.GetComponent<Rigidbody>();
-            Vector3 direction = (player.transform.position - spawnPoint.position).normalized;
-            rb.AddForce(direction * 500000f, ForceMode.Impulse);
-
-            yield return new WaitForSeconds(2f);
-
-            Destroy(asteroid);
-        }
-    }
 
     // シングルのボスの動き（出現→消失→移動→出現）をまとめたコルーチン
     IEnumerator SingleBossMove(float duration)
@@ -399,6 +362,7 @@ public class LastBossController : MonoBehaviour
                 currentHP = 0;
                 bossState = BossState.Mad;  // ここで状態を Mad に設定
                 spriteRenderer.sprite = bossTired;  // ここで Sprite を設定
+                bossShield.SetActive(true);
             }
             gameManager.UpdateScore(damage);
         }

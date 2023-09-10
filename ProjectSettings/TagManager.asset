@@ -21,6 +21,9 @@ TagManager:
   - BossStopPosUp
   - BossStopPosMiddle
   - BossStopPosDown
+  - ChargeFire
+  - Asteroids
+  - SpecialBullet
   layers:
   - Default
   - TransparentFX

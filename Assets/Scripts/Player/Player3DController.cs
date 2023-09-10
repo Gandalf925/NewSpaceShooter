@@ -130,7 +130,7 @@ public class Player3DController : MonoBehaviour
     {
         if (isInvincible) return;
 
-        if (other.CompareTag("EnemyBullet"))
+        if (other.CompareTag("EnemyBullet") || other.CompareTag("ChargeFire") || other.CompareTag("Asteroids"))
         {
             TakeDamage();
 
