@@ -6,7 +6,7 @@ public class ShieldImpact : MonoBehaviour
 {
     public GameObject impactVfx;
     public GameObject crashVfx;
-    public float waitBeforeDestroyImpact = 1f;
+    public float waitBeforeDestroyImpact = 0.2f;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,13 +24,13 @@ public class ShieldImpact : MonoBehaviour
 
             rb.velocity = randomDirection.normalized * rb.velocity.magnitude;
 
-            var impact = Instantiate(impactVfx, transform);
+            GameObject impact = Instantiate(impactVfx, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z), Quaternion.identity);
             Destroy(impact, waitBeforeDestroyImpact);
         }
 
         if (other.CompareTag("SpecialBullet"))
         {
-            var crash = Instantiate(crashVfx, transform);
+            var crash = Instantiate(crashVfx, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z), Quaternion.identity);
             Destroy(crash, waitBeforeDestroyImpact);
             Destroy(this.gameObject);
         }
