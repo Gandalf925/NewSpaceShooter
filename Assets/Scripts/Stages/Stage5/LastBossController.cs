@@ -42,7 +42,11 @@ public class LastBossController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     _2dxFX_NewTeleportation2 telepotation;
 
+    bool isBossMad = false;
+
     GameManager gameManager;
+    Stage5Manager stage5Manager;
+
     void Start()
     {
         transform.position = BossPositions[9].position;
@@ -55,27 +59,33 @@ public class LastBossController : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         // soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<BGMManager>();
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        stage5Manager = FindObjectOfType<Stage5Manager>();
 
         StartCoroutine(BossMoveRoutine());
     }
 
     void Update()
     {
-        // HP が 0 の場合を先に評価
-        if (currentHP == 0)
-        {
-            bossState = BossState.Mad;
-            spriteRenderer.sprite = bossTired;
-        }
-        else if (currentHP <= maxHP / 2)
+        if (currentHP <= maxHP / 2)
         {
             bossState = BossState.Angry;
             spriteRenderer.sprite = bossAngry;
         }
 
-        if (bossState == BossState.Mad)
+        if (currentHP <= 0)
         {
+            if (bossState != BossState.Mad)
+            {
+                currentHP = 0; // 保険として currentHP を 0 にクリッピング
+                bossState = BossState.Mad;
+                spriteRenderer.sprite = bossTired;
+            }
+        }
 
+        if (bossState == BossState.Mad && isBossMad == false)
+        {
+            isBossMad = true;
+            StartCoroutine(stage5Manager.StartLastEvent());
         }
     }
 
@@ -367,7 +377,6 @@ public class LastBossController : MonoBehaviour
             currentHP -= damage;
             if (currentHP <= 0)
             {
-                currentHP = 0;
                 bossState = BossState.Mad;
                 spriteRenderer.sprite = bossTired;
                 bossShield.SetActive(true);

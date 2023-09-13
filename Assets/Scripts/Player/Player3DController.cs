@@ -21,7 +21,13 @@ public class Player3DController : MonoBehaviour
 
     private SpriteRenderer playerImage;
 
+    public bool isSpecialGun = false;
+    public bool canAttack = false;
+    public GameObject SpecialBullet;
+
     GameManager gameManager;
+
+    PlayerShootController playerShootController;
 
     [Header("Audio")]
     public AudioSource seSource;
@@ -110,6 +116,13 @@ public class Player3DController : MonoBehaviour
                 EnableCollider();
                 invincibleTimer = 0f;
             }
+
+        }
+
+        if (isSpecialGun && !canAttack)
+        {
+            canAttack = true;
+            Debug.Log("SpecialGun");
         }
 
         // プレイヤーの位置を制限する
