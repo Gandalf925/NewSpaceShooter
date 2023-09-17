@@ -50,6 +50,8 @@ public class Player3DController : MonoBehaviour
 
         // カメラの初期位置を設定（オプション）
         mainCamera.transform.position = transform.position + cameraOffset;
+
+
     }
 
     void Update()

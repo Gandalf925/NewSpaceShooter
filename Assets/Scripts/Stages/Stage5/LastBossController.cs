@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class LastBossController : MonoBehaviour
 {
@@ -431,20 +432,21 @@ public class LastBossController : MonoBehaviour
         transform.DOMoveY(bossDeadPos.position.y, 5f);
 
         yield return new WaitForSeconds(5f);
-        this.gameObject.SetActive(false);
+        stage5Manager.uIManager.FadeOut();
         yield return new WaitForSeconds(2f);
 
+        SceneManager.LoadScene("Ending");
     }
 
     IEnumerator PauseGameForHalfSeconds()
     {
         Time.timeScale = 0;
-        telepotation._Fade = 0f;
         yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 1;
     }
     void ChangeBossSpriteDead()
     {
+        telepotation._Fade = 0f;
         spriteRenderer.sprite = bossDead;
     }
     void AllAttackDelete()

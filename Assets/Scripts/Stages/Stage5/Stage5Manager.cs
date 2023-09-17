@@ -19,8 +19,11 @@ public class Stage5Manager : MonoBehaviour
     public int SpecialBulletCount = 3;
     public bool isDisplayReleaseText = false;
 
+    public UIManager uIManager;
+
     void Start()
     {
+        uIManager.FadeIn();
         SetNumeratorText(SpecialBulletCount);
         player.EnableShooting();
     }

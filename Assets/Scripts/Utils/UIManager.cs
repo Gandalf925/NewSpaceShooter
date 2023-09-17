@@ -34,20 +34,13 @@ public class UIManager : MonoBehaviour
     // ブラックアウトパネル
     public Image blackoutPanel;
 
-    // フェードイン処理
     public void FadeIn()
     {
-        // ブラックアウトパネルをフェードインさせる
         blackoutPanel.DOFade(0f, 2f);
-
     }
 
-    // フェードアウト処理
     public void FadeOut()
     {
-
-        // ブラックアウトパネルをフェードアウトさせる
         blackoutPanel.DOFade(1f, 2f);
-
     }
 }
