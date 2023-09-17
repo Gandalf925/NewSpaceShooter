@@ -23,6 +23,7 @@ public class Player3DController : MonoBehaviour
 
     public bool isSpecialGun = false;
     public bool canAttack = false;
+    public bool canShoot = true;
     public GameObject SpecialBullet;
 
     GameManager gameManager;
@@ -163,7 +164,7 @@ public class Player3DController : MonoBehaviour
         isInvincible = true;
     }
 
-    private void Death()
+    public void Death()
     {
         PlayExplosionSE();
         // 爆発エフェクトを生成し、プレイヤーの位置に設定する
@@ -173,6 +174,16 @@ public class Player3DController : MonoBehaviour
         isActive = false;
         // プレイヤーを破棄する
         Destroy(gameObject);
+    }
+
+    public void DisableShooting()
+    {
+        canShoot = false;
+    }
+
+    public void EnableShooting()
+    {
+        canShoot = true;
     }
 
     public void EnableCollider()
@@ -205,4 +216,5 @@ public class Player3DController : MonoBehaviour
 
         seSource.Stop();
     }
+
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using DG.Tweening;
 
 public class LastBossController : MonoBehaviour
 {
@@ -17,14 +18,23 @@ public class LastBossController : MonoBehaviour
     public float currentHP;
 
     public GameObject player;
+    public Player3DController playerController;
     public Transform[] BossPositions;
+    [SerializeField] Transform bossDeadPos;
     [SerializeField] Sprite bossNormal;
     [SerializeField] Sprite bossUseMagic;
     [SerializeField] Sprite bossAngry;
     [SerializeField] Sprite bossTired;
+    [SerializeField] Sprite bossDead;
 
     [SerializeField] GameObject bossShield;
+    [SerializeField] GameObject explosionEffect;
+
     BossState bossState = BossState.Normal;
+    Coroutine bossMoveCoroutine;
+    Coroutine chargeFireAttackCoroutine;
+    Coroutine AsteroidAttackCoroutine;
+    public Transform[] bossExplosionPoints;
 
 
 
@@ -49,7 +59,7 @@ public class LastBossController : MonoBehaviour
 
     void Start()
     {
-        transform.position = BossPositions[9].position;
+        transform.position = new Vector3(BossPositions[5].position.x, bossDeadPos.position.y, BossPositions[5].position.z);
 
         currentHP = maxHP;
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -57,28 +67,32 @@ public class LastBossController : MonoBehaviour
         col = GetComponent<BoxCollider>();
         telepotation._Fade = 0f;
         player = GameObject.FindWithTag("Player");
+        playerController = player.GetComponent<Player3DController>();
         // soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<BGMManager>();
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         stage5Manager = FindObjectOfType<Stage5Manager>();
 
-        StartCoroutine(BossMoveRoutine());
+        bossMoveCoroutine = StartCoroutine(BossMoveRoutine());
     }
 
     void Update()
     {
-        if (currentHP <= maxHP / 2)
+        if (bossState != BossState.Mad)
         {
-            bossState = BossState.Angry;
-            spriteRenderer.sprite = bossAngry;
-        }
-
-        if (currentHP <= 0)
-        {
-            if (bossState != BossState.Mad)
+            if (currentHP <= maxHP / 2)
             {
-                currentHP = 0; // 保険として currentHP を 0 にクリッピング
-                bossState = BossState.Mad;
-                spriteRenderer.sprite = bossTired;
+                bossState = BossState.Angry;
+                spriteRenderer.sprite = bossAngry;
+            }
+
+            if (currentHP <= 0)
+            {
+                if (bossState != BossState.Mad)
+                {
+                    currentHP = 0; // 保険として currentHP を 0 にクリッピング
+                    bossState = BossState.Mad;
+                    spriteRenderer.sprite = bossTired;
+                }
             }
         }
 
@@ -91,6 +105,16 @@ public class LastBossController : MonoBehaviour
 
     IEnumerator BossMoveRoutine()
     {
+        playerController.DisableShooting();
+        transform.DOMoveY(BossPositions[5].position.y, 5f);
+        Transform cameraTransform = Camera.main.transform;
+        Tweener bossMoveTween = transform.DOMoveY(BossPositions[5].position.y, 5f);
+        Tweener cameraShakeTween = cameraTransform.DOShakePosition(5f, 0.5f, 100, 90, false, true);
+
+        yield return new WaitForSeconds(8f);
+
+        playerController.EnableShooting();
+
         while (player != null)
         {
             if (bossState == BossState.Normal)
@@ -101,10 +125,12 @@ public class LastBossController : MonoBehaviour
 
                 if (randomIndex == 0)
                 {
+                    spriteRenderer.sprite = bossUseMagic;
                     yield return AttackChargeFireArrowLevel1();
                 }
                 else
                 {
+                    spriteRenderer.sprite = bossUseMagic;
                     yield return SpawnAndShootAsteroidLevel1();
                 }
                 yield return new WaitForSeconds(2f);
@@ -116,10 +142,12 @@ public class LastBossController : MonoBehaviour
                 yield return BossMoveLevel2();
                 if (randomIndex == 0)
                 {
+                    spriteRenderer.sprite = bossUseMagic;
                     yield return AttackChargeFireArrowLevel2();
                 }
                 else
                 {
+                    spriteRenderer.sprite = bossUseMagic;
                     yield return SpawnAndShootAsteroidLevel2();
                 }
                 yield return new WaitForSeconds(1.5f);
@@ -131,11 +159,11 @@ public class LastBossController : MonoBehaviour
                 yield return BossMoveLevel3();
                 if (randomIndex == 0)
                 {
-                    StartCoroutine(AttackChargeFireArrowLevel2());
+                    chargeFireAttackCoroutine = StartCoroutine(AttackChargeFireArrowLevel2());
                 }
                 else
                 {
-                    StartCoroutine(SpawnAndShootAsteroidLevel2());
+                    AsteroidAttackCoroutine = StartCoroutine(SpawnAndShootAsteroidLevel2());
                 }
                 yield return new WaitForSeconds(1f);
             }
@@ -180,8 +208,6 @@ public class LastBossController : MonoBehaviour
     {
 
         List<GameObject> createdObjects = new List<GameObject>();  // 生成したオブジェクトを保存するリスト
-
-        spriteRenderer.sprite = bossUseMagic;
         bossUseMagicEffect.SetActive(true);
         yield return new WaitForSeconds(0.7f);
 
@@ -225,7 +251,6 @@ public class LastBossController : MonoBehaviour
     {
         List<GameObject> createdObjects = new List<GameObject>();  // 生成したオブジェクトを保存するリスト
 
-        spriteRenderer.sprite = bossUseMagic;
         bossUseMagicEffect.SetActive(true);
         yield return new WaitForSeconds(0.7f);
 
@@ -268,7 +293,6 @@ public class LastBossController : MonoBehaviour
     {
         List<GameObject> createdObjects = new List<GameObject>();  // 生成したオブジェクトを保存するリスト
 
-        spriteRenderer.sprite = bossUseMagic;
         bossUseMagicEffect.SetActive(true);
 
         for (int i = 0; i < 15; i++) // 25個生成
@@ -298,8 +322,6 @@ public class LastBossController : MonoBehaviour
     IEnumerator AttackChargeFireArrowLevel2()
     {
         List<GameObject> createdObjects = new List<GameObject>();  // 生成したオブジェクトを保存するリスト
-
-        spriteRenderer.sprite = bossUseMagic;
         bossUseMagicEffect.SetActive(true);
 
         for (int i = 0; i < 30; i++) // 25個生成
@@ -382,6 +404,99 @@ public class LastBossController : MonoBehaviour
                 bossShield.SetActive(true);
             }
             gameManager.UpdateScore(damage);
+        }
+
+        if (other.CompareTag("SpecialBullet"))
+        {
+            StartCoroutine(BossDead());
+        }
+    }
+
+    IEnumerator BossDead()
+    {
+        stage5Manager.HideReleaseText();
+        stage5Manager.player.DisableShooting();
+        yield return PauseGameForHalfSeconds();
+
+        AllAttackDelete();
+        if (bossMoveCoroutine != null)
+        {
+            StopCoroutine(bossMoveCoroutine);
+        }
+
+        ChangeBossSpriteDead();
+
+        StartCoroutine(GenerateBossExplosionEffects());
+
+        transform.DOMoveY(bossDeadPos.position.y, 5f);
+
+        yield return new WaitForSeconds(5f);
+        this.gameObject.SetActive(false);
+        yield return new WaitForSeconds(2f);
+
+    }
+
+    IEnumerator PauseGameForHalfSeconds()
+    {
+        Time.timeScale = 0;
+        telepotation._Fade = 0f;
+        yield return new WaitForSecondsRealtime(1f);
+        Time.timeScale = 1;
+    }
+    void ChangeBossSpriteDead()
+    {
+        spriteRenderer.sprite = bossDead;
+    }
+    void AllAttackDelete()
+    {
+        bossUseMagicEffect.SetActive(false);
+
+        if (chargeFireAttackCoroutine != null)
+        {
+            StopCoroutine(chargeFireAttackCoroutine);
+        }
+        if (AsteroidAttackCoroutine != null)
+        {
+            StopCoroutine(AsteroidAttackCoroutine);
+        }
+
+        GameObject[] asteroids = GameObject.FindGameObjectsWithTag("Asteroids");
+        GameObject[] chargeFires = GameObject.FindGameObjectsWithTag("ChargeFire");
+        GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+
+        foreach (GameObject asteroid in asteroids)
+        {
+            Destroy(asteroid);
+        }
+        foreach (GameObject chargeFire in chargeFires)
+        {
+            Destroy(chargeFire);
+        }
+        foreach (GameObject enemyBullet in enemyBullets)
+        {
+            Destroy(enemyBullet);
+        }
+    }
+
+    IEnumerator GenerateBossExplosionEffects()
+    {
+        float duration = 5.0f; // 総持続時間
+        float interval = 0.5f; // エフェクト生成の間隔
+
+        float timer = 0.0f; // タイマー初期化
+
+        while (timer < duration)
+        {
+            // bossExplosionPoints配列の中からランダムなTransformを選ぶ
+            int randomIndex = Random.Range(0, bossExplosionPoints.Length);
+            Transform randomPoint = bossExplosionPoints[randomIndex];
+
+            // ランダムなTransformの位置にエクスプロージョンエフェクトを生成
+            Instantiate(explosionEffect, randomPoint.position, Quaternion.identity);
+
+            timer += interval; // タイマーを更新
+
+            yield return new WaitForSeconds(interval); // 指定した間隔で待機
         }
     }
 }

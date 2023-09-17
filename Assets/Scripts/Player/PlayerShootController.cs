@@ -22,32 +22,35 @@ public class PlayerShootController : MonoBehaviour
     void Update()
     {
         ShowIcon();
-
-        if (player3DController.isSpecialGun)
+        if (player3DController.canShoot)
         {
-            if (Time.time > nextFire && Input.GetKeyUp(KeyCode.Mouse0))
-            {
-                nextFire = Time.time + 1.0f / fireRate;
-                ShootSpecialBullet();
-            }
-            if (Time.time > nextFire && Input.GetKey(KeyCode.Space))
-            {
-                nextFire = Time.time + 1.0f / fireRate;
-                ShootSpecialBullet();
-            }
-        }
-        else
-        {
-            if (Time.time > nextFire && Input.GetKey(KeyCode.Mouse0))
-            {
-                nextFire = Time.time + 1.0f / fireRate;
-                ShootBullet();
-            }
 
-            if (Time.time > nextFire && Input.GetKey(KeyCode.Space))
+            if (player3DController.isSpecialGun)
             {
-                nextFire = Time.time + 1.0f / fireRate;
-                ShootBullet();
+                if (Time.time > nextFire && Input.GetKeyUp(KeyCode.Mouse0))
+                {
+                    nextFire = Time.time + 1.0f / fireRate;
+                    ShootSpecialBullet();
+                }
+                if (Time.time > nextFire && Input.GetKey(KeyCode.Space))
+                {
+                    nextFire = Time.time + 1.0f / fireRate;
+                    ShootSpecialBullet();
+                }
+            }
+            else
+            {
+                if (Time.time > nextFire && Input.GetKey(KeyCode.Mouse0))
+                {
+                    nextFire = Time.time + 1.0f / fireRate;
+                    ShootBullet();
+                }
+
+                if (Time.time > nextFire && Input.GetKey(KeyCode.Space))
+                {
+                    nextFire = Time.time + 1.0f / fireRate;
+                    ShootBullet();
+                }
             }
         }
 
