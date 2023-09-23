@@ -19,10 +19,13 @@ public class Stage5Manager : MonoBehaviour
     public int SpecialBulletCount = 3;
     public bool isDisplayReleaseText = false;
 
+    public AudioClip stage5BGM;
+
     public UIManager uIManager;
 
     void Start()
     {
+        BGMManager.instance.PlayBGM(stage5BGM);
         uIManager.FadeIn();
         SetNumeratorText(SpecialBulletCount);
         player.EnableShooting();

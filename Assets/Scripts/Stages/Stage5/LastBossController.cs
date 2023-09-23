@@ -37,6 +37,8 @@ public class LastBossController : MonoBehaviour
     Coroutine AsteroidAttackCoroutine;
     public Transform[] bossExplosionPoints;
 
+    [SerializeField] AudioClip bossExplosionSE;
+
 
 
     [SerializeField] GameObject bossUseMagicEffect;
@@ -58,6 +60,9 @@ public class LastBossController : MonoBehaviour
     GameManager gameManager;
     Stage5Manager stage5Manager;
 
+    public AudioSource seSource;
+    public AudioClip warpSE;
+
     void Start()
     {
         transform.position = new Vector3(BossPositions[5].position.x, bossDeadPos.position.y, BossPositions[5].position.z);
@@ -69,10 +74,11 @@ public class LastBossController : MonoBehaviour
         telepotation._Fade = 0f;
         player = GameObject.FindWithTag("Player");
         playerController = player.GetComponent<Player3DController>();
-        // soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<BGMManager>();
+        seSource = GetComponent<AudioSource>();
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         stage5Manager = FindObjectOfType<Stage5Manager>();
 
+        playerController.DisableShooting();
         bossMoveCoroutine = StartCoroutine(BossMoveRoutine());
     }
 
@@ -106,11 +112,11 @@ public class LastBossController : MonoBehaviour
 
     IEnumerator BossMoveRoutine()
     {
-        playerController.DisableShooting();
         transform.DOMoveY(BossPositions[5].position.y, 5f);
         Transform cameraTransform = Camera.main.transform;
         Tweener bossMoveTween = transform.DOMoveY(BossPositions[5].position.y, 5f);
         Tweener cameraShakeTween = cameraTransform.DOShakePosition(5f, 0.5f, 100, 90, false, true);
+
 
         yield return new WaitForSeconds(8f);
 
@@ -353,6 +359,7 @@ public class LastBossController : MonoBehaviour
     // シングルのボスの動き（出現→消失→移動→出現）をまとめたコルーチン
     IEnumerator SingleBossMove(float duration)
     {
+        seSource.PlayOneShot(warpSE);
         yield return Dissolve(duration, false); // ボスを消す
         yield return Move();                // ランダムな位置に移動
         yield return Dissolve(duration, true);  // ボスを登場させる
@@ -426,6 +433,7 @@ public class LastBossController : MonoBehaviour
         }
 
         ChangeBossSpriteDead();
+        seSource.PlayOneShot(bossExplosionSE);
 
         StartCoroutine(GenerateBossExplosionEffects());
 
@@ -434,6 +442,8 @@ public class LastBossController : MonoBehaviour
         yield return new WaitForSeconds(5f);
         stage5Manager.uIManager.FadeOut();
         yield return new WaitForSeconds(2f);
+
+        BGMManager.instance.StopBGM();
 
         SceneManager.LoadScene("Ending");
     }

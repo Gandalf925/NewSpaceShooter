@@ -43,10 +43,12 @@ public class Player3DController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
+        source = GetComponents<AudioSource>()[0];
         playerImage = GetComponent<SpriteRenderer>();
         fixedZPosition = transform.position.z;
 
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        seSource = GetComponent<AudioSource>();
 
         // カメラの初期位置を設定（オプション）
         mainCamera.transform.position = transform.position + cameraOffset;
@@ -159,6 +161,7 @@ public class Player3DController : MonoBehaviour
 
     public void TakeDamage()
     {
+        PlayExplosionSE();
         GameObject effectInstance = Instantiate(explosionEffect, transform.position, Quaternion.identity);
         Destroy(effectInstance, 1f);  // エフェクトが終了したら破棄する
         gameManager.UpdateLives(-1);
@@ -175,7 +178,7 @@ public class Player3DController : MonoBehaviour
 
         isActive = false;
         // プレイヤーを破棄する
-        Destroy(gameObject);
+        this.gameObject.SetActive(false);
     }
 
     public void DisableShooting()
@@ -199,7 +202,7 @@ public class Player3DController : MonoBehaviour
 
     public void PlayShootSE()
     {
-        source.PlayOneShot(explosionSE);
+        source.PlayOneShot(shootSE);
     }
 
     public void PlayExplosionSE()

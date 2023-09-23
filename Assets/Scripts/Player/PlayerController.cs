@@ -147,7 +147,7 @@ public class PlayerController : MonoBehaviour
 
             // 弾のプレハブをインスタンス化
             GameObject bulletInstance = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
-            source.PlayOneShot(shootSE);
+            PlayShootSE();
 
             // BulletControllerの発射間隔、攻撃力を取得
             PlayerBulletController bulletController = bulletInstance.GetComponent<PlayerBulletController>();

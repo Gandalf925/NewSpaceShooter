@@ -99,6 +99,7 @@ public class PlayerShootController : MonoBehaviour
     {
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         Vector3 shootDirection = new Vector3(0.0f, 0.0f, shootSpeedZ);
+        player3DController.PlayShootSE();
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
         {
@@ -110,6 +111,7 @@ public class PlayerShootController : MonoBehaviour
     {
         GameObject bullet = Instantiate(specialbulletPrefab, transform.position, Quaternion.identity);
         Vector3 shootDirection = new Vector3(0.0f, 0.0f, shootSpeedZ);
+        player3DController.PlayShootSE();
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
         {

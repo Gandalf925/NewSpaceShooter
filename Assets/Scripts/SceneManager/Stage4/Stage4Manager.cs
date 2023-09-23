@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 public class Stage4Manager : MonoBehaviour
@@ -19,6 +20,7 @@ public class Stage4Manager : MonoBehaviour
     public GameObject crownPepePrefab;
 
     [Header("Boss")]
+    GameObject boss;
     public GameObject bossPrefab;
     public Transform bossStayPos1;
     public Transform bossStayPos2;
@@ -35,6 +37,8 @@ public class Stage4Manager : MonoBehaviour
     [SerializeField] Transform frameStartPos;
     [SerializeField] Transform frameStopPos;
     [SerializeField] Transform frameEndPos;
+
+    bool isBoss = false;
 
     [Header("Manager")]
     GameManager gameManager;
@@ -57,6 +61,18 @@ public class Stage4Manager : MonoBehaviour
         StartCoroutine(StartFrameIn());
 
         StartCoroutine(SpawnEnemies(6f));
+    }
+
+    private void Update()
+    {
+        if (isBoss)
+        {
+            Debug.Log("Boss appeared");
+            if (boss == null)
+            {
+                StartCoroutine(LoadNextScene());
+            }
+        }
     }
 
     private IEnumerator SpawnEnemies(float delayTime)
@@ -107,8 +123,11 @@ public class Stage4Manager : MonoBehaviour
         StartCoroutine(WarningBeforBossBattle());
         yield return new WaitForSeconds(7f);
 
-
-        Instantiate(bossPrefab, canvasTransform);
+        if (!isBoss)
+        {
+            boss = Instantiate(bossPrefab, canvasTransform);
+            isBoss = true;
+        }
     }
 
 
@@ -156,5 +175,13 @@ public class Stage4Manager : MonoBehaviour
             shieldPepe.transform.DOMove(shieldPepePos[i].transform.position, 1f);
         }
         yield return new WaitForSeconds(2f);
+    }
+
+    IEnumerator LoadNextScene()
+    {
+        BGMManager.instance.StopBGM();
+        uIManager.FadeOut();
+        yield return new WaitForSecondsRealtime(2f);
+        SceneManager.LoadScene("Stage4ED1");
     }
 }
