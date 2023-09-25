@@ -62,10 +62,14 @@ public class Stage4ED2Manager : MonoBehaviour
 
         POPanel.transform.DOScale(new Vector3(3f, 3f, 3f), 0.5f);
 
+        yield return new WaitForSeconds(0.5f);
 
+        blackoutPanel.DOFade(1f, 2f);
 
-        // BGMManager.instance.StopBGM();
-        // SceneManager.LoadScene("Stage4");
+        yield return new WaitForSeconds(2f);
+
+        BGMManager.instance.StopBGM();
+        SceneManager.LoadScene("Stage5OP1");
     }
 
 

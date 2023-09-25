@@ -382,7 +382,7 @@ public class PlayerController : MonoBehaviour
 
     public void PlayShootSE()
     {
-        source.PlayOneShot(explosionSE);
+        source.PlayOneShot(shootSE);
     }
 
     public void PlayExplosionSE()
