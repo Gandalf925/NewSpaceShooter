@@ -445,7 +445,7 @@ public class LastBossController : MonoBehaviour
 
         BGMManager.instance.StopBGM();
 
-        SceneManager.LoadScene("Ending");
+        SceneManager.LoadScene("ED1");
     }
 
     IEnumerator PauseGameForHalfSeconds()

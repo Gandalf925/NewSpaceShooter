@@ -32,7 +32,7 @@ public class PlayerShootController : MonoBehaviour
                     nextFire = Time.time + 1.0f / fireRate;
                     ShootSpecialBullet();
                 }
-                if (Time.time > nextFire && Input.GetKey(KeyCode.Space))
+                if (Time.time > nextFire && Input.GetKeyDown(KeyCode.Space))
                 {
                     nextFire = Time.time + 1.0f / fireRate;
                     ShootSpecialBullet();
@@ -53,7 +53,6 @@ public class PlayerShootController : MonoBehaviour
                 }
             }
         }
-
     }
 
     void ShowIcon()

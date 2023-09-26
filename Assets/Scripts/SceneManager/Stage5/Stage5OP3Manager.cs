@@ -32,7 +32,6 @@ public class Stage5OP3Manager : MonoBehaviour
 
     IEnumerator Stage5OP3()
     {
-        // BGMManager.instance.PlayBGM(stage4OP1BGM);
         yield return new WaitForSecondsRealtime(2f);
 
         lastBossShadow.GetComponent<Image>().DOColor(new Color(1f, 1f, 1f, 1f), 2f);
@@ -47,13 +46,14 @@ public class Stage5OP3Manager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(2f);
 
-        lastBossShadow.transform.DOScale(new Vector3(100f, 100f, 1f), 3f);
+        lastBossShadow.transform.DOScale(new Vector3(50f, 50f, 0f), 3f);
 
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(1.5f);
 
         blackoutPanel.DOFade(1f, 2f);
         yield return new WaitForSeconds(2f);
 
+        BGMManager.instance.StopBGM();
         SceneManager.LoadScene("Stage5");
     }
 

@@ -33,7 +33,7 @@ public class Stage5OP1Manager : MonoBehaviour
 
     IEnumerator Stage5OP1()
     {
-        // BGMManager.instance.PlayBGM(stage4OP1BGM);
+        BGMManager.instance.PlayBGM(stage5OP1BGM);
         yield return new WaitForSecondsRealtime(2f);
 
         leftDoor.transform.DOMove(leftDoorEndPos.position, 0.8f);

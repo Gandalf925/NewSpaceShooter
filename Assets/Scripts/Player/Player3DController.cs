@@ -58,22 +58,29 @@ public class Player3DController : MonoBehaviour
 
     void Update()
     {
+        Vector3 direction = Vector3.zero;
 
-        float horizontalInput = Input.GetAxis("Horizontal"); // ADキーまたは左右矢印キー
-        float verticalInput = Input.GetAxis("Vertical"); // WSキーまたは上下矢印キー
-
-        Vector3 direction = new Vector3(horizontalInput, verticalInput, 0).normalized;
-
-        if (direction != Vector3.zero)
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            rb.velocity = direction * speed;
+            direction.x = -1;
+        }
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            direction.x = 1;
         }
 
-        if (!Input.GetMouseButton(0))
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
-            rb.velocity = Vector3.zero;
+            direction.y = 1;
         }
-        else
+        else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        {
+            direction.y = -1;
+        }
+
+        direction.Normalize();
+
+        if (Input.GetMouseButton(0))
         {
             Vector3 mouseScreenPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
@@ -84,7 +91,6 @@ public class Player3DController : MonoBehaviour
 
             Vector3 diff = targetPosition - transform.position;
             diff.z = 0;
-
 
             Vector3 currentDirection = rb.velocity.normalized;
             Vector3 newDirection = diff.normalized;
@@ -106,6 +112,14 @@ public class Player3DController : MonoBehaviour
             {
                 rb.velocity = Vector3.zero;
             }
+        }
+        else if (direction != Vector3.zero)
+        {
+            rb.velocity = direction * speed;
+        }
+        else
+        {
+            rb.velocity = Vector3.zero;
         }
 
         if (isInvincible)

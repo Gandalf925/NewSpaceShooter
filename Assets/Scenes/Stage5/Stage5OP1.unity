@@ -3780,7 +3780,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1857364565}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6551,7 +6551,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1857364565}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7965,7 +7965,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1857364565}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -8782,7 +8782,7 @@ MonoBehaviour:
   leftDoorEndPos: {fileID: 807628760}
   rightDoorEndPos: {fileID: 912758124}
   blackoutPanel: {fileID: 1509864381}
-  stage5OP1BGM: {fileID: 0}
+  stage5OP1BGM: {fileID: 8300000, guid: f7cdc47ae3f3e6944b8cb943a4c8c617, type: 3}
 --- !u!1 &1680992142
 GameObject:
   m_ObjectHideFlags: 0
@@ -9655,9 +9655,9 @@ RectTransform:
   - {fileID: 1923442301}
   - {fileID: 334645831}
   - {fileID: 1161103312}
-  - {fileID: 1509864383}
   - {fileID: 1166766667}
   - {fileID: 689371740}
+  - {fileID: 1509864383}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
