@@ -8782,7 +8782,7 @@ MonoBehaviour:
   leftDoorEndPos: {fileID: 807628760}
   rightDoorEndPos: {fileID: 912758124}
   blackoutPanel: {fileID: 1509864381}
-  stage5OP1BGM: {fileID: 8300000, guid: f7cdc47ae3f3e6944b8cb943a4c8c617, type: 3}
+  stage5OP1BGM: {fileID: 8300000, guid: 1f16c406b017ca744bf1a53436bda932, type: 3}
 --- !u!1 &1680992142
 GameObject:
   m_ObjectHideFlags: 0

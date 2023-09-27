@@ -585,7 +585,7 @@ MonoBehaviour:
   upperGreenEgg: {fileID: 227638321}
   upperEggEndPos: {fileID: 202787577}
   blackoutPanel: {fileID: 1720222799}
-  stage4OP1BGM: {fileID: 8300000, guid: 4ccde7017860ab54db1f38bd06697978, type: 3}
+  stage4OP1BGM: {fileID: 8300000, guid: 1f16c406b017ca744bf1a53436bda932, type: 3}
 --- !u!1001 &1140641271
 PrefabInstance:
   m_ObjectHideFlags: 0

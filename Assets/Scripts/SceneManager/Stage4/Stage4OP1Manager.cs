@@ -105,7 +105,7 @@ public class Stage4OP1Manager : MonoBehaviour
         blackoutPanel.DOFade(1f, 2f);
         yield return new WaitForSeconds(2f);
         BGMManager.instance.StopBGM();
-        SceneManager.LoadScene("Stage3");
+        SceneManager.LoadScene("Stage4");
     }
 
 }

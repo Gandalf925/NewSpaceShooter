@@ -323,7 +323,7 @@ MonoBehaviour:
   greenEgg: {fileID: 493180206}
   greenEggEndPos: {fileID: 423407666}
   blackoutPanel: {fileID: 680733595}
-  ED1BGM: {fileID: 0}
+  ED1BGM: {fileID: 8300000, guid: c2917fa8a39881348915ba31c69a9091, type: 3}
 --- !u!1 &83511153
 GameObject:
   m_ObjectHideFlags: 0

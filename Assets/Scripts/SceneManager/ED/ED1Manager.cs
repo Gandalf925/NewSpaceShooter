@@ -27,7 +27,7 @@ public class ED1Manager : MonoBehaviour
 
     IEnumerator ED1()
     {
-        // BGMManager.instance.PlayBGM(stage5OP1BGM);
+        BGMManager.instance.PlayBGM(ED1BGM);
         yield return new WaitForSecondsRealtime(1f);
 
         bullet.SetActive(true);
@@ -43,14 +43,5 @@ public class ED1Manager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(1.8f);
         SceneManager.LoadScene("ED2");
-    }
-
-
-    IEnumerator SkipScene()
-    {
-        blackoutPanel.DOFade(1f, 2f);
-        yield return new WaitForSeconds(2f);
-        BGMManager.instance.StopBGM();
-        SceneManager.LoadScene("Stage3");
     }
 }

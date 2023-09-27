@@ -56,7 +56,7 @@ public class ED5Manager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(3f);
 
-        SceneManager.LoadScene("ED5");
+        SceneManager.LoadScene("ED6");
     }
 
 

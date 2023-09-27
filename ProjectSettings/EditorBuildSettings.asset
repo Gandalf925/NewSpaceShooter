@@ -56,40 +56,46 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Stage4/Stage4.unity
     guid: f4ac6cbbb0d762e4daf2c7a4ec5886b4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Stage4/Stage4ED1.unity
     guid: 2ca5ea27e728565429b2c053aaea8971
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Stage4/Stage4ED2.unity
     guid: 725b39d553a38a34b9c157e1de64c4a7
   - enabled: 0
     path: Assets/Scenes/ToBeContinued.unity
     guid: cbf52d290468cfe469b610e3248b5d94
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Stage5/Stage5OP1.unity
     guid: 4a36e7e05883c144b8baebe45aa14190
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Stage5/Stage5OP2.unity
     guid: 058acaf59c678214b849074d1029e6cf
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Stage5/Stage5OP3.unity
     guid: 06658698e9f494a4cb1aa5ee4dcead96
   - enabled: 1
     path: Assets/Scenes/Stage5/Stage5.unity
     guid: 50d953cdc973d5049ada2dbc7efe4d93
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ED/ED1.unity
     guid: 4ce4ae04c48c58248a7c4fadce872b81
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ED/ED2.unity
     guid: d2fd1557c2f06ed4ab968895e5122731
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ED/ED3.unity
     guid: aa8f5dea467ab3a4e9ae86212ab0f79e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ED/ED4.unity
     guid: b23649b55598b944abc05f65d0d106c7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ED/ED5.unity
     guid: 36b5b3361654fb4479abb6d1e550e371
+  - enabled: 0
+    path: Assets/Scenes/ED/ED6.unity
+    guid: 48e9cedc2e75b3447b1e5b646b718e83
+  - enabled: 0
+    path: Assets/Scenes/ED/ED7.unity
+    guid: 68ff7ad0c22b14941a91eaaac342c3d1
   m_configObjects: {}
