@@ -37,9 +37,9 @@ public class Stage5OP2Manager : MonoBehaviour
         // BGMManager.instance.PlayBGM(stage4OP1BGM);
         yield return new WaitForSecondsRealtime(2f);
 
-        player.transform.DOMoveX(playerEndPos.position.x, 2f);
-        lastBossShadow.transform.DOMoveX(lastBossEndPos.position.x, 2f);
-        desk.transform.DOMoveX(deskEndPos.position.x, 2f);
+        lastBossShadow.GetComponent<Image>().DOFade(1f, 2f);
+
+
 
         yield return new WaitForSecondsRealtime(3f);
 

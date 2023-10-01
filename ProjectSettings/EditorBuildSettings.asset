@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Stage1/Stage1.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/BGMTest.unity
     guid: fcfc49951d9707540a2ea4e0d8f579a5
   - enabled: 0
@@ -56,25 +56,25 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Stage4/Stage4.unity
     guid: f4ac6cbbb0d762e4daf2c7a4ec5886b4
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Stage4/Stage4ED1.unity
     guid: 2ca5ea27e728565429b2c053aaea8971
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Stage4/Stage4ED2.unity
     guid: 725b39d553a38a34b9c157e1de64c4a7
   - enabled: 0
     path: Assets/Scenes/ToBeContinued.unity
     guid: cbf52d290468cfe469b610e3248b5d94
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Stage5/Stage5OP1.unity
     guid: 4a36e7e05883c144b8baebe45aa14190
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Stage5/Stage5OP2.unity
     guid: 058acaf59c678214b849074d1029e6cf
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Stage5/Stage5OP3.unity
     guid: 06658698e9f494a4cb1aa5ee4dcead96
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Stage5/Stage5.unity
     guid: 50d953cdc973d5049ada2dbc7efe4d93
   - enabled: 0
