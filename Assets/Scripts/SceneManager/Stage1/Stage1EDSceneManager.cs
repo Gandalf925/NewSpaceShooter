@@ -109,24 +109,12 @@ public class Stage1EDSceneManager : MonoBehaviour
         Destroy(gun);
 
         yield return new WaitForSecondsRealtime(1f);
-        player.transform.DOShakeScale(2, 60, 20, 100, false);
+        player.transform.DOShakeScale(2, 0.5f, 20, 100, false);
         yield return new WaitForSecondsRealtime(2f);
 
         player.transform.DOMove(pepeStopPos.position, 0.3f);
 
         yield return new WaitForSecondsRealtime(1f);
-
-        // blackoutPanel.DOFade(1f, 1f);
-        // yield return new WaitForSecondsRealtime(2f);
-        // continueText.gameObject.SetActive(true);
-
-        // continueText.DOFade(1f, 3f);
-
-        // yield return new WaitForSecondsRealtime(5f);
-
-        // continueText.DOFade(0f, 3f);
-
-        // yield return new WaitForSecondsRealtime(5f);
 
         SceneManager.LoadScene("Stage2OP1");
     }

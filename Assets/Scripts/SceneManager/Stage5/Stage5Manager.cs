@@ -20,6 +20,7 @@ public class Stage5Manager : MonoBehaviour
     public bool isDisplayReleaseText = false;
 
     public AudioClip stage5BGM;
+    public AudioClip stage5LastBGM;
 
     public UIManager uIManager;
 
@@ -58,6 +59,7 @@ public class Stage5Manager : MonoBehaviour
     public IEnumerator StartLastEvent()
     {
         yield return new WaitForSeconds(3f);
+        BGMManager.instance.PlayBGM(stage5LastBGM);
         god.SetActive(true);
         god.transform.DOShakePosition(2f, 1f, 100, 90f, false, true);
         god.transform.DOMoveY(godEndPos.position.y, 2f);

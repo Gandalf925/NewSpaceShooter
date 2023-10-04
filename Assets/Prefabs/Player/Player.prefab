@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 4703976458070735490}
   - component: {fileID: 3015317879304947920}
   - component: {fileID: 4740207073384616500}
+  - component: {fileID: 3503208429951386395}
   - component: {fileID: 7308484306499651492}
   m_Layer: 0
   m_Name: Player
@@ -260,6 +261,7 @@ MonoBehaviour:
   explosionSE: {fileID: 8300000, guid: 800465dc2aabec245b3c0d553c32079c, type: 3}
   chargingSE: {fileID: 8300000, guid: 78432c2b41c4bd246ab92dac243731ab, type: 3}
   shootSE: {fileID: 8300000, guid: e151d52fe31c41b4aa58b8ba55c58e10, type: 3}
+  isPlayerActive: 1
   companionPrefab:
   - {fileID: 5149909700050226722}
   - {fileID: 3625145687198744449}
@@ -341,6 +343,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3503208429951386395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4703976458070735494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07e2f3f136e781f4ea34210d6564b37f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerImage: {fileID: 4740207073384616500}
 --- !u!82 &7308484306499651492
 AudioSource:
   m_ObjectHideFlags: 0

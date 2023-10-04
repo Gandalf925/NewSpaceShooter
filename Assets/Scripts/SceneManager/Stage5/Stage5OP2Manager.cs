@@ -10,6 +10,7 @@ public class Stage5OP2Manager : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] GameObject lastBossShadow;
     [SerializeField] GameObject desk;
+    [SerializeField] Transform playerStartPos;
     [SerializeField] Transform playerEndPos;
     [SerializeField] Transform lastBossEndPos;
     [SerializeField] Transform deskEndPos;
@@ -35,7 +36,11 @@ public class Stage5OP2Manager : MonoBehaviour
     IEnumerator Stage5OP2()
     {
         // BGMManager.instance.PlayBGM(stage4OP1BGM);
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(1f);
+
+        player.transform.DOMove(playerStartPos.position, 1f);
+
+        yield return new WaitForSecondsRealtime(1f);
 
         lastBossShadow.GetComponent<Image>().DOFade(1f, 2f);
 

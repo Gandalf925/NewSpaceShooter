@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7096902263673154605}
+  - component: {fileID: 531737930835609356}
   - component: {fileID: 7096902263673154606}
   - component: {fileID: 7096902263673154610}
   - component: {fileID: 7096902263673154609}
@@ -30,12 +31,25 @@ Transform:
   m_GameObject: {fileID: 7096902263673154607}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4.99998, y: 24.299988, z: 4.6}
-  m_LocalScale: {x: 2.6399076, y: 2.6399076, z: 2.6399076}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &531737930835609356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7096902263673154607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 508451be17b8b5d4385d57d9ce5415cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerImage: {fileID: 7096902263673154606}
 --- !u!212 &7096902263673154606
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -77,7 +91,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6089399e2f029fd4c9c10b72dc469e21, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7e3700e95a319d649bc186ffd7f44633, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,6 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7169585669544198896, guid: 520f711497cc01a4299a16bd3fae243e, type: 3}
+  specialbulletPrefab: {fileID: 0}
   shootSpeedZ: 20
   fireRate: 3
   iconPrefab: {fileID: 7556579367477831420, guid: 4996cae6d332f444db136b56722cdfff, type: 3}
@@ -121,6 +136,17 @@ MonoBehaviour:
   iconPrefab: {fileID: 0}
   mainCamera: {fileID: 0}
   cameraOffset: {x: 0, y: 0, z: 0}
+  explosionEffect: {fileID: 0}
+  isActive: 1
+  isSpecialGun: 0
+  canAttack: 0
+  canShoot: 1
+  SpecialBullet: {fileID: 0}
+  seSource: {fileID: 0}
+  warningSE: {fileID: 0}
+  explosionSE: {fileID: 0}
+  chargingSE: {fileID: 0}
+  shootSE: {fileID: 0}
 --- !u!136 &7096902263673154615
 CapsuleCollider:
   m_ObjectHideFlags: 0
