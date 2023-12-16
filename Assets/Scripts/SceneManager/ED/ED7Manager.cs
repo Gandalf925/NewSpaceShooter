@@ -32,7 +32,7 @@ public class ED7Manager : MonoBehaviour
 
     [SerializeField] TMP_Text thanksText;
     [SerializeField] TMP_Text cregitsText;
-    [SerializeField] SpriteRenderer pepeSprite;
+    [SerializeField] Image pepeImage;
     [SerializeField] SpriteRenderer heartSprite;
 
 
@@ -137,7 +137,7 @@ public class ED7Manager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(2f);
 
-        pepeSprite.DOFade(1f, 1f);
+        pepeImage.DOFade(1f, 1f);
         heartSprite.DOFade(1f, 1f);
         thanksText.DOFade(1f, 1f);
         cregitsText.DOFade(1f, 1f);

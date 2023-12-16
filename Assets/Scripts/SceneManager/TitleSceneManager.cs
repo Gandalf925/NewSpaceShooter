@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class TitleSceneManager : MonoBehaviour
 {
-    private string sceneName = "Stage1OPFirst";
+    private string sceneName = "CharactorSelect";
     public Image titleTextImage;
     public Image pressSpaceKeyImage;
 
